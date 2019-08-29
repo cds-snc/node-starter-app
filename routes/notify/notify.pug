@@ -1,0 +1,17 @@
+extends /base
+include /_includes/yesNoRadios
+
+block variables
+  -var title = __('notify.title')
+
+block content
+
+  h1 #{title}
+
+  div
+    p #{__('notify.intro')}
+  
+  form.cra-form(method='post')
+    +yesNoRadios('confirm', null, 'notify.confirm.yes.no.desc', errors)
+
+    +formButtons()

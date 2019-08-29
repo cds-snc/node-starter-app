@@ -26,5 +26,10 @@
   "errors.email.length": "Email is required",
   "errors.expiry.date": "Date is required",
   "confirmation.title": "Confirmation Title",
-  "confirmation.intro": "Confirmation Intro goes here"
+  "confirmation.intro": "Confirmation Intro goes here",
+  "notify.title": "notify.title",
+  "notify.intro": "notify.intro",
+  "notify.confirm.yes.no.desc": "notify.confirm.yes.no.desc",
+  "Yes": "Yes",
+  "No": "No"
 }
