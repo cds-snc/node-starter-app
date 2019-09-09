@@ -38,8 +38,7 @@ const Schema = {
   notify_type: {
     custom: {
       options: (value, { req }) => {
-        console.log("val",value)
-        //return isValidDate(value);
+        return ( value === "SMS" || value === "Email" )
       },
       errorMessage: "errors.notify_type"
     }
