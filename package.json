@@ -9,14 +9,16 @@
     "node": ">=10"
   },
   "scripts": {
+    "build": "webpack --mode=production",
     "dev": "NODE_ENV=development nodemon ./bin/www",
     "lint": "node_modules/eslint/bin/eslint.js config routes bin/www app.js",
     "prettier": "prettier --write '**/*.{ts,js,css,html}'",
-    "start": "NODE_ENV=production node ./bin/www",
+    "start": "npm run build && NODE_ENV=production node ./bin/www",
     "test": "node node_modules/jest/bin/jest.js --coverage",
     "test:watch": "node node_modules/jest/bin/jest.js --watch",
     "postinstall": "patch-package"
   },
+
   "dependencies": {
     "commander": "^3.0.1",
     "compression": "^1.7.4",
@@ -34,7 +36,8 @@
     "nonce-next": "^1.1.0",
     "nunjucks": "^3.2.0",
     "purecss": "^1.0.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "node-starter-demo": "cds-snc/node-starter-demo#a26e01456d"
   },
   "devDependencies": {
     "acorn": "^7.0.0",
