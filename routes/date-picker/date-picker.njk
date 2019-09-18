@@ -1,0 +1,98 @@
+{% extends "base.njk" %}
+
+{% block content %}
+    <section class="Calendar" aria-label="Calendar">
+      
+      <!-- Calendar navigation -->
+      <section aria-label="Calendar Navigation" class="Calendar-nav u-flex">
+        
+        <button id="previous" class="Calendar-nav--button" type="button" aria-label="Previous month, October 2018">&#10094;</button>
+        
+        <div class="Calendar-nav--selects">
+          <!-- Months -->
+          <div class="Calendar-nav--select">
+            <select id="month" aria-label="month">
+              <option>January</option>
+              <option>February</option>
+              <option>March</option>
+              <option>April</option>
+              <option>May</option>
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+              <option>December</option>
+            </select>
+          </div>
+          <!-- End Months -->
+          
+          <!-- Years -->
+          <div class="Calendar-nav--select">
+            <select id="year" aria-label="year">
+              <option>2011</option>
+              <option>2012</option>
+              <option>2013</option>
+              <option>2014</option>
+              <option>2015</option>
+              <option>2016</option>
+              <option>2017</option>
+              <option>2018</option>
+              <option>2019</option>
+              <option>2020</option>
+              <option>2021</option>
+              <option>2022</option>
+              <option>2023</option>
+              <option>2024</option>
+              <option>2025</option>
+            </select>
+          </div>
+          <!-- End Years -->
+        </div>
+        <button id="next" class="Calendar-nav--button" type="button" aria-label="Next month, December 2018">&#10095;</button>
+      </section>
+
+      <!-- End calendar navigation -->
+      
+      <!-- Calendar grid -->
+      <div class="Calendar-grid">
+        <div class="Calendar-help">
+          <button id="Calendar-help-trigger" class="Calendar-help-trigger" aria-label="keyboard shortcuts" aria-haspopup="dialog">Keyboard Shortcuts</button>
+        </div>
+        <div class="Calendar-days Calendar-row" aria-hidden="false">
+          <span class="Calendar-item Calendar-item--day">Su</span>
+          <span class="Calendar-item Calendar-item--day">Mo</span>
+          <span class="Calendar-item Calendar-item--day">Tu</span>
+          <span class="Calendar-item Calendar-item--day">We</span>
+          <span class="Calendar-item Calendar-item--day">Th</span>
+          <span class="Calendar-item Calendar-item--day">Fr</span>
+          <span class="Calendar-item Calendar-item--day">Sa</span>
+        </div>
+        <section id="Calendar-dates" aria-label="Calendar dates" role="application">
+        </section>
+      </div>
+      <!-- End calendar grid -->
+      
+      
+      <!-- Calendar help --> 
+      <div id="Calendar-help-dialog" class="Calendar-help-dialog" role="dialog" aria-labelledby="Calendar-help-trigger" aria-hidden="true" tabindex="-1">
+        <p tabindex="-1">The following keyboard shortcuts are available:</p>
+        <ul>
+          <li><kbd>LEFT</kbd>/ <kbd>RIGHT</kbd> to move day to day.</li>
+          <li><kbd>UP</kbd>/ <kbd>DOWN</kbd> to move week to week.</li>
+          <li><kbd>HOME</kbd> to move to the first day of the month.</li>
+          <li><kbd>END</kbd> to move to the last day of the month.</li>
+          <li><kbd>PAGE UP</kbd> to move to the same day in the previous month.</li>
+          <li><kbd>PAGE DOWN</kbd> to move to the same day in the next month.</li>
+          <li><kbd>SPACE</kbd> to select a date.</li>
+        </ul>
+        <button id="Calendar-help-close" class="Calendar-help-close" type="button">Got it!</button>
+      </div>
+      <!-- End calendar help --> 
+      <span id="Calendar-updates" class="visually-hidden" aria-live="assertive"></span>
+    </section>
+
+
+
+{% endblock %}

@@ -58,5 +58,7 @@
   "next": "Next",
   "form.expiry": "form.expiry",
   "form.expiry.desc": "form.expiry.desc",
-  "form.upload": "upload file"
+  "form.upload": "upload file",
+  "date-picker.title": "date-picker.title",
+  "date-picker.intro": "date-picker.intro"
 }
