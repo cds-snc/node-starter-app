@@ -459,26 +459,6 @@ const calendarUpdates = document.getElementById('Calendar-updates')
 const currentDate = dayjs()
 let selected
 const holidays = {
-  2018: {
-    9: {
-      11: {
-        label: 'My Birthday',
-        isEnabled: true,
-      },
-    },
-    10: {
-      22: {
-        label: 'Thanksgiving',
-        isEnabled: false,
-      },
-    },
-    11: {
-      25: {
-        label: 'Christmas',
-        isEnabled: false,
-      },
-    },
-  },
   2019: {
     0: {
       1: {
@@ -489,12 +469,6 @@ const holidays = {
     4: {
       16: {
         label: 'Global Accessibility Awareness Day',
-        isEnabled: true,
-      },
-    },
-    8: {
-      16: {
-        label: 'Very Busy',
         isEnabled: true,
       },
     },
@@ -639,9 +613,9 @@ const isWeekend = day => {
 }
 
 const isBlockedDay = (day, month) => {
-  if (day.$D === 19 || day.$D === 20) {
-    return true
-  }
+  const blocked = [2, 5, 6, 9, 12, 13, 16, 19, 20, 23, 26, 27, 30]
+  const d = day.$D
+  if (blocked.includes(d)) return true
 }
 
 const getDateTemplate = (day, month, today) => {

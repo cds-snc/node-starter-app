@@ -32,11 +32,12 @@ $available: rgb(185, 218, 199);
   }
 
   .Calendar-nav--button {
-    color: #000;
+    color: green;
     font-size: 1.5rem;
     font-weight: bold;
     height: 2.750rem;
     width: 2.750rem;
+    border:0;
   }
 
   .Calendar-nav--button:last-of-type {
@@ -86,12 +87,19 @@ $available: rgb(185, 218, 199);
 
   .Calendar-nav--button:focus,
   .Calendar-nav--select select:focus,
-  .Calendar-item:hover:not(.Calendar-item--day):not(:empty),
-  .Calendar-item:focus:not(.Calendar-item--day):not(:empty),
+  .Calendar-item:hover:not(.Calendar-item--day):not(.Calendar-item--unavailable):not(:empty),
+  .Calendar-item:focus:not(.Calendar-item--day):not(.Calendar-item--unavailable):not(:empty),
   .Calendar-help-trigger:focus,
   .Calendar-help-dialog:focus,
   .Calendar-help-close:focus {
-    outline: none;
+    outline:  black inset;
+    outline-offset: -4px;
+    outline-offset: -4px;
+    
+  }
+
+  .Calendar-item.Calendar-item--day, .Calendar-item.Calendar-item--empty{
+    background-color: white;
   }
 
   .Calendar-row {
@@ -101,21 +109,22 @@ $available: rgb(185, 218, 199);
 
   .Calendar-item {
     background: $available;
-    border: 0.125rem solid transparent;
+    border: 0;
+    outline:  none;
     border-radius: 0;
-    box-sizing: content-box;
+    box-sizing: border-box;
     font-size: 1rem;
     font-weight: bold;
-    height: 2.750rem;
+    height: 3.4rem;
     line-height: 200%;
-    margin: 0.156rem;
-    padding: 0.063rem;
+    //margin: 0.156rem;
+    //padding: 0.063rem;
     position: relative;
-    width: 2.750rem;
+    width: 3.4rem;
   }
 
   .Calendar-item[aria-current] {
-    border-color: #005490
+    //border-color: #005490
   }
 
   .Calendar-item[aria-pressed] {
@@ -125,20 +134,34 @@ $available: rgb(185, 218, 199);
   .Calendar-item[aria-pressed="true"] {
     background-color: $selected;
     color: #fff;
+    border: 3px solid #000;
   }
 
   .Calendar-days {
     color: #666;
   }
 
-  .Calendar-item--unavailable:not(.Calendar-item--holiday) {
+  .Calendar-item--unavailable {
     @include cursor-disable;
     opacity: .5;
     pointer-events: none;
+    background-color: white;
+    outline:none;
+    border:0;
+  }
+
+  .Calendar-item.Calendar-item--unavailable:focus{
+    outline:dotted;
+    outline-offset: -4px;
+    outline-offset: -4px;
   }
 
   .Calendar-item:not(.Calendar-item--unavailable):hover {
    background-color: $hover;
+  }
+
+  .Calendar-item.Calendar-item--empty:hover, .Calendar-item.Calendar-item--day:hover{
+    background-color: white;
   }
   
   .Calendar-help {
