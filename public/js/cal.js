@@ -457,7 +457,8 @@ const calendarSection = document.getElementById('Calendar-dates')
 const calendarHelp = document.getElementById('Calendar-help-trigger')
 const calendarUpdates = document.getElementById('Calendar-updates')
 const currentDate = dayjs()
-let selected
+let selected = ''
+let selectedDates = []
 const holidays = {
   2019: {
     0: {
@@ -509,17 +510,31 @@ const announce = content => {
  * @return {void}
  */
 const selectDate = date => {
-  const selection = calendarSection.querySelector('[aria-pressed="true"]')
+  const timestamp = date.getAttribute('data-timestamp')
+  const calDay = date.getAttribute('data-day')
 
-  if (selection) {
-    selection.setAttribute('aria-pressed', 'false')
-    selection.setAttribute('tabindex', '-1')
+  if (selectedDates.includes(calDay)) {
+    const found = selectedDates.findIndex(function(element) {
+      return element === calDay
+    })
+
+    if (found >= 0) {
+      selectedDates.splice(found, 1)
+      date.setAttribute('aria-pressed', 'false')
+      date.setAttribute('tabindex', '-1')
+    }
+
+    return
   }
+
+  selectedDates.push(calDay)
+  // ensure unique array
+  selectedDates = [...new Set(selectedDates)]
 
   date.setAttribute('aria-pressed', 'true')
   date.removeAttribute('tabindex')
 
-  selected = dayjs.unix(date.getAttribute('data-timestamp'))
+  selected = dayjs.unix(timestamp)
 
   announce(`selected ${date.getAttribute('aria-label')}`)
 }
@@ -629,9 +644,6 @@ const getDateTemplate = (day, month, today) => {
   const isCurrent = day.isSame(today)
   const isSelected = day.isSame(selected)
 
-
-  console.log(selected)
-
   return `<button
                 class="Calendar-item ${
                   isDisabled
@@ -645,8 +657,7 @@ const getDateTemplate = (day, month, today) => {
   }${isDisabled ? ', Unavailable' : ''}"
                 ${isCurrent ? 'aria-current="date"' : ''}
                 ${day.$D !== today.$D ? 'tabindex="-1"' : ''}
-                ${hasHoliday ? `data-holiday="${hasHoliday.label}"` : ''}
-                data-timestamp="${day.unix()}">
+                data-timestamp="${day.unix()}" data-day="day-${day.$D}">
                   ${day.$D}
               </button>`
 }

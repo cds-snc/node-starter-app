@@ -134,7 +134,6 @@ $available: rgb(185, 218, 199);
   .Calendar-item[aria-pressed="true"] {
     background-color: $selected;
     color: #fff;
-    border: 3px solid #000;
   }
 
   .Calendar-days {
