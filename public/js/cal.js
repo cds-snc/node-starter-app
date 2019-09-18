@@ -629,6 +629,9 @@ const getDateTemplate = (day, month, today) => {
   const isCurrent = day.isSame(today)
   const isSelected = day.isSame(selected)
 
+
+  console.log(selected)
+
   return `<button
                 class="Calendar-item ${
                   isDisabled

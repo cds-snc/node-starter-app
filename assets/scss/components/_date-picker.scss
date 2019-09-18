@@ -163,6 +163,12 @@ $available: rgb(185, 218, 199);
   .Calendar-item.Calendar-item--empty:hover, .Calendar-item.Calendar-item--day:hover{
     background-color: white;
   }
+
+  .Calendar-nav--select select:focus{  
+    outline: block inset;
+    outline-offset: -2px;
+    outline-offset: -2px;
+  }
   
   .Calendar-help {
     position: relative;
@@ -180,6 +186,7 @@ $available: rgb(185, 218, 199);
     right: 0;
     top: 0;
     z-index: 1;
+    font-size:0.9rem;
   }
 
   .visually-hidden,
