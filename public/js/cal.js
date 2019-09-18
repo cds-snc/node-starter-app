@@ -459,22 +459,6 @@ const calendarUpdates = document.getElementById('Calendar-updates')
 const currentDate = dayjs()
 let selected = ''
 let selectedDates = []
-const holidays = {
-  2019: {
-    0: {
-      1: {
-        label: " New Year's day, Office Closed",
-        isEnabled: false,
-      },
-    },
-    4: {
-      16: {
-        label: 'Global Accessibility Awareness Day',
-        isEnabled: true,
-      },
-    },
-  },
-}
 
 /**************************************************************************
  * Important Accessibility Bits
@@ -634,13 +618,8 @@ const isBlockedDay = (day, month) => {
 }
 
 const getDateTemplate = (day, month, today) => {
-  const hasHoliday = getHoliday(day)
-
   const isDisabled =
-    day.$M !== month.$M ||
-    isWeekend(day) ||
-    (hasHoliday && !hasHoliday.isEnabled) ||
-    isBlockedDay(day, month)
+    day.$M !== month.$M || isWeekend(day) || isBlockedDay(day, month)
   const isCurrent = day.isSame(today)
   const isSelected = day.isSame(selected)
 
@@ -652,7 +631,9 @@ const getDateTemplate = (day, month, today) => {
                 }"
                 type="button"
                 aria-pressed="${isSelected}"
-                aria-label="${isDisabled ? 'Unavailable, ' : ''}${dayjs(day).format('D, dddd MMMM YYYY')}"
+                aria-label="${isDisabled ? 'Unavailable, ' : ''}${dayjs(
+    day,
+  ).format('D, dddd MMMM YYYY')}"
                 ${isCurrent ? 'aria-current="date"' : ''}
                 ${day.$D !== today.$D ? 'tabindex="-1"' : ''}
                 data-timestamp="${day.unix()}" data-day="day-${day.$D}">
@@ -787,16 +768,6 @@ const getLastDate = () =>
   calendarSection.lastElementChild.querySelector(
     '.Calendar-item:last-of-type:not(.Calendar-item--empty)',
   )
-
-const getHoliday = date => {
-  if (holidays[date.$y]) {
-    if (holidays[date.$y][date.$M]) {
-      if (holidays[date.$y][date.$M][date.$D]) {
-        return holidays[date.$y][date.$M][date.$D]
-      }
-    }
-  }
-}
 
 const setText = (node, text) => {
   let child = node.firstChild
