@@ -649,12 +649,10 @@ const getDateTemplate = (day, month, today) => {
                   isDisabled
                     ? 'Calendar-item--unavailable'
                     : 'Calendar-item--active'
-                } ${hasHoliday ? 'Calendar-item--holiday' : ''}"
+                }"
                 type="button"
                 aria-pressed="${isSelected}"
-                aria-label="${dayjs(day).format('D, dddd MMMM YYYY')}${
-    hasHoliday ? `, ${hasHoliday.label}` : ''
-  }${isDisabled ? ', Unavailable' : ''}"
+                aria-label="${isDisabled ? 'Unavailable, ' : ''}${dayjs(day).format('D, dddd MMMM YYYY')}"
                 ${isCurrent ? 'aria-current="date"' : ''}
                 ${day.$D !== today.$D ? 'tabindex="-1"' : ''}
                 data-timestamp="${day.unix()}" data-day="day-${day.$D}">
