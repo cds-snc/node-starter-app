@@ -10,8 +10,6 @@ module.exports = app => {
   const jsFiles = ['js/cal.js']
 
   app.get(route.path, (req, res) => {
-    res.render(name, {
-      jsFiles,
-    })
+    res.render(name, { data: { month: 'September', year: '2019' }, jsFiles })
   })
 }

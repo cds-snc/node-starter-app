@@ -1,3 +1,11 @@
+/*
+Original code from "A New Day: Making a Better //Calendar" available at https://www.24a11y.com/2018/a-new-day-making-a-better-calendar/
+
+- Code has been altered to allow mutiple date selects
+
+*/
+
+
 !(function(t, e) {
   'object' == typeof exports && 'undefined' != typeof module
     ? (module.exports = e())
@@ -611,6 +619,12 @@ const isWeekend = day => {
   return day.$W === 0 || day.$W === 6
 }
 
+// @todo 
+// make isBlockedDay to be dynamic
+// selected dates - output (You've selected X days)
+// pre-selected dates
+// enforce max days selected
+
 const isBlockedDay = (day, month) => {
   const blocked = [2, 5, 6, 9, 12, 13, 16, 19, 20, 23, 26, 27, 30]
   const d = day.$D
@@ -941,13 +955,6 @@ const renderDates = date => {
   calendarSection.innerHTML = ''
   calendarSection.insertAdjacentHTML('beforeEnd', grid)
 }
-
-/* Setup */
-monthSelect.selectedIndex = currentDate.$M
-
-yearSelect.selectedIndex = Array.from(yearSelect.options).findIndex(
-  option => option.textContent == currentDate.$y,
-)
 
 /* Event Listeners */
 monthSelect.addEventListener('change', updateUI)

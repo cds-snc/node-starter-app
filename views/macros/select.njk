@@ -1,0 +1,9 @@
+{% macro selectMenu(name, values, selectedVals, attributes) %}
+    <select id="{{name}}" aria-label="{{name}}">
+        {% for index, val in values %}
+            <option {% if selectedVals and val in selectedVals %} selected {% endif %} >
+                {{ val }}
+            </option>
+        {% endfor %}
+    </select>
+{% endmacro %}
