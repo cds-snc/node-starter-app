@@ -10,7 +10,7 @@ module.exports = app => {
 
   app
     .get(route.path, (req, res) => {
-      const jsFiles = ['js/file-input.js']
+      const jsFiles = ['js/file-input.js', 'js/toggle-area.js']
       res.render(name, { ...routeUtils.getViewData(req), jsFiles })
     })
     .post(route.path, [
