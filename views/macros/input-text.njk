@@ -1,21 +1,22 @@
 {#
+  - `name`: field name
   - `label`: text for the label
-  - `divClasses`: any classes to be applied to the wrapper div (but not the input itself)
   - `hintText`: any text that appears above the input in light grey (ex. Optional)
+  - `attributes`: object of optional attributes: class, hintText, divClasses, autocomplete, id, value
 #}
 {% if errors %}
     {% set firstError = errors[errors.keys()[0]] %}
 {% endif %}
 
-{% macro textInput(label, divClasses, hintText, attributes) %}
-    <div class="{{ 'has-error' if errors and errors[attributes.name] }} {{ divClasses }}">
-        <label for="{{ attributes.name }}" id="{{ attributes.name }}__label">{{ __(label) }}</label>
-        {% if hintText %}
-            <span class="form-message">{{ __(hintText) }}</span>
+{% macro textInput(name, label, value, attributes) %}
+    <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
+        <label for="{{ name }}" id="{{ name }}__label">{{ __(label) }}</label>
+        {% if attributes.hintText %}
+            <span class="form-message">{{ __(attributes.hintText) }}</span>
         {% endif %}
-        {% if errors and errors[attributes.name] %}
-            {{ validationMessage(errors[attributes.name].msg, attributes.name) }}
+        {% if errors and errors[name] %}
+            {{ validationMessage(errors[name].msg, name) }}
         {% endif %}
-        <input class="{{ attributes.class }}" autocomplete="{{ attributes.autocomplete }}" type="text" id="{{ attributes.id if attributes.id else attributes.name }}" {% if errors and errors[attributes.name] %} aria-describedby="{{ attributes.name + '-error' }}" aria-invalid="true" {% endif %} {% if errors and firstError.param === attributes.name %} autofocus="true" {% endif %} name="{{ attributes.name }}" value="{{ attributes.value }}"/>
+        <input class="{{ attributes.class if attributes.class else "w-3-4" }}" {% if attributes.autocomplete %}autocomplete="{{ attributes.autocomplete }}" {% endif %} type="text" id="{{ attributes.id if attributes.id else attributes.name }}" {% if errors and errors[name] %} aria-describedby="{{ name + '-error' }}" aria-invalid="true" {% endif %} {% if errors and firstError.param === name %} autofocus="true" {% endif %} name="{{ name }}" value="{{ value }}"/>
     </div>
 {% endmacro %}
