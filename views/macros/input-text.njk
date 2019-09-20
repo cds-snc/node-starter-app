@@ -2,7 +2,7 @@
   - `name`: field name
   - `label`: text for the label
   - `hintText`: any text that appears above the input in light grey (ex. Optional)
-  - `attributes`: object of optional attributes: class, hintText, divClasses, autocomplete, id, value
+  - `attributes`: object of optional attributes: id, class, hint, divClasses, autocomplete
 #}
 {% if errors %}
     {% set firstError = errors[errors.keys()[0]] %}
@@ -11,8 +11,8 @@
 {% macro textInput(name, label, value, attributes) %}
     <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
         <label for="{{ name }}" id="{{ name }}__label">{{ __(label) }}</label>
-        {% if attributes.hintText %}
-            <span class="form-message">{{ __(attributes.hintText) }}</span>
+        {% if attributes.hint %}
+            <span class="form-message">{{ __(attributes.hint) }}</span>
         {% endif %}
         {% if errors and errors[name] %}
             {{ validationMessage(errors[name].msg, name) }}
