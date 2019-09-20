@@ -9,13 +9,8 @@
             {% endif %}
             {% for index, val in values %}
                 <div class="multiple-choice__item">
-<<<<<<< HEAD
-                    <input id="{{ key }}{{ val }}" name="{{ key }}" type="radio" value="{{ val }}" {% if value == val %} checked="checked" {% endif %} {% if errors and errors[key] %} aria-describedby="{{ key + '-error' }}" {% endif %}>
-                    <label for="{{ key }}{{ val }}">{{ __(val) }}</label>
-=======
                     <input data-index="{{ index }}" id="{{ key }}{{ val }}" name="{{ key }}" type="radio" value="{{ val }}" {% if value == val %} checked="checked" {% endif %} {% if errors and errors[key] %} aria-describedby="{{ key + '-error' }}" {% endif %}>
-                    <label for="{{ key }}{{ val }}">{{ val }}</label>
->>>>>>> Add toggle area
+                    <label for="{{ key }}{{ val }}">{{ __(val) }}</label>
                 </div>
             {% endfor %}
         </div>

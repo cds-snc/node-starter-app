@@ -59,5 +59,9 @@
   "next": "Next",
   "form.expiry": "form.expiry",
   "form.expiry.desc": "form.expiry.desc",
-  "form.upload": "upload file"
+  "form.upload": "upload file",
+  "Yes": "Yes",
+  "No": "No",
+  "SMS": "SMS",
+  "Email": "Email"
 }
