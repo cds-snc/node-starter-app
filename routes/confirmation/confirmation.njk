@@ -7,8 +7,17 @@
     <div>
         <p>
             {{ __('confirmation.intro') }}
-            <strong>{{ data.email }}</strong>
         </p>
+        <ul>
+            <li>Name:  <strong>{{ data.fullname }}</strong></li>
+            <li>Email: <strong>{{ data.email }}</strong></li>
+            <li>Notify: <strong>{{ data.send_notifications }}</strong></li>
+
+            {% if data.send_notifications == "Yes" %}
+                <li>Notify Type: <strong>{{ data.notify_type }}</strong></li>
+            {% endif %}
+
+        </ul>
     </div>
 
 {% endblock %}

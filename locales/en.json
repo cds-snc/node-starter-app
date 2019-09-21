@@ -57,7 +57,11 @@
   "chart.title": "Chart example",
   "chart.intro": "chart.intro",
   "next": "Next",
-  "form.expiry": "form.expiry",
-  "form.expiry.desc": "form.expiry.desc",
-  "form.upload": "upload file"
+  "form.expiry": "Expiry date",
+  "form.expiry.desc": "eg. 2010-12",
+  "form.upload": "upload file",
+  "Yes": "Yes",
+  "No": "No",
+  "SMS": "SMS",
+  "Email": "Email"
 }
