@@ -9,12 +9,12 @@
             {{ __('confirmation.intro') }}
         </p>
         <ul>
-            <li>Name:  <strong>{{ data.fullname }}</strong></li>
-            <li>Email: <strong>{{ data.email }}</strong></li>
-            <li>Notify: <strong>{{ data.send_notifications }}</strong></li>
+            <li>{{ __('form.fullname') }}:  <strong>{{ data.fullname }}</strong></li>
+            <li>{{ __('form.email') }}: <strong>{{ data.email }}</strong></li>
+            <li>{{ __('form.send_notifications') }}: <strong>{{ data.send_notifications }}</strong></li>
 
             {% if data.send_notifications == "Yes" %}
-                <li>Notify Type: <strong>{{ data.notify_type }}</strong></li>
+                <li>{{ __('form.notify_by') }}: <strong>{{ data.notify_type }}</strong></li>
             {% endif %}
 
         </ul>
