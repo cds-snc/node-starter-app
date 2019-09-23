@@ -11,7 +11,7 @@
     <div class="{{ 'has-error' if errors and errors[attributes.name] }} {{ divClasses }}">
         <label for="{{ attributes.name }}" id="{{ attributes.name }}__label">{{ __(label) }}</label>
         {% if hintText %}
-            <span class="form-message">{{ hintText }}</span>
+            <span class="form-message">{{ __(hintText) }}</span>
         {% endif %}
         {% if errors and errors[attributes.name] %}
             {{ validationMessage(errors[attributes.name].msg, attributes.name) }}
