@@ -29,6 +29,10 @@ form {
       width: 20%;
     }
   }
+
+  @include md {
+    max-width: 800px;
+  }
 }
 
 form.form--lg {
