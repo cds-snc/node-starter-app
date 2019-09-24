@@ -1,5 +1,5 @@
 on: deployment_status
-name: Continuous Integration
+name: A11Y scanning
 jobs:
   build:
     name: a11y
