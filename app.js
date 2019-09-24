@@ -12,13 +12,13 @@ const cookieSession = require('cookie-session')
 const cookieSessionConfig = require('./config/cookieSession.config')
 const { hasData, checkPublic, checkLangQuery } = require('./utils')
 const csp = require('./config/csp.config')
-const csrf = require('csurf');
+const csrf = require('csurf')
 
 // check to see if we have a custom configRoutes function
-let { configRoutes, routes } = require('./config/routes.config')
+let { configRoutes, routes } = require('./config/routes.config') // test mock sets as undefined but says line isn't covered
 
-/* istanbul ignore next */ // test mock sets as undefined but says line isn't covered
-if (typeof configRoutes === 'undefined') { // if not use the default
+/* istanbul ignore next */ if (typeof configRoutes === 'undefined') {
+  // if not use the default
   configRoutes = require('./utils/route.helpers').configRoutes
 }
 
@@ -32,13 +32,15 @@ app.use(cookieParser(process.env.app_session_secret))
 app.use(require('./config/i18n.config').init)
 
 // CSRF setup
-app.use(csrf({
-  cookie: true,
-  signed: true,
-}))
+app.use(
+  csrf({
+    cookie: true,
+    signed: true,
+  }),
+)
 
 // append csrfToken to all responses
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   res.locals.csrfToken = req.csrfToken()
   next()
 })
@@ -82,21 +84,29 @@ app.locals.GITHUB_SHA = process.env.GITHUB_SHA || null
 app.locals.hasData = hasData
 
 // set default views path
-app.locals.basedir = path.join(__dirname, "./views");
-app.set("views", [path.join(__dirname, "./views")]);
+app.locals.basedir = path.join(__dirname, './views')
+app.set('views', [path.join(__dirname, './views')])
 
 configRoutes(app, routes)
 
 // view engine setup
-const nunjucks = require("nunjucks");
+const nunjucks = require('nunjucks')
 
-nunjucks.configure([...app.get("views"), 'views/macros'], {
-  autoescape: true,
-  express: app,
-}).addGlobal('$env', process.env);
+const env = nunjucks
+  .configure([...app.get('views'), 'views/macros'], {
+    autoescape: true,
+    express: app,
+  })
+  .addGlobal('$env', process.env)
 
-nunjucks.installJinjaCompat();
+env.addFilter('shorten', function(str, count) {
+  return str.slice(0, count || 2)
+})
 
-app.set('view engine', 'njk');
+//
 
-module.exports = app;
+nunjucks.installJinjaCompat()
+
+app.set('view engine', 'njk')
+
+module.exports = app
