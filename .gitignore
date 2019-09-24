@@ -71,3 +71,6 @@ public/styles.css*
 .DS_Store
 credentials
 cdk.out
+cdk.out
+
+cdk/local-image
