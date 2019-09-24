@@ -1,5 +1,6 @@
-on: [deployment]
-name: A11Y scanning
+on: 
+  deployment_status
+name: a11y-scanning
 jobs:
   build:
     name: a11y
