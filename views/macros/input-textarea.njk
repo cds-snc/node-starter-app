@@ -7,7 +7,7 @@
     {% set firstError = errors[errors.keys()[0]] %}
 {% endif %}
 
-{% macro textArea(name, label, value, attributes) %}
+{% macro textArea(name, label, attributes) %}
     <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
         <label for="{{ name }}" id="{{ name }}__label">{{ __(label) }}</label>
         {% if attributes.hint %}
