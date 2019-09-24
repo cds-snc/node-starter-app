@@ -1,0 +1,10 @@
+on: deployment_status
+name: Continuous Integration
+jobs:
+  build:
+    name: a11y
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: docker://cdssnc/a11y-multiple-page-checker
+      uses: docker://cdssnc/a11y-multiple-page-checker
