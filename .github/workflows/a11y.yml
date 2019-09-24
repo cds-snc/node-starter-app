@@ -1,4 +1,4 @@
-on: deployment_status
+on: [deployment_status]
 name: A11Y scanning
 jobs:
   build:
