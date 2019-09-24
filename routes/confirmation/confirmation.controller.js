@@ -1,7 +1,6 @@
 const path = require('path')
 const {
   // validateRouteData,
-  getSessionData,
   getRouteByName,
   addViewPath,
   getViewData,
