@@ -11,13 +11,13 @@
 
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
-        {{ textInput('fullname', 'form.fullname', data.fullname, { class: "w-3-4" }) }}
+        {{ textInput('fullname', 'form.fullname', { class: "w-3-4" }) }}
         
-        {{ textInput('email', 'form.email', data.email) }}
+        {{ textInput('email', 'form.email') }}
 
-        {{ textInput('expiry', 'form.expiry', data.expiry) }}
+        {{ textInput('expiry', 'form.expiry') }}
         
-        {{ textArea('address', 'form.address', data.address, { hint: 'form.address.desc' }) }}
+        {{ textArea('address', 'form.address', { hint: 'form.address.desc' }) }}
         
         {{ fileInput('form.upload', null, {name: "myfile", id: "myfile"} ) }}
         
