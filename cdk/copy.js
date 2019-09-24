@@ -19,11 +19,13 @@ const files = [
   'config',
   'locales',
   'patches',
+  'public',
   'routes',
   'utils',
   'views',
   'package.json',
   'Dockerfile',
+  'app.js'
 ]
 
 const asyncForEach = async (array, callback) => {
