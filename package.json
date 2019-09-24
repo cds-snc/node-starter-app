@@ -9,7 +9,9 @@
     "node": ">=10"
   },
   "scripts": {
-    "aws": "node cdk/build.js",
+    "aws": "cd cdk && cdk synth && node deploy",
+    "aws-bootstrap": "node cdk/bootstrap.js",
+    "aws-destroy": "node cdk/destroy.js",
     "dev": "NODE_ENV=development nodemon ./bin/www",
     "lint": "node_modules/eslint/bin/eslint.js config routes bin/www app.js",
     "prettier": "prettier --write '**/*.{ts,js,css,html}'",
