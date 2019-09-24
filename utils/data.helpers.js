@@ -3,7 +3,7 @@ const { getFlashMessage } = require('./flash.message.helpers')
 
 const getViewData = (req, optionalParams = {}) => {
   const params = {
-    data: { ...getSessionData(req), ...optionalParams },
+    data: { ...getSessionData(req) },
   }
 
   const errors = getFlashMessage(req)
@@ -12,7 +12,7 @@ const getViewData = (req, optionalParams = {}) => {
     params.errors = errors
   }
 
-  return params
+  return { ...params, ...optionalParams }
 }
 
 module.exports = {

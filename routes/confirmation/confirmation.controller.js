@@ -4,6 +4,7 @@ const {
   getSessionData,
   getRouteByName,
   addViewPath,
+  getViewData,
   // setFlashMessageContent,
 } = require('../../utils/index')
 
@@ -26,6 +27,6 @@ module.exports = app => {
     }
     */
 
-    res.render(name, { data: getSessionData(req) })
+    res.render(name, getViewData(req))
   })
 }

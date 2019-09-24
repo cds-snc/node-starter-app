@@ -1,4 +1,5 @@
 const getSessionData = req => {
+  if (!req.session) return {}
   return typeof req.session.formdata === 'object' ? req.session.formdata : {}
 }
 

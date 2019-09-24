@@ -1,6 +1,7 @@
 // ⚠️ experimental
 
 const getFlashMessage = req => {
+  if (!req || !req.session) return null
   const message = req.session.flashmessage
   clearFlashMessageContent(req)
   return message

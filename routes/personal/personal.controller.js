@@ -11,9 +11,10 @@ module.exports = app => {
   app
     .get(route.path, (req, res) => {
       const jsFiles = ['js/file-input.js']
-      res.render(name, { ...routeUtils.getViewData(req), jsFiles })
+      res.render(name, routeUtils.getViewData(req, jsFiles))
     })
-    .post(route.path, [
-      ...routeUtils.getDefaultMiddleware({ schema: Schema, name: name }),
-    ])
+    .post(
+      route.path,
+      routeUtils.getDefaultMiddleware({ schema: Schema, name: name }),
+    )
 }
