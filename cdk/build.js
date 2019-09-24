@@ -28,6 +28,5 @@ const synth = function(name = 'node-starter-app') {
 
 copyApp(() => {
   console.log("App copied we're ready")
-  //build + deploy
   synth()
 })
