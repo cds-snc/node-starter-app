@@ -1,20 +1,14 @@
-# Use an official Python runtime as a parent image
-FROM python:3.4-alpine
+FROM node:10-alpine
+LABEL maintainer="-"
 
-# Set the working directory to /app
-WORKDIR /app
+ARG GITHUB_SHA_ARG
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+COPY . /src
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+WORKDIR /src
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+RUN npm install --quiet --production
 
-# Define environment variable
-ENV NAME World
+EXPOSE 3000
 
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+ENTRYPOINT [ "npm", "start" ]
