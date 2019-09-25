@@ -1,10 +1,13 @@
 on: deployment_status
 name: a11y-scanning
 jobs:
-  build:
+  check:
     name: a11y
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: Test
+      run: |
+        echo "test.
     - name: a11y check
       uses: docker://cdssnc/a11y-multiple-page-checker
