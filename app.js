@@ -11,6 +11,7 @@ const path = require('path')
 const cookieSession = require('cookie-session')
 const cookieSessionConfig = require('./config/cookieSession.config')
 const { hasData, checkPublic, checkLangQuery } = require('./utils')
+const { addNunjucksFilters } = require('./filters')
 const csp = require('./config/csp.config')
 const csrf = require('csurf')
 
@@ -99,11 +100,7 @@ const env = nunjucks
   })
   .addGlobal('$env', process.env)
 
-env.addFilter('shorten', function(str, count) {
-  return str.slice(0, count || 2)
-})
-
-//
+addNunjucksFilters(env)
 
 nunjucks.installJinjaCompat()
 
