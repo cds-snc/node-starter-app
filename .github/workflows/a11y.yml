@@ -1,4 +1,4 @@
-on: deployment_status
+on: push
 name: a11y-scanning
 jobs:
   check:
