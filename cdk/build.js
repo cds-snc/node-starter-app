@@ -12,6 +12,8 @@ const synth = function(name = 'node-starter-app') {
   const vpc = new ec2.Vpc(stack, name, { maxAzs: 1 })
   const cluster = new ecs.Cluster(stack, 'Cluster', { vpc })
 
+  //https://github.com/kneekey23/CDKNodeAppDemo/blob/master/cdk/cdk_stack.py
+
   new ecsPatterns.NetworkLoadBalancedFargateService(
     stack,
     `${name}FargateService`,
@@ -20,6 +22,8 @@ const synth = function(name = 'node-starter-app') {
       image: ecs.ContainerImage.fromAsset(
         path.resolve(__dirname, 'local-image'),
       ),
+      containerPort: 3000,
+      assignPublicIp: true,
     },
   )
 
