@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1] - 2019-09-26
+### Added
+- updated nextRoute redirect to include query params
+- added getNextRouteURL helper to get next route with query params
+
+
 ## [3.0.0] - 2019-09-26
 ### Added
 - refactored the textInput and textArea macros with better defaults, simpler use
