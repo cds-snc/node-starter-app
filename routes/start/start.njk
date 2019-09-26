@@ -7,9 +7,6 @@
     {{ banner('blue', '<p>' + __('start.intro.banner') + '</p>') }}
 
     <div>{{ __('start.intro') | safe }}</div>
-
-    <p>Sample input that accepts arbitrary params:</p>
-    {{ sampleInput({"class": "error", "data-arr1":"data-1","data-arr2":"data-2"}) }}
     <div>
         <a class="button-link" href="{{ nextRoute }}" role="button" draggable="false">
             {{ __('start.submit') }}

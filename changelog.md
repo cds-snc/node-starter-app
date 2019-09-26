@@ -1,11 +1,6 @@
 # Changelog
 
-## [2.2.0] - 2019-09-26
+## [2.2.1] - 2019-09-26
 ### Added
-- something was added
-
-### Changed
-- something was changed
-
-### Removed
-- something was removed
+- filter spreadParams for future use 
+  see: https://github.com/cds-snc/node-starter-app/pull/69
