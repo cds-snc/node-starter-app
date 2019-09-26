@@ -1,13 +1,14 @@
 const { checkSchema } = require('express-validator')
 const { routes: defaultRoutes } = require('../config/routes.config')
 const { checkErrors } = require('./validate.helpers')
+const url = require('url');
 
 const DefaultRouteObj = { name: false, path: false }
 
 /**
  * This request middleware checks if we are visiting a public path
  */
-const checkPublic = function(req, res, next) {
+const checkPublic = function (req, res, next) {
   const publicPaths = ['/', '/clear', '/start']
   if (publicPaths.includes(req.path)) {
     return next()
@@ -124,7 +125,10 @@ const doRedirect = routeName => {
       throw new Error(`[POST ${req.path}] 'redirect' missing`)
     }
 
-    return res.redirect(nextRoute.path)
+    return res.redirect(url.format({
+      pathname: nextRoute.path,
+      query: req.query,
+    }));
   }
 }
 
