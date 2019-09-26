@@ -27,6 +27,7 @@
     "copy-template-dir": "^1.4.0",
     "csurf": "^1.10.0",
     "dotenv": "^8.1.0",
+    "dynamoose": "^1.11.1",
     "express": "~4.17.1",
     "express-session": "^1.16.2",
     "express-validator": "^6.2.0",
