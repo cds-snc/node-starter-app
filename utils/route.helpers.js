@@ -72,8 +72,16 @@ const getNextRoute = (name, routes = defaultRoutes) => {
 }
 
 const getNextRouteURL = (name, req) => {
+
+  const nextRoute = getNextRoute(name)
+
+  /* istanbul ignore next */
+  if (!nextRoute.path) {
+    throw new Error(`[POST ${req.path}] 'redirect' missing`)
+  }
+
   return url.format({
-    pathname: getNextRoute(name).path,
+    pathname: nextRoute.path,
     query: req.query,
   })
 }
@@ -125,17 +133,7 @@ const doRedirect = routeName => {
       return next()
     }
 
-    const nextRoute = getNextRoute(routeName)
-
-    /* istanbul ignore next */
-    if (!nextRoute.path) {
-      throw new Error(`[POST ${req.path}] 'redirect' missing`)
-    }
-
-    return res.redirect(url.format({
-      pathname: nextRoute.path,
-      query: req.query,
-    }));
+    return res.redirect(getNextRouteURL(routeName, req));
   }
 }
 
