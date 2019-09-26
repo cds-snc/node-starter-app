@@ -71,6 +71,13 @@ const getNextRoute = (name, routes = defaultRoutes) => {
   return nextRoute
 }
 
+const getNextRouteURL = (name, req) => {
+  return url.format({
+    pathname: getNextRoute(name).path,
+    query: req.query,
+  })
+}
+
 /**
  * @param {String} name route name
  * @param {Array} routes array of route objects { name: "start", path: "/start" }
@@ -139,6 +146,7 @@ module.exports = {
   doRedirect,
   getPreviousRoute,
   getNextRoute,
+  getNextRouteURL,
   getRouteByName,
   getRouteWithIndexByName,
   getDefaultMiddleware,

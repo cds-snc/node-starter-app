@@ -1,7 +1,7 @@
 const path = require('path')
 const {
   routeUtils,
-  getNextRoute,
+  getNextRouteURL,
   getRouteByName,
   addViewPath,
   getClientJs,
@@ -10,7 +10,6 @@ const {
 module.exports = app => {
   const name = 'start'
   const route = getRouteByName(name)
-  const url = require('url');
 
   addViewPath(app, path.join(__dirname, './'))
 
@@ -27,15 +26,10 @@ module.exports = app => {
     const jsPath = getClientJs(req, name)
     const jsFiles = jsPath ? [jsPath] : false
 
-    const nextPath = url.format({
-      pathname: getNextRoute(name).path,
-      query: req.query,
-    })
-
     res.render(
       name,
       routeUtils.getViewData(res, {
-        nextRoute: nextPath,
+        nextRoute: getNextRouteURL(name, req),
         jsFiles,
       }),
     )
