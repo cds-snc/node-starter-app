@@ -2,7 +2,7 @@ const { validateRouteData } = require('../utils')
 
 test('receives an error when missing data for a route schema', async () => {
   const req = {
-    body: { fullname: '', json: true },
+    session: { formdata: { fullname: '', json: true } },
   }
 
   const schema = {
@@ -20,7 +20,7 @@ test('receives an error when missing data for a route schema', async () => {
 
 test('receives an error when missing data for a route schema', async () => {
   const req = {
-    body: { fullname: 'My Full Name', json: true },
+    session: { formdata: { fullname: 'the full name', json: true } },
   }
 
   const schema = {

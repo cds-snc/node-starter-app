@@ -112,6 +112,11 @@ const middlewareArr = options => {
 }
 
 const validateRouteData = async (req, schema) => {
+  const data = getSessionData(req)
+  const validateReq = {}
+  validateReq.body = data
+  validateReq.body.json = true
+
   // setup middleWare to call
   const middleWare = middlewareArr({ schema })
 
@@ -122,12 +127,12 @@ const validateRouteData = async (req, schema) => {
   }
 
   //run checkSchema()
-  await middleWare[0][0](req, res, () => {})
+  await middleWare[0][0](validateReq, res, () => {})
 
   //run checkErrors()
-  middleWare[1](req, res, () => {})
+  middleWare[1](validateReq, res, () => {})
 
-  const errors = checkErrorsJSON(req, res, () => {})
+  const errors = checkErrorsJSON(validateReq, res, () => {})
 
   if (!isEmptyObject(errors)) {
     return { status: false, errors: errors }

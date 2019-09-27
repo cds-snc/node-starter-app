@@ -1,10 +1,10 @@
 const path = require('path')
 const {
-  // validateRouteData,
+  validateRouteData,
   getRouteByName,
   addViewPath,
   getViewData,
-  // setFlashMessageContent,
+  setFlashMessageContent,
 } = require('../../utils/index')
 
 module.exports = app => {
@@ -17,14 +17,12 @@ module.exports = app => {
     // ⚠️ experimental
     // validate data from previous step
     // see if we should be allowed to reach this step
-
-    /*
-    const result = await validateRouteData(req, 'personal')
+    const { Schema } = require('../personal/schema.js')
+    const result = await validateRouteData(req, Schema)
     if (!result.status) {
       setFlashMessageContent(req, result.errors)
       return res.redirect(getRouteByName('personal').path)
     }
-    */
 
     res.render(name, getViewData(req))
   })
