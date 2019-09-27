@@ -1,4 +1,4 @@
-const { spreadParams } = require('./spreadParams')
+const { spreadParams } = require('./spread.params')
 
 const addNunjucksFilters = env => {
   spreadParams(env)
