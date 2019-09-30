@@ -1,4 +1,3 @@
-const path = require('path')
 const { routeUtils } = require('./../../utils')
 const { Schema } = require('./schema.js')
 
