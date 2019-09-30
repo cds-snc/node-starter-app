@@ -36,6 +36,9 @@ class Route {
   get next() { return this.table.routes[this.index + 1] }
   get prev() { return this.table.routes[this.index - 1] }
 
+  get nextPath() { return this.next && this.next.path }
+  get prevPath() { return this.prev && this.prev.path }
+
   url(query={}) {
     return url.format({
       pathname: this.path,
@@ -113,9 +116,9 @@ const configRoutes = (app, routes, opts={}) => {
 const doRedirect = route => {
   return (req, res, next) => {
     if (req.body.json) return next()
-    if (!route.next) throw new Error(`[POST ${req.path}] 'redirect' missing`)
+    if (!route.path) throw new Error(`[POST ${req.path}] 'redirect' missing`)
 
-    return res.redirect(route.next.url(req.query))
+    return res.redirect(route.url(req.query))
   }
 }
 
