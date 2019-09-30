@@ -1,15 +1,18 @@
+const path = require('path')
+
 const { checkSchema } = require('express-validator')
 const { routes: defaultRoutes } = require('../config/routes.config')
 const { checkErrors } = require('./validate.helpers')
+const { addViewPath } = require('./view.helpers')
 const url = require('url');
 
 const DefaultRouteObj = { name: false, path: false }
 
 class RoutingTable {
   constructor(routes, conf) {
-    this.routes = routes.map((r, i) => new Route(this, i, r))
     Object.assign(this, conf)
-    if (!this.directory) this.directory = '../routes'
+    this.directory = path.resolve(this.directory || './routes')
+    this.routes = routes.map((r, i) => new Route(this, i, r))
   }
 
   get(name) { return this.routes.find(r => r.name === name) }
@@ -27,9 +30,8 @@ class Route {
     Object.assign(this, conf)
   }
 
-  get controllerPath() {
-    return `../routes/${this.name}/${this.name}.controller`
-  }
+  get directory() { return `${this.table.directory}/${this.name}` }
+  get controllerPath() { return `${this.directory}/${this.name}.controller` }
 
   get next() { return this.table.routes[this.index + 1] }
   get prev() { return this.table.routes[this.index - 1] }
@@ -42,6 +44,7 @@ class Route {
   }
 
   config(app) {
+    addViewPath(app, this.directory)
     require(this.controllerPath)(app, this)
   }
 

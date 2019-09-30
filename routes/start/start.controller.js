@@ -1,14 +1,11 @@
 const path = require('path')
 const {
   routeUtils,
-  addViewPath,
   getClientJs,
 } = require('../../utils/index')
 
 module.exports = (app, route) => {
   const name = route.name
-
-  addViewPath(app, path.join(__dirname, './'))
 
   // redirect from "/" → "/start"
   app.get('/', (req, res) => res.redirect(route.path))

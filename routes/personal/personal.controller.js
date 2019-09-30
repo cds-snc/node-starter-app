@@ -3,8 +3,6 @@ const { routeUtils } = require('./../../utils')
 const { Schema } = require('./schema.js')
 
 module.exports = (app, route) => {
-  routeUtils.addViewPath(app, path.join(__dirname, './'))
-
   app
     .get(route.path, (req, res) => {
       const jsFiles = ['js/file-input.js']
