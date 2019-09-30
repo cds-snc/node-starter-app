@@ -82,7 +82,7 @@ const makeRoutingTable = (routes, opts={}) => new RoutingTable(routes, opts)
 const configRoutes = (app, routes, opts={}) => {
   // require the controllers defined in the routes
   // dir and file name based on the route name
-  return new RoutingTable(routes, opts).config(app)
+  return makeRoutingTable(routes, opts).config(app)
 }
 
 /**
