@@ -4,7 +4,6 @@ const {
   getPreviousRoute,
   getNextRoute,
   doRedirect,
-  getDefaultMiddleware,
   routeUtils,
   routeHasIndex,
 } = require('./index')
@@ -60,13 +59,11 @@ test('getNextRoute will throw an error when missing params', () => {
 })
 
 describe('doRedirect', () => {
-  const runMiddleWare = routeName => {
-    return (req, res, next) => {
-      return doRedirect(routeName)(req, res, next)
-    }
-  }
-
   test('Calls redirect if it finds the next route', () => {
+
+    // stub for the Route class
+    const route = { next: { url: () => '/somewhere' } }
+
     const req = { body: {} }
     const next = jest.fn()
     const redirectMock = jest.fn()
@@ -79,7 +76,7 @@ describe('doRedirect', () => {
       },
     }
 
-    runMiddleWare('start')(req, res, next)
+    doRedirect(route)(req, res, next)
     expect(next.mock.calls.length).toBe(0)
     expect(redirectMock.mock.calls.length).toBe(1)
   })
@@ -88,14 +85,9 @@ describe('doRedirect', () => {
     const req = { body: { json: true } }
     const next = jest.fn()
     const res = {}
-    runMiddleWare('start')(req, res, next)
+    doRedirect({})(req, res, next)
     expect(next.mock.calls.length).toBe(1)
   })
-})
-
-test('Can retreive an array of middleware', () => {
-  const arr = getDefaultMiddleware({ schema: {}, name: 'test' })
-  expect(arr.length).toBe(3)
 })
 
 test('Can import routeUtils functions', () => {

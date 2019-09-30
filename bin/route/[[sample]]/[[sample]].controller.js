@@ -8,9 +8,7 @@ module.exports = (app, route) => {
 
   app
     .get(route.path, (req, res) => {
-      res.render(name, { ...routeUtils.getViewData(req, {}), nextRoute: getNextRoute(name).path })
+      res.render(name, { ...routeUtils.getViewData(req, {}), nextRoute: route.next })
     })
-    .post(route.path, [
-      ...routeUtils.getDefaultMiddleware({ schema: Schema, name: name }),
-    ])
+    .post(route.path, ...route.defaultMiddleware({ schema: Schema }))
 }

@@ -12,6 +12,6 @@ module.exports = (app, route) => {
     })
     .post(
       route.path,
-      routeUtils.getDefaultMiddleware({ schema: Schema, name: route.name }),
+      route.defaultMiddleware({ schema: Schema }),
     )
 }
