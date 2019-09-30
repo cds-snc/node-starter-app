@@ -10,7 +10,7 @@ const sassMiddleware = require('node-sass-middleware')
 const path = require('path')
 const cookieSession = require('cookie-session')
 const cookieSessionConfig = require('./config/cookieSession.config')
-const { hasData, checkPublic, checkLangQuery } = require('./utils')
+const { hasData, checkLangQuery } = require('./utils')
 const { addNunjucksFilters } = require('./filters')
 const csp = require('./config/csp.config')
 const csrf = require('csurf')
@@ -77,7 +77,6 @@ app.use(helmet.contentSecurityPolicy({ directives: csp }))
 // gzip response body compression.
 app.use(compression())
 
-app.use(checkPublic)
 app.use(checkLangQuery)
 
 // Adding values/functions to app.locals means we can access them in our templates

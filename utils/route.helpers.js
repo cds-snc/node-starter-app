@@ -63,18 +63,6 @@ class Route {
 }
 
 /**
- * This request middleware checks if we are visiting a public path
- */
-const checkPublic = function (req, res, next) {
-  const publicPaths = ['/', '/clear', '/start']
-  if (publicPaths.includes(req.path)) {
-    return next()
-  }
-
-  return next()
-}
-
-/**
  * @returns a new routing table
  */
 const makeRoutingTable = (routes, opts={}) => new RoutingTable(routes, opts)
@@ -100,6 +88,5 @@ const doRedirect = route => {
 module.exports = {
   makeRoutingTable,
   configRoutes,
-  checkPublic,
   doRedirect,
 }
