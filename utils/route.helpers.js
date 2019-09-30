@@ -110,7 +110,7 @@ const configRoutes = (app, routes = []) => {
   // dir and file name based on the route name
   routes.forEach(routeObj => {
     const routeName = routeObj.name
-    require(`../routes/${routeName}/${routeName}.controller`)(app)
+    require(`../routes/${routeName}/${routeName}.controller`)(app, routeObj)
   })
 
   require('../routes/global/global.controller')(app)

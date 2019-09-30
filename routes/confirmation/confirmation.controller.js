@@ -7,10 +7,7 @@ const {
   setFlashMessageContent,
 } = require('../../utils/index')
 
-module.exports = app => {
-  const name = 'confirmation'
-  const route = getRouteByName(name)
-
+module.exports = (app, route) => {
   addViewPath(app, path.join(__dirname, './'))
 
   app.get(route.path, async (req, res) => {
@@ -24,6 +21,6 @@ module.exports = app => {
       return res.redirect(getRouteByName('personal').path)
     }
 
-    res.render(name, getViewData(req))
+    res.render(route.name, getViewData(req))
   })
 }
