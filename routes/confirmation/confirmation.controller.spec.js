@@ -1,6 +1,5 @@
 const request = require('supertest')
 const app = require('../../app.js')
-const { getRouteByName } = require('../../utils/route.helpers')
 
 const mockFn = jest
   .fn(req => {
@@ -22,13 +21,13 @@ jest.mock('../../utils/session.helpers', () => {
 })
 
 test('Confirmation redirects when missing data', async () => {
-  const route = getRouteByName('confirmation')
+  const route = app.routes.default.get('confirmation')
   const response = await request(app).get(route.path)
   expect(response.statusCode).toBe(302)
 })
 
 test('Confirmation receives 200 when data exists', async () => {
-  const route = getRouteByName('confirmation')
+  const route = app.routes.default.get('confirmation')
   const response = await request(app).get(route.path)
   expect(response.text).toContain('My full name')
   expect(response.statusCode).toBe(200)

@@ -88,7 +88,9 @@ app.locals.hasData = hasData
 app.locals.basedir = path.join(__dirname, './views')
 app.set('views', [path.join(__dirname, './views')])
 
-configRoutes(app, routes)
+app.routes = {
+  default: configRoutes(app, routes)
+}
 
 // view engine setup
 const nunjucks = require('nunjucks')

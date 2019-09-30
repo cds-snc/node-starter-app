@@ -1,6 +1,5 @@
 const {
   validateRouteData,
-  getRouteByName,
   getViewData,
   setFlashMessageContent,
 } = require('../../utils/index')
@@ -14,7 +13,7 @@ module.exports = (app, route) => {
     const result = await validateRouteData(req, Schema)
     if (!result.status) {
       setFlashMessageContent(req, result.errors)
-      return res.redirect(getRouteByName('personal').path)
+      return res.redirect(route.get('personal').path)
     }
 
     res.render(route.name, getViewData(req))

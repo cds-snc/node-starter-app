@@ -1,12 +1,10 @@
 const path = require('path')
+const url = require('url');
 
 const { checkSchema } = require('express-validator')
 const { routes: defaultRoutes } = require('../config/routes.config')
 const { checkErrors } = require('./validate.helpers')
 const { addViewPath } = require('./view.helpers')
-const url = require('url');
-
-const DefaultRouteObj = { name: false, path: false }
 
 class RoutingTable {
   constructor(routes, conf) {
@@ -20,6 +18,7 @@ class RoutingTable {
   config(app) {
     this.routes.forEach(r => r.config(app))
     require(`${this.directory}/global/global.controller`)(app, this)
+    return this
   }
 }
 
@@ -29,6 +28,8 @@ class Route {
     this.index = index
     Object.assign(this, conf)
   }
+
+  get(routeName) { return this.table.get(routeName) }
 
   get directory() { return `${this.table.directory}/${this.name}` }
   get controllerPath() { return `${this.directory}/${this.name}.controller` }
@@ -49,6 +50,7 @@ class Route {
   config(app) {
     addViewPath(app, this.directory)
     require(this.controllerPath)(app, this)
+    return this
   }
 
   defaultMiddleware(opts) {
@@ -72,33 +74,6 @@ const checkPublic = function (req, res, next) {
   return next()
 }
 
-const routeHasIndex = route => {
-  if (!route || !route.hasOwnProperty('index')) {
-    return false
-  }
-
-  return true
-}
-
-/**
- * @param {String} name route name
- * @param {Array} routes array of route objects { name: "start", path: "/start" }
- * @returns { name: "", path: "" }
- */
-const getRouteByName = (name, routes = defaultRoutes) => {
-  return getRouteWithIndexByName(name, routes).route
-}
-
-/**
- * @param {String} name route name
- * @param {Array} routes array of route objects { name: "start", path: "/start" }
- * @returns { index: "1", route: { name: "start", path: "/start" } }
- */
-const getRouteWithIndexByName = (name, routes = defaultRoutes) => {
-  const index = routes.findIndex(r => r.name === name)
-  if (index >= 0) return { index, route: routes[index] }
-}
-
 /**
  * @returns a new routing table
  */
@@ -107,7 +82,7 @@ const makeRoutingTable = (routes, opts={}) => new RoutingTable(routes, opts)
 const configRoutes = (app, routes, opts={}) => {
   // require the controllers defined in the routes
   // dir and file name based on the route name
-  new RoutingTable(routes, opts).config(app)
+  return new RoutingTable(routes, opts).config(app)
 }
 
 /**
@@ -124,10 +99,7 @@ const doRedirect = route => {
 
 module.exports = {
   makeRoutingTable,
-  routeHasIndex,
   configRoutes,
   checkPublic,
-  getRouteByName,
-  getRouteWithIndexByName,
   doRedirect,
 }
