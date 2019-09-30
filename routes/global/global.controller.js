@@ -1,4 +1,4 @@
-module.exports = app => {
+module.exports = (app, table) => {
   // clear session
 
   app.get('/test-500', (req, res) => {
