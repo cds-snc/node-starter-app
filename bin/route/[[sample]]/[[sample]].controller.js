@@ -2,10 +2,8 @@ const path = require('path')
 const { getNextRoute, routeUtils } = require('./../../utils')
 const { Schema } = require('./schema.js')
 
-module.exports = app => {
-  const name = '[[sample]]'
-  const route = routeUtils.getRouteByName(name)
-
+module.exports = (app, route) => {
+  const name = route.name
   routeUtils.addViewPath(app, path.join(__dirname, './'))
 
   app
