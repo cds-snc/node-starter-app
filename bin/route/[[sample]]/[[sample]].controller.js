@@ -1,5 +1,5 @@
 const path = require('path')
-const { getNextRoute, routeUtils } = require('./../../utils')
+const { routeUtils } = require('./../../utils')
 const { Schema } = require('./schema.js')
 
 module.exports = (app, route) => {

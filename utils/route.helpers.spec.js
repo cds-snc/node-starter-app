@@ -1,68 +1,49 @@
 const {
+  makeRoutingTable,
   getRouteWithIndexByName,
   getRouteByName,
-  getPreviousRoute,
-  getNextRoute,
   doRedirect,
   routeUtils,
   routeHasIndex,
 } = require('./index')
 
-const testRoutes = [
+const testRoutes = makeRoutingTable([
   { name: 'start', path: '/start' },
   { name: 'personal', path: '/personal' },
   { name: 'confirmation', path: '/confirmation' },
-]
+], { directory: '/tmp' })
 
 describe('Routes', () => {
-  test('finds route index by name', () => {
-    const obj = getRouteWithIndexByName('personal', testRoutes)
-    expect(obj.index).toEqual(1)
+  test('finds route by name', () => {
+    const personal = testRoutes.get('personal')
+    expect(personal.index).toEqual(1)
+    expect(personal.path).toEqual('/personal')
   })
 
-  test('finds route path by name', () => {
-    const obj = getRouteByName('personal', testRoutes)
-    expect(obj.path).toEqual('/personal')
+  test("return undefined for previous route that doesn't exist", () => {
+    const start = testRoutes.get('start')
+    expect(start.prev).toBeUndefined()
   })
 
-  test("return false for previous route that doesn't exist", () => {
-    const obj = getPreviousRoute('start', testRoutes)
-    expect(obj.path).toEqual(false)
+  test('finds previous route', () => {
+    const personal = testRoutes.get('personal')
+    expect(personal.prev.path).toEqual('/start')
   })
 
-  test('finds previous route path by name', () => {
-    const obj = getPreviousRoute('personal', testRoutes)
-    expect(obj.path).toEqual('/start')
-  })
-
-  test("return false for next route that doesn't exist", () => {
-    const obj = getNextRoute('confirmation', testRoutes)
-    expect(obj.path).toEqual(false)
+  test("return undefined for next route that doesn't exist", () => {
+    const confirmation = testRoutes.get('confirmation')
+    expect(confirmation.next).toBeUndefined()
   })
 
   test('finds next route path by name', () => {
-    const obj = getNextRoute('personal', testRoutes)
-    expect(obj.path).toEqual('/confirmation')
+    const personal = testRoutes.get('personal').next
+    expect(personal.path).toEqual('/confirmation')
   })
-})
-
-test('getPreviousRoute will throw an error when missing params', () => {
-  expect(() => {
-    getPreviousRoute()
-  }).toThrow()
-})
-
-test('getNextRoute will throw an error when missing params', () => {
-  expect(() => {
-    getNextRoute()
-  }).toThrow()
 })
 
 describe('doRedirect', () => {
   test('Calls redirect if it finds the next route', () => {
-
-    // stub for the Route class
-    const route = { next: { url: () => '/somewhere' } }
+    const route = testRoutes.get('personal')
 
     const req = { body: {} }
     const next = jest.fn()
@@ -85,7 +66,7 @@ describe('doRedirect', () => {
     const req = { body: { json: true } }
     const next = jest.fn()
     const res = {}
-    doRedirect({})(req, res, next)
+    doRedirect(testRoutes.get('confirmation'))(req, res, next)
     expect(next.mock.calls.length).toBe(1)
   })
 })
