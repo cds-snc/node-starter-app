@@ -29,8 +29,6 @@ const synth = function(name = 'node-starter-app') {
     partitionKey: { name: 'fullname', type: dynamodb.AttributeType.STRING },
   })
 
-  console.log(table.tableName)
-
   app.synth()
 }
 
