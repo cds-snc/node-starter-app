@@ -88,7 +88,7 @@ app.locals.basedir = path.join(__dirname, './views')
 app.set('views', [path.join(__dirname, './views')])
 
 app.routes = {
-  default: configRoutes(app, routes)
+  default: configRoutes(app, routes),
 }
 
 // view engine setup
