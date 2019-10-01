@@ -6,14 +6,27 @@ const { checkErrors } = require('./validate.helpers')
 const { addViewPath } = require('./view.helpers')
 
 class RoutingTable {
+  /**
+   * A routing table, based on the user's configured routes from
+   * routes.config.js. Can have arbitrary keys set via the `conf`
+   * parameter. In particular, this parameter allows setting the
+   * directory for the route files, by default `./routes` from the
+   * project root.
+   */
   constructor(routes, conf) {
     Object.assign(this, conf)
     this.directory = path.resolve(this.directory || './routes')
     this.routes = routes.map((r, i) => new Route(this, i, r))
   }
 
+  /**
+   * Returns a route given a route name
+   */
   get(name) { return this.routes.find(r => r.name === name) }
 
+  /**
+   * Attach the route controllers to an app.
+   */
   config(app) {
     this.routes.forEach(r => r.config(app))
     require(`${this.directory}/global/global.controller`)(app, this)
@@ -22,23 +35,36 @@ class RoutingTable {
 }
 
 class Route {
+  /**
+   * A route is a single element of a routing table. It contains
+   * a back-reference to the table, as well as an index in that
+   * table, for use with `.prev` and `.next`, to find adjacent
+   * routes in the same table. `conf` is the user's configuration
+   * object, which we will expect to contain `.name` and `.path`
+   * at minimum, but can also contain other configuration keys.
+   */
   constructor(table, index, conf) {
     this.table = table
     this.index = index
     Object.assign(this, conf)
   }
 
+  // an alias for RoutingTable::get
   get(routeName) { return this.table.get(routeName) }
 
+  // paths to load files during setup
   get directory() { return `${this.table.directory}/${this.name}` }
   get controllerPath() { return `${this.directory}/${this.name}.controller` }
 
+  // the adjacent routes from the same table
   get next() { return this.table.routes[this.index + 1] }
   get prev() { return this.table.routes[this.index - 1] }
 
+  // helpers for the path of the next / previous route
   get nextPath() { return this.next && this.next.path }
   get prevPath() { return this.prev && this.prev.path }
 
+  // a URL for this route, given a query
   url(query={}) {
     return url.format({
       pathname: this.path,
@@ -46,12 +72,17 @@ class Route {
     })
   }
 
+  // set up this route's controller in an Express app
   config(app) {
     addViewPath(app, this.directory)
     require(this.controllerPath)(app, this)
     return this
   }
 
+  /**
+   * The default middleware for this route, intended
+   * for the POST method.
+   */
   defaultMiddleware(opts) {
     return [
       checkSchema(opts.schema),
@@ -66,6 +97,9 @@ class Route {
  */
 const makeRoutingTable = (routes, opts={}) => new RoutingTable(routes, opts)
 
+/**
+ * The default `configRoutes` function
+ */
 const configRoutes = (app, routes, opts={}) => {
   // require the controllers defined in the routes
   // dir and file name based on the route name
