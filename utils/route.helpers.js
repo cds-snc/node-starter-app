@@ -2,7 +2,6 @@ const path = require('path')
 const url = require('url');
 
 const { checkSchema } = require('express-validator')
-const { routes: defaultRoutes } = require('../config/routes.config')
 const { checkErrors } = require('./validate.helpers')
 const { addViewPath } = require('./view.helpers')
 
