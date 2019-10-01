@@ -70,3 +70,4 @@ public/styles.css*
 
 .DS_Store
 credentials
+cdk.out

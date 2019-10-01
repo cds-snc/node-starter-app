@@ -1,0 +1,25 @@
+const ec2 = require('@aws-cdk/aws-ec2');
+const ecs = require('@aws-cdk/aws-ecs');
+const ecsPatterns = require('@aws-cdk/aws-ecs-patterns');
+const cdk = require('@aws-cdk/core');
+const path = require('path');
+
+const synth = function(name = "node-starter-app"){
+
+  const app = new cdk.App();
+  const stack = new cdk.Stack(app, `${name}FargateServiceStack`);
+
+  const vpc = new ec2.Vpc(stack, name, { maxAzs: 1 });
+  const cluster = new ecs.Cluster(stack, 'Cluster', { vpc });
+
+  new ecsPatterns.NetworkLoadBalancedFargateService(stack, `${name}FargateService`, {
+    cluster,
+    image: ecs.ContainerImage.fromAsset(path.resolve(__dirname, 'local-image'))
+  });
+
+  app.synth();
+}
+
+synth();
+
+

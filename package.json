@@ -9,6 +9,7 @@
     "node": ">=10"
   },
   "scripts": {
+    "aws": "node cdk/build.js",
     "dev": "NODE_ENV=development nodemon ./bin/www",
     "lint": "node_modules/eslint/bin/eslint.js config routes bin/www app.js",
     "prettier": "prettier --write '**/*.{ts,js,css,html}'",
@@ -36,8 +37,12 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "commander": "^3.0.2",
-    "acorn": "^7.1.0",
+    "acorn": "^7.0.0",
+    "@aws-cdk/aws-docdb": "*",
+    "@aws-cdk/aws-ec2": "*",
+    "@aws-cdk/aws-ecs": "*",
+    "@aws-cdk/aws-ecs-patterns": "*",
+    "@aws-cdk/core": "*",
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
