@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.0.0] - 2019-10-01
+### Updated
+Refactored the route helpers - we now pass a `Route` object into the controller alongside the `app`.
+
 ## [3.2.0] - 2019-09-27
 ### Updated
 - validateRouteData(req, schema) allows a route data to be validated from another route
