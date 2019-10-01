@@ -2,11 +2,9 @@ const path = require('path')
 const { routeUtils } = require('./../../utils')
 // const dynamoose = require('dynamoose')
 
-module.exports = app => {
-  const name = 'test_db'
-  const route = routeUtils.getRouteByName(name)
+module.exports = (app, route) => {
+  const name = route.name
 
-  routeUtils.addViewPath(app, path.join(__dirname, './'))
   /*
   dynamoose.AWS.config.update({})
 
