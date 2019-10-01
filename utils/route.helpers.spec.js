@@ -5,16 +5,16 @@ const {
 } = require('./index')
 
 const testRoutes = makeRoutingTable([
-  { name: 'start', path: '/start' },
-  { name: 'personal', path: '/personal' },
+  { name: 'start', path: { en: '/start', fr: '/debut' } },
+  { name: 'personal', path: { en: '/personal', fr: '/personnel' } },
   { name: 'confirmation', path: '/confirmation' },
-], { directory: '/tmp' })
+], { directory: '/tmp' }).en
 
 describe('Routes', () => {
   test('finds route by name', () => {
     const personal = testRoutes.get('personal')
     expect(personal.index).toEqual(1)
-    expect(personal.path).toEqual('/personal')
+    expect(personal.path).toEqual('/en/personal')
   })
 
   test("return undefined for previous route that doesn't exist", () => {
@@ -24,7 +24,7 @@ describe('Routes', () => {
 
   test('finds previous route', () => {
     const personal = testRoutes.get('personal')
-    expect(personal.prev.path).toEqual('/start')
+    expect(personal.prev.path).toEqual('/en/start')
   })
 
   test("return undefined for next route that doesn't exist", () => {
@@ -33,8 +33,19 @@ describe('Routes', () => {
   })
 
   test('finds next route path by name', () => {
-    const personal = testRoutes.get('personal').next
-    expect(personal.path).toEqual('/confirmation')
+    const confirmation = testRoutes.get('personal').next
+    expect(confirmation.path).toEqual('/en/confirmation')
+  })
+
+  test('finds same route in a different locale', () => {
+    const confirmation = testRoutes.get('confirmation').withLocale('fr')
+    expect(confirmation.locale).toEqual('fr')
+    expect(confirmation.path).toEqual('/fr/confirmation')
+  })
+
+  test('uses the localized path name', () => {
+    const start = testRoutes.get('start').withLocale('fr')
+    expect(start.path).toEqual('/fr/debut')
   })
 })
 

@@ -5,19 +5,50 @@ const { checkSchema } = require('express-validator')
 const { checkErrors } = require('./validate.helpers')
 const { addViewPath } = require('./view.helpers')
 
+class LocaleGroup {
+  constructor(routes, locales, conf) {
+    this.locales = locales
+
+    // make separate tables available at group.en, group.fr, etc
+    locales.forEach(locale => {
+      this[locale] = new RoutingTable(this, routes, { ...conf, locale })
+    })
+  }
+
+  tableFor(locale) {
+    if (this.locales.indexOf(locale) < 0) throw new Error(`invalid locale ${locale}`)
+
+    return this[locale]
+  }
+
+  config(app) {
+    // NOTE: this forEach means that we will call each controller function
+    // multiple times - once for every locale. This is necessary to allow
+    // registering multiple routes on /en/... and /fr/... independently.
+    this.locales.forEach(l => this[l].config(app))
+    return this
+  }
+
+  get(locale, name) { return this.tableFor(locale).get(name) }
+  at(locale, idx) { return this.tableFor(locale).at(idx) }
+}
+
 class RoutingTable {
-  constructor(routes, conf) {
+  constructor(localeGroup, routes, conf) {
     Object.assign(this, conf)
+    this.locales = localeGroup
+    this.routes = routes
     this.directory = path.resolve(this.directory || './routes')
+
     this.routes = routes.map((r, i) => new Route(this, i, r))
   }
 
   get(name) { return this.routes.find(r => r.name === name) }
+  at(index) { return this.routes[index] }
 
   config(app) {
     this.routes.forEach(r => r.config(app))
     require(`${this.directory}/global/global.controller`)(app, this)
-    return this
   }
 }
 
@@ -26,15 +57,24 @@ class Route {
     this.table = table
     this.index = index
     Object.assign(this, conf)
+
+    if (typeof this.path === 'object') {
+      this.path = this.path[this.locale]
+    }
+
+    // turn the path into something like '/en/route-name'
+    this.path = `/${this.locale}${this.path}`
   }
 
   get(routeName) { return this.table.get(routeName) }
+  withLocale(locale) { return this.table.locales.at(locale, this.index) }
 
+  get locale() { return this.table.locale }
   get directory() { return `${this.table.directory}/${this.name}` }
   get controllerPath() { return `${this.directory}/${this.name}.controller` }
 
-  get next() { return this.table.routes[this.index + 1] }
-  get prev() { return this.table.routes[this.index - 1] }
+  get next() { return this.table.at(this.index + 1) }
+  get prev() { return this.table.at(this.index - 1) }
 
   get nextPath() { return this.next && this.next.path }
   get prevPath() { return this.prev && this.prev.path }
@@ -61,14 +101,11 @@ class Route {
   }
 }
 
-/**
- * @returns a new routing table
- */
-const makeRoutingTable = (routes, opts={}) => new RoutingTable(routes, opts)
+const makeRoutingTable = (routes, opts={}) => {
+  return new LocaleGroup(routes, opts.locales || ['en', 'fr'], opts)
+}
 
 const configRoutes = (app, routes, opts={}) => {
-  // require the controllers defined in the routes
-  // dir and file name based on the route name
   return makeRoutingTable(routes, opts).config(app)
 }
 
