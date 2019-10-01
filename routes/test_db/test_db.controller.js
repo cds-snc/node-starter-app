@@ -1,5 +1,4 @@
-const path = require('path')
-const { routeUtils } = require('./../../utils')
+// const { routeUtils } = require('./../../utils')
 // const dynamoose = require('dynamoose')
 
 module.exports = (app, route) => {
