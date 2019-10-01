@@ -25,7 +25,7 @@ const synth = function(name = 'node-starter-app') {
     },
   )
 
-  const table = new dynamodb.Table(stack, 'Submissions', {
+  new dynamodb.Table(stack, 'Submissions', {
     partitionKey: { name: 'fullname', type: dynamodb.AttributeType.STRING },
   })
 
