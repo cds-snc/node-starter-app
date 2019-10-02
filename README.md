@@ -62,30 +62,11 @@ const routes = [
 
 Note: Delete unused route(s) directories as needed.
 
-## Passing data to views
 
-Saved data is available via getSessionData(req) or getViewData(req)
-
-```javascript
-app.get(route.path, (req, res) => {
-  res.render(name, {... routeUtils.getViewData(req, {datePlaceholder: "DD/MM/YYYY"}), });
-});
-```
-
-```pug
- +textInput('form.passport_expiry', null, 'form.passport_expiry.desc')(class='w-3-4', id='expiry' name='expiry', autofocus, value=data.expiry, placeholder=data.datePlaceholder)
-```
 
 ## Form step redirects
 
-Redirects are handled via doRedirect based on a `name` value (the name of the current route) sent via in the req.body. The doRedirect function will do a look up for the next route based on the routes config. 
-
-```javascript
-// your_route_name.controller post route
-app.post(route.path, [
-      ...routeUtils.getDefaultMiddleware({ schema: Schema, name: name })
-    ]);
-```
+Redirects are handled via doRedirect. The doRedirect function will do a look up for the next route based on the routes config. 
 
 For cases where the redirect is not straight forward you can handle manually.
 
