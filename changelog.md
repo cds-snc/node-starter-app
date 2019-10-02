@@ -4,6 +4,30 @@
 ### Updated
 Refactored the route helpers - we now pass a `Route` object into the controller alongside the `app`.
 
+Additional properties added:
+- route.name
+- route.defaultMiddleware
+- route.next
+- route.prev
+- route.get('personal').path
+
+```
+app
+    .get(route.path, (req, res) => {
+      res.render(route.name, routeUtils.getViewData(req))
+    })
+    .post(
+      route.path,
+      route.defaultMiddleware({ schema: Schema }),
+    )
+```
+
+### Removed
+- getPreviousRoute()
+- getNextRoute()
+- getNextRouteURL()
+- getDefaultMiddleware()
+
 ## [3.2.0] - 2019-09-27
 ### Updated
 - validateRouteData(req, schema) allows a route data to be validated from another route
