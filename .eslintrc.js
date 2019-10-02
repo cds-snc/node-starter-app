@@ -12,5 +12,8 @@ module.exports = {
   },
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
+    'security/detect-object-injection': 'off',
+    'security/detect-non-literal-require': 'off',
+    'security/detect-non-literal-fs-filename': 'off',
   },
 }

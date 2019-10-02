@@ -68,7 +68,7 @@ class Route {
   url(query={}) {
     return url.format({
       pathname: this.path,
-      query: query
+      query: query,
     })
   }
 
@@ -87,7 +87,7 @@ class Route {
     return [
       checkSchema(opts.schema),
       checkErrors(this.name),
-      doRedirect(this.next)
+      doRedirect(this.next),
     ]
   }
 }

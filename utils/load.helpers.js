@@ -17,7 +17,7 @@ const getClientJs = (req, routeName = '', jsPath = '../public') => {
 
     const json = JSON.parse(content)
     // get the JS filename from the list
-    //_filelist.json
+    // _filelist.json
     /*
     {
       "start":"start.9dfca2e687c206cf5967.js",
@@ -34,7 +34,7 @@ const getClientJs = (req, routeName = '', jsPath = '../public') => {
 
     return false
   } catch (e) {
-    //console.log(e.message)
+    // console.log(e.message)
     console.log(`${routeName}.js or filelist.json doesn't exist`)
     return false
   }

@@ -12,6 +12,6 @@ test('Sets and clears flash messages', () => {
   expect(err).toBe(errMessage)
   expect(getFlashMessage(req).errors[0]).toBe(err)
 
-  //should clear itself after calling getFlashMessage
+  // should clear itself after calling getFlashMessage
   expect(getFlashMessage(req).errors).toBe(undefined)
 })

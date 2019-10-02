@@ -1,14 +1,13 @@
-const {
-  makeRoutingTable,
-  doRedirect,
-  routeUtils,
-} = require('./index')
+const { makeRoutingTable, doRedirect } = require('./index')
 
-const testRoutes = makeRoutingTable([
-  { name: 'start', path: '/start' },
-  { name: 'personal', path: '/personal' },
-  { name: 'confirmation', path: '/confirmation' },
-], { directory: '/tmp' })
+const testRoutes = makeRoutingTable(
+  [
+    { name: 'start', path: '/start' },
+    { name: 'personal', path: '/personal' },
+    { name: 'confirmation', path: '/confirmation' },
+  ],
+  { directory: '/tmp' },
+)
 
 describe('Routes', () => {
   test('finds route by name', () => {

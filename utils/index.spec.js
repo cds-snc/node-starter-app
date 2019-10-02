@@ -1,4 +1,4 @@
-//@todo break the tests up
+// @todo break the tests up
 
 const { isValidDate, isEmptyObject } = require('./index')
 
