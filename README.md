@@ -157,7 +157,7 @@ block content
 
 ## Template Engine
 
-[Nunjucks](https://mozilla.github.io/nunjucks/(https://expressjs.com/en/resources/template-engines.html)
+[Nunjucks](https://mozilla.github.io/nunjucks/)
 
 ## Common View Helpers
 
