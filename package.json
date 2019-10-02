@@ -22,7 +22,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm test",
+      "pre-commit": "",
       "pre-push": "npm run lint && npm test"
     }
   },
@@ -46,9 +46,16 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "acorn": "^7.1.0",
+    "fse": "^4.0.1",
+    "husky": "^3.0.7",
+    "rimraf": "^3.0.0",
+    "acorn": "^7.0.0",
+    "@aws-cdk/aws-docdb": "1.9.0",
+    "@aws-cdk/aws-ec2": "1.9.0",
+    "@aws-cdk/aws-ecs": "1.9.0",
+    "@aws-cdk/aws-ecs-patterns": "1.9.0",
+    "@aws-cdk/core": "1.9.0",
     "cheerio": "^1.0.0-rc.3",
-    "commander": "^3.0.2",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
@@ -58,9 +65,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.1",
-    "husky": "^3.0.7",
     "jest": "^24.9.0",
-    "lint-staged": "^9.4.1",
     "nodemon": "^1.19.2",
     "patch-package": "^6.2.0",
     "prettier": "^1.18.2",
