@@ -155,9 +155,9 @@ block content
 
 - Form validation is built into the form schema files and use [validator.js](https://github.com/validatorjs/validator.js#validators) to validate input
 
-## Templates
+## Template Engine
 
-- Templates currenty use Pug (formerly Jade). You can use whatever you like for a [template-engine](https://expressjs.com/en/resources/template-engines.html). There's even a server rendered [React](https://github.com/reactjs/express-react-views) engine. That said, it's bring your own layouts and helper files.
+[Nunjucks](https://mozilla.github.io/nunjucks/(https://expressjs.com/en/resources/template-engines.html)
 
 ## Common View Helpers
 
@@ -166,18 +166,6 @@ See views/_includes
 ## Change configuration
 
 Don't like the way it's setup -> it's an Express server so do your thing `app.js`
-
-### Samples
-
-Radio Buttons
-```
-include /_includes/radios
-+radioButtons('card_type', {1:'Visa',2:'MasterCard'}, data.card_type, 'Name of card', errors)
-```
-Text Inputs
-```
-+textInput('form.fullname', null, 'form.fullname.desc')(class='w-3-4', id='fullname' name='fullname', autofocus, value=data.fullname)
-```
 
 ## CLI
 
@@ -210,10 +198,6 @@ Text Inputs
 
 - This project aims to allow you to hit the ground running. It's not meant to be a be all end all defacto solution.
 
-## Todo
-
-- Adding tests for sample routes
-- Adding more tests for utility functions
 
 ## Notes
 
