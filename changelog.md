@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.1] - 2019-10-02
+### Updated
+Linting rules + include utils directory
+
+### Added 
+Husky git hooks
+
+
 ## [4.0.0] - 2019-10-01
 ### Updated
 Refactored the route helpers - we now pass a `Route` object into the controller alongside the `app`.
