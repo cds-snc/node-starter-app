@@ -179,20 +179,7 @@ const configRoutes = (app, routes, locales, opts={}) => {
   return makeRoutingTable(routes, locales, opts).config(app)
 }
 
-/**
- * attempt to auto redirect based on the next route it the route config
- */
-const doRedirect = route => {
-  return (req, res, next) => {
-    if (req.body.json) return next()
-    if (!route.path) throw new Error(`[POST ${req.path}] 'redirect' missing`)
-
-    return res.redirect(route.url(req.locale, req.query))
-  }
-}
-
 module.exports = {
   makeRoutingTable,
   configRoutes,
-  doRedirect,
 }

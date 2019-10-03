@@ -48,31 +48,26 @@ describe('Routes', () => {
 })
 
 describe('doRedirect', () => {
+  const req = { body: {}, locale: 'fr' }
+  const next = jest.fn()
+  const redirectMock = jest.fn()
+  const res = {
+    query: {},
+    headers: {},
+    data: null,
+    redirect: redirectMock
+  }
+
   test('Calls redirect if it finds the next route', () => {
-    const route = testRoutes.get('personal')
-
-    const req = { body: {} }
-    const next = jest.fn()
-    const redirectMock = jest.fn()
-    const res = {
-      query: {},
-      headers: {},
-      data: null,
-      redirect: () => {
-        redirectMock()
-      },
-    }
-
-    doRedirect(route)(req, res, next)
+    personal.doRedirect()(req, res, next)
     expect(next.mock.calls.length).toBe(0)
     expect(redirectMock.mock.calls.length).toBe(1)
+    expect(redirectMock.mock.calls[0][0]).toEqual('/fr/confirmation')
   })
 
   test('Calls next if json is requested', () => {
-    const req = { body: { json: true } }
-    const next = jest.fn()
-    const res = {}
-    doRedirect(testRoutes.get('confirmation'))(req, res, next)
+    jsonReq = { ...req, body: { json: true } }
+    confirmation.doRedirect()(jsonReq, res, next)
     expect(next.mock.calls.length).toBe(1)
   })
 })
