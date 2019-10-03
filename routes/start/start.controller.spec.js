@@ -20,14 +20,14 @@ jest.mock('../../utils/load.helpers.js', () => ({
 
 test('Can send get request to start route and have js src set', async () => {
   const route = app.routes.get('start')
-  const response = await request(app).get(route.path)
+  const response = await request(app).get(route.path.en)
   expect(response.statusCode).toBe(200)
   expect(response.text).toContain('digital.canada.ca')
 })
 
 test('Can send get request to start route and have empty js src', async () => {
   const route = app.routes.get('start')
-  const response = await request(app).get(route.path)
+  const response = await request(app).get(route.path.en)
   expect(response.statusCode).toBe(200)
   // call to getClientJs should return false
   // which means we should have X number of script tags

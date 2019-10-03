@@ -2,38 +2,48 @@ const { makeRoutingTable, doRedirect } = require('./index')
 
 const testRoutes = makeRoutingTable(
   [
-    { name: 'start', path: '/start' },
-    { name: 'personal', path: '/personal' },
+    { name: 'start', path: { en: '/start', fr: '/debut' } },
+    { name: 'personal', path: { en: '/personal', fr: '/personnel' }, otherKey: 42 },
     { name: 'confirmation', path: '/confirmation' },
   ],
+  ['en', 'fr'],
   { directory: '/tmp' },
 )
 
+const start = testRoutes.get('start')
+const personal = testRoutes.get('personal')
+const confirmation = testRoutes.get('confirmation')
+
 describe('Routes', () => {
   test('finds route by name', () => {
-    const personal = testRoutes.get('personal')
+    expect(start.index).toEqual(0)
     expect(personal.index).toEqual(1)
-    expect(personal.path).toEqual('/personal')
+    expect(confirmation.index).toEqual(2)
+  })
+
+  test('prefixes paths', () => {
+    expect(start.path.fr).toEqual('/fr/debut')
+    expect(confirmation.path.en).toEqual('/en/confirmation')
+  })
+
+  test('preserves custom keys', () => {
+    expect(personal.otherKey).toEqual(42)
   })
 
   test("return undefined for previous route that doesn't exist", () => {
-    const start = testRoutes.get('start')
     expect(start.prev).toBeUndefined()
   })
 
   test('finds previous route', () => {
-    const personal = testRoutes.get('personal')
-    expect(personal.prev.path).toEqual('/start')
+    expect(start.prev).toBeUndefined()
+    expect(personal.prev).toEqual(start)
+    expect(confirmation.prev).toEqual(personal)
   })
 
-  test("return undefined for next route that doesn't exist", () => {
-    const confirmation = testRoutes.get('confirmation')
+  test('finds next route', () => {
+    expect(start.next).toEqual(personal)
+    expect(personal.next).toEqual(confirmation)
     expect(confirmation.next).toBeUndefined()
-  })
-
-  test('finds next route path by name', () => {
-    const personal = testRoutes.get('personal').next
-    expect(personal.path).toEqual('/confirmation')
   })
 })
 
