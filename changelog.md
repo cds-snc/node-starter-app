@@ -3,8 +3,9 @@
 ## [4.0.1] - 2019-10-02
 ### Updated
 Linting rules + include utils directory
+Don't save `redirect` or `csrf` form data to session
 
-### Added 
+### Added
 Husky git hooks
 
 
@@ -58,5 +59,5 @@ app
 
 ## [2.2.1] - 2019-09-26
 ### Added
-- filter spreadParams for future use 
+- filter spreadParams for future use
   see: https://github.com/cds-snc/node-starter-app/pull/69

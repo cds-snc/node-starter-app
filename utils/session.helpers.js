@@ -6,6 +6,9 @@ const getSessionData = req => {
 const saveSessionData = req => {
   // copy all posted parameters
   const body = Object.assign({}, req.body)
+  delete body.redirect
+  delete body._csrf
+
   req.session.formdata = { ...req.session.formdata, ...body }
 }
 
