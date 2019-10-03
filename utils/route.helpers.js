@@ -105,10 +105,22 @@ class Route {
    */
   defaultMiddleware(opts) {
     return [
-      checkSchema(opts.schema),
-      checkErrors(this.name),
-      doRedirect(this.next),
+      ...applySchema(opts.schema),
+      this.doRedirect(opts.computeNext),
     ]
+  }
+
+  applySchema(schema) {
+    return [checkSchema(schema), checkErrors(this.name)]
+  }
+
+  doRedirect(redirectTo = null) {
+    return (req, res) => {
+      if (typeof redirectTo === 'function') redirectTo = redirectTo(req, res, this)
+      if (!redirectTo) redirectTo = this.next
+      if (typeof redirectTo === 'string') redirectTo = this.get(redirectTo)
+      res.redirect(redirectTo.url(req.locale))
+    }
   }
 }
 

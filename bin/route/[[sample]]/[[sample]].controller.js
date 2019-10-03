@@ -8,5 +8,5 @@ module.exports = (app, route) => {
     .get(route.path, (req, res) => {
       res.render(name, routeUtils.getViewData(req, {}))
     })
-    .post(route.path, ...route.defaultMiddleware({ schema: Schema }))
+    .post(route.path, route.applySchema(Schema), route.doRedirect())
 }
