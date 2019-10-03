@@ -121,7 +121,7 @@ class DrawRoutes {
 
   request(method, ...args) {
     this.route.eachLocale((path, locale) => {
-      this.app[method](path, ...args)
+      this.app[method](path, routeMiddleware(this.route, locale), ...args)
     })
 
     return this
@@ -131,6 +131,25 @@ class DrawRoutes {
   post(...args) { return this.request('post', ...args) }
   put(...args) { return this.request('put', ...args) }
   delete(...args) { return this.request('delete', ...args) }
+}
+
+const oneHour = 1000 * 60 * 60 * 1
+const routeMiddleware = (route, locale) => (req, res, next) => {
+  res.cookie('lang', locale, {
+    httpOnly: true,
+    maxAge: oneHour,
+    sameSite: 'strict',
+  })
+
+  res.setLocale(locale)
+
+  res.locals.route = route
+  res.locals.routePath = (nameOrObj) => {
+    if (typeof nameOrObj === 'string') nameOrObj = route.get(nameOrObj)
+    return nameOrObj.path[locale]
+  }
+
+  return next()
 }
 
 /**
