@@ -115,7 +115,9 @@ class Route {
   }
 
   doRedirect(redirectTo = null) {
-    return (req, res) => {
+    return (req, res, next) => {
+      if (req.body.json) return next()
+
       if (typeof redirectTo === 'function') redirectTo = redirectTo(req, res, this)
       if (!redirectTo) redirectTo = this.next
       if (typeof redirectTo === 'string') redirectTo = this.get(redirectTo)

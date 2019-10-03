@@ -66,20 +66,21 @@ Note: Delete unused route(s) directories as needed.
 
 ## Form step redirects
 
-Redirects are handled via doRedirect. The doRedirect function will do a look up for the next route based on the routes config. 
+Redirects are handled via `route.doRedirect()`. The doRedirect function will do a look up for the next route based on the routes config.
 
-For cases where the redirect is not straight forward you can handle manually.
+For cases where the redirect is not straight forward you can pass in a function, which can return a route name or a route object:
 
 ```javascript
-(req, res, next) => {
-  const confirm = req.body.confirm;
-  if (confirm === "Yes") {
-    const nextRoute = getNextRoute(name);
-    return res.redirect(nextRoute.path);
-  }
+// routes.config.js
+const routes = [
+  ...
+  { name: 'my-route', ..., skipTo: 'other-route' }
+  ...
+]
 
-  res.send("you said no");
-};
+// my-route.controller.js
+route.draw(app)
+  .post(..., route.doRedirect((req, res) => shouldSkip(req) ? route.skipTo : route.next))
 ```
 
 ## Form CSRF Protection
