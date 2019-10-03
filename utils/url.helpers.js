@@ -5,8 +5,6 @@
  * From this point onwards, all of the site's content will be in the user's preferred language.
  */
 
-const oneHour = 1000 * 60 * 60 * 1
-
 /**
  * get the domain for the app from the request obj
  */

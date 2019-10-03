@@ -55,11 +55,11 @@ class Route {
       const globalPath = this.path
       this.path = {}
       console.log('locales', this.table.locales)
-      this.table.locales.forEach(l => this.path[l] = globalPath)
+      this.table.locales.forEach(l => { this.path[l] = globalPath })
     }
 
     // prepend the locale (/en, /fr) to each path
-    this.table.locales.forEach(l => this.path[l] = `/${l}${this.path[l]}`)
+    this.table.locales.forEach(l => { this.path[l] = `/${l}${this.path[l]}` })
   }
 
   // an alias for RoutingTable::get
