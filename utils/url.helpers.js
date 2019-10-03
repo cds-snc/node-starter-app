@@ -7,23 +7,6 @@
 
 const oneHour = 1000 * 60 * 60 * 1
 
-const checkLangQuery = function(req, res, next) {
-  let lang = 'en'
-  if (req && req.query && req.query.lang) {
-    lang = req.query.lang
-  }
-
-  if (lang === 'en' || lang === 'fr') {
-    res.cookie('lang', lang, {
-      httpOnly: true,
-      maxAge: oneHour,
-      sameSite: 'strict',
-    })
-  }
-
-  return next()
-}
-
 /**
  * get the domain for the app from the request obj
  */
@@ -54,7 +37,6 @@ const getClientJsPath = req => {
 }
 
 module.exports = {
-  checkLangQuery,
   getDomain,
   getHostProtocol,
   getClientJsPath,
