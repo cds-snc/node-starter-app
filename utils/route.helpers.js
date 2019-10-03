@@ -13,8 +13,9 @@ class RoutingTable {
    * directory for the route files, by default `./routes` from the
    * project root.
    */
-  constructor(routes, conf) {
+  constructor(routes, locales, conf) {
     Object.assign(this, conf)
+    this.locales = locales
     this.directory = path.resolve(this.directory || './routes')
     this.routes = routes.map((r, i) => new Route(this, i, r))
   }
@@ -95,15 +96,15 @@ class Route {
 /**
  * @returns a new routing table
  */
-const makeRoutingTable = (routes, opts={}) => new RoutingTable(routes, opts)
+const makeRoutingTable = (routes, locales, opts={}) => new RoutingTable(routes, locales, opts)
 
 /**
  * The default `configRoutes` function
  */
-const configRoutes = (app, routes, opts={}) => {
+const configRoutes = (app, routes, locales, opts={}) => {
   // require the controllers defined in the routes
   // dir and file name based on the route name
-  return makeRoutingTable(routes, opts).config(app)
+  return makeRoutingTable(routes, locales, opts).config(app)
 }
 
 /**

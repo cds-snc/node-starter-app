@@ -16,12 +16,10 @@ const csp = require('./config/csp.config')
 const csrf = require('csurf')
 
 // check to see if we have a custom configRoutes function
-let { configRoutes, routes } = require('./config/routes.config') // test mock sets as undefined but says line isn't covered
+let { configRoutes, routes, locales } = require('./config/routes.config')
 
-/* istanbul ignore next */ if (typeof configRoutes === 'undefined') {
-  // if not use the default
-  configRoutes = require('./utils/route.helpers').configRoutes
-}
+if (!configRoutes) configRoutes = require('./utils/route.helpers').configRoutes
+if (!locales) locales = ['en', 'fr']
 
 // initialize application.
 const app = express()
@@ -85,7 +83,7 @@ app.locals.hasData = hasData
 app.locals.basedir = path.join(__dirname, './views')
 app.set('views', [path.join(__dirname, './views')])
 
-app.routes = configRoutes(app, routes)
+app.routes = configRoutes(app, routes, locales)
 
 // view engine setup
 const nunjucks = require('nunjucks')
