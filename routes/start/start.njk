@@ -8,7 +8,7 @@
 
     <div>{{ __('start.intro') | safe }}</div>
     <div>
-        <a class="button-link" href="{{ nextRoute }}" role="button" draggable="false">
+        <a class="button-link" href="{{ routePath(route.next) }}" role="button" draggable="false">
             {{ __('start.submit') }}
             <span aria-hidden="true">→</span>
         </a>

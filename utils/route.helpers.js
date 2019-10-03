@@ -48,10 +48,26 @@ class Route {
     this.table = table
     this.index = index
     Object.assign(this, conf)
+
+    // if path is specified as a string, turn it into { en: ..., fr: ... }
+    // so the api is consistent
+    if (typeof this.path === 'string') {
+      const globalPath = this.path
+      this.path = {}
+      console.log('locales', this.table.locales)
+      this.table.locales.forEach(l => this.path[l] = globalPath)
+    }
+
+    // prepend the locale (/en, /fr) to each path
+    this.table.locales.forEach(l => this.path[l] = `/${l}${this.path[l]}`)
   }
 
   // an alias for RoutingTable::get
   get(routeName) { return this.table.get(routeName) }
+
+  draw(app) {
+    return new DrawRoutes(this, app)
+  }
 
   // paths to load files during setup
   get directory() { return `${this.table.directory}/${this.name}` }
@@ -65,10 +81,14 @@ class Route {
   get nextPath() { return this.next && this.next.path }
   get prevPath() { return this.prev && this.prev.path }
 
+  eachLocale(fn) {
+    return this.table.locales.forEach(locale => fn(this.path[locale], locale))
+  }
+
   // a URL for this route, given a query
-  url(query={}) {
+  url(locale, query={}) {
     return url.format({
-      pathname: this.path,
+      pathname: this.path[locale],
       query: query,
     })
   }
@@ -93,6 +113,26 @@ class Route {
   }
 }
 
+class DrawRoutes {
+  constructor(route, app) {
+    this.route = route
+    this.app = app
+  }
+
+  request(method, ...args) {
+    this.route.eachLocale((path, locale) => {
+      this.app[method](path, ...args)
+    })
+
+    return this
+  }
+
+  get(...args) { return this.request('get', ...args) }
+  post(...args) { return this.request('post', ...args) }
+  put(...args) { return this.request('put', ...args) }
+  delete(...args) { return this.request('delete', ...args) }
+}
+
 /**
  * @returns a new routing table
  */
@@ -115,7 +155,7 @@ const doRedirect = route => {
     if (req.body.json) return next()
     if (!route.path) throw new Error(`[POST ${req.path}] 'redirect' missing`)
 
-    return res.redirect(route.url(req.query))
+    return res.redirect(route.url(req.locale, req.query))
   }
 }
 
