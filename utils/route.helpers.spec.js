@@ -1,4 +1,4 @@
-const { makeRoutingTable, doRedirect } = require('./index')
+const { makeRoutingTable } = require('./index')
 
 const testRoutes = makeRoutingTable(
   [
@@ -55,7 +55,7 @@ describe('doRedirect', () => {
     query: {},
     headers: {},
     data: null,
-    redirect: redirectMock
+    redirect: redirectMock,
   }
 
   test('Calls redirect if it finds the next route', () => {
@@ -66,7 +66,7 @@ describe('doRedirect', () => {
   })
 
   test('Calls next if json is requested', () => {
-    jsonReq = { ...req, body: { json: true } }
+    const jsonReq = { ...req, body: { json: true } }
     confirmation.doRedirect()(jsonReq, res, next)
     expect(next.mock.calls.length).toBe(1)
   })

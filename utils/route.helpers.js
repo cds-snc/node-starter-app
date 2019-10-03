@@ -105,7 +105,7 @@ class Route {
    */
   defaultMiddleware(opts) {
     return [
-      ...applySchema(opts.schema),
+      ...this.applySchema(opts.schema),
       this.doRedirect(opts.computeNext),
     ]
   }
