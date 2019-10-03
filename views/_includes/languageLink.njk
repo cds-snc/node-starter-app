@@ -1,9 +1,10 @@
+{% if route %}
 <div class="language-link">
-    <form>
-        <h2>{{ __('Language Selection') }}</h2>
-        <input id="language-id" type="hidden" name="lang" value="{{ 'en' if getLocale() == 'fr' else 'fr' }}">
-        <button id="language-toggle">
-            <span aria-label="{{ __('Language selection: French') }}">{{ 'English' if getLocale() == 'fr' else 'Français' }}</span>
-        </button>
-    </form>
+    {% if locale != 'fr' %}
+    <a href="{{route.path.fr}}" lang="fr">Français</a>
+    {% endif %}
+    {% if locale != 'en' %}
+    <a href="{{route.path.en}}" lang="en">English</a>
+    {% endif %}
 </div>
+{% endif %}
