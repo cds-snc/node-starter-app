@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.0.0] - 2019-10-04
+
+### Updated
+- Support for localized routes using `route.draw(app).get(...)`
+  * BREAKING: `route.path` now returns an object with `.en`, `.fr`, etc keys.
+
+### Added
+- `route.applySchema(schema)` is a middleware that does the schema-related parts of what was formerly `defaultMiddleware`.
+- `route.doRedirect()` is a middleware that will redirect to the next route in the correct locale
+- `route.doRedirect((req, res) => routeOrName)` is a middleware that will compute the next redirect route, and redirect there in the correct locale.
+
+
 ## [4.0.1] - 2019-10-02
 ### Updated
 Linting rules + include utils directory
