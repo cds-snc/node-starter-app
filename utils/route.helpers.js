@@ -54,7 +54,6 @@ class Route {
     if (typeof this.path === 'string') {
       const globalPath = this.path
       this.path = {}
-      console.log('locales', this.table.locales)
       this.table.locales.forEach(l => { this.path[l] = globalPath })
     }
 
