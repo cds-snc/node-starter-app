@@ -33,6 +33,8 @@ upstream        git@github.com:cds-snc/node-starter-app.git (push)
 
 ## Install + Dev Mode
 
+If running on windows, you will need to use https://github.com/laggingreflex/win-node-env by installing it globally npm install -g win-node-env
+
 ```bash
 npm install
 npm run dev
