@@ -13,7 +13,7 @@
     "aws-bootstrap": "node cdk/bootstrap.js",
     "aws-destroy": "node cdk/destroy.js",
     "dev": "NODE_ENV=development nodemon ./bin/www",
-    "lint": "node_modules/eslint/bin/eslint.js config utils routes bin/www app.js",
+    "lint": "node node_modules/eslint/bin/eslint.js config utils routes bin/www app.js",
     "prettier": "prettier --write '**/*.{ts,js,css,html}'",
     "start": "NODE_ENV=production node ./bin/www",
     "test": "node node_modules/jest/bin/jest.js --coverage",
