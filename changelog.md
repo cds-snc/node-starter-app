@@ -1,5 +1,10 @@
 # Changelog
 
+## [5.0.1] - 2019-10-10
+
+### Added 
+- cross env for proper support of Node environment variables on Windows
+
 ## [5.0.0] - 2019-10-04
 
 ### Updated
