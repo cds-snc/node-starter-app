@@ -47,5 +47,6 @@
   "start.title": "Node Starter App",
   "wordmark.alt": "Symbol of the Government of Canada",
   "caught this error": "caught this error",
-  "Cannot read property 'match' of undefined": "Cannot read property 'match' of undefined"
+  "Cannot read property 'match' of undefined": "Cannot read property 'match' of undefined",
+  "Government of Canada": "Government of Canada"
 }
