@@ -1,5 +1,11 @@
 # Changelog
 
+
+## [5.0.2] - 2019-10-15
+
+### Updated 
+- Moved cross env to be a dev dependency to fix Heroku deployment
+
 ## [5.0.1] - 2019-10-10
 
 ### Added 
