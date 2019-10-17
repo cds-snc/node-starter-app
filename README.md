@@ -156,8 +156,7 @@ block content
 
 - Form validation is built into the form schema files and use [validator.js](https://github.com/validatorjs/validator.js#validators) to validate input
 
-> To mark fields showing as required you can pass required: true as an attribute {{ textInput('email', 'form.email', { required: true }) }}
-
+> To mark fields showing as required you can pass required: true as an attribute
 ## Template Engine
 
 [Nunjucks](https://mozilla.github.io/nunjucks/)
