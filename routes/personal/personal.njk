@@ -16,13 +16,13 @@
 
         {{ textInput('expiry', 'form.expiry', { hint: 'form.expiry.desc', required: true }) }}
 
-        {{ textArea('address', 'form.address', { hint: 'form.address.desc', required: true }) }}
+        {{ textArea('address', 'form.address', { hint: 'form.address.desc'}) }}
 
         {{ fileInput('form.upload', null, {name: "myfile", id: "myfile"} ) }}
 
         {{ radioButtons('send_notifications', { '1':'Yes','2':'No'}, data.send_notifications, 'form.send_notifications', errors, { required: true }) }}
 
-        {{ checkBoxes('notify_type', {'1':'SMS','2':'Email'}, data.notify_type, 'form.notify_by', errors,{ required: true } ) }}
+        {{ checkBoxes('notify_type', {'1':'SMS','2':'Email'}, data.notify_type, 'form.notify_by', errors ) }}
 
         {{ formButtons() }}
     </form>
