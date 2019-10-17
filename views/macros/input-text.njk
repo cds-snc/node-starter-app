@@ -11,7 +11,7 @@
     <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
         <label for="{{ name }}" id="{{ name }}__label">
             {% if attributes.required %}
-                <span class="required">*</span>
+                <span aria-hidden="true" class="required">*</span>
             {% endif %}
             {{ __(label) }}
             {% if attributes.required %}

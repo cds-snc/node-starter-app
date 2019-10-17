@@ -3,7 +3,7 @@
         <fieldset class="fieldset">
             <legend class="fieldset__legend">
             {% if attributes.required %}
-                <span class="required">*</span>
+                <span aria-hidden="true" class="required">*</span>
             {% endif %}
             {{ __(question) }}
             {% if attributes.required %}
