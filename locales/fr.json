@@ -45,5 +45,7 @@
   "start.intro.banner": "This is a demo",
   "start.submit": "Let's Go",
   "start.title": "Node Starter App",
-  "wordmark.alt": "Symbol of the Government of Canada"
+  "wordmark.alt": "Symbol of the Government of Canada",
+  "Government of Canada": "Government of Canada",
+  "required": "required"
 }
