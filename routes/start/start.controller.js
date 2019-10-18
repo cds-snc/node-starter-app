@@ -1,4 +1,4 @@
-const { routeUtils, getClientJs } = require('../../utils/index')
+const { routeUtils } = require('../../utils/index')
 
 module.exports = (app, route) => {
   const name = route.name

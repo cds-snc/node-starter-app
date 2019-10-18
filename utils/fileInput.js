@@ -7,7 +7,7 @@ export const fileInput = () => {
 
   Array.prototype.forEach.call(inputs, function(input) {
     const label = input.nextElementSibling,
-      labelVal = label.innerHTML
+    const labelVal = label.innerHTML
 
     input.addEventListener('change', function(e) {
       var fileName = ''
