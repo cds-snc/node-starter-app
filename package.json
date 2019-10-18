@@ -9,8 +9,10 @@
     "node": ">=10"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
-    "start": "cross-env NODE_ENV=production node ./bin/www",
+    "build": "webpack --mode=production",
+    "dev": "cross-env nodemon --ignore public/js/dist --exec npm run dev:dist",
+    "dev:dist": "webpack --mode=development && cross-env NODE_ENV=development  node ./bin/www",
+    "start": "npm run build && cross-env NODE_ENV=production node ./bin/www",
     "lint": "node node_modules/eslint/bin/eslint.js config utils routes bin/www app.js",
     "prettier": "prettier --write '**/*.{ts,js,css,html}'",
     "test": "node node_modules/jest/bin/jest.js --coverage",
@@ -43,7 +45,8 @@
     "normalize.css": "^8.0.1",
     "nunjucks": "^3.2.0",
     "request": "^2.88.0",
-    "cross-env": "^6.0.3"
+    "cross-env": "^6.0.3",
+    "@cds-snc/webpack-starter": "cds-snc/webpack-starter#aa0e70bae"
   },
   "devDependencies": {
     "@aws-cdk/aws-docdb": "1.13.0",
