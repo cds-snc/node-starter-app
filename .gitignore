@@ -75,3 +75,7 @@ cdk.out
 
 cdk/local-image
 credentials
+
+
+
+public/js/dist
