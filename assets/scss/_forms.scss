@@ -2,19 +2,19 @@ form {
   margin-top: $space-xl;
   max-width: 300px;
   width: 100%;
-  
+
   .d--ib {
     margin-bottom: $space-xs;
   }
 
   @include sm {
     max-width: 450px;
-    
+
     .d--ib {
       display: inline-block;
       margin-bottom: 0;
     }
-    
+
 
     .w-3-4 {
       width: 75%;
@@ -36,7 +36,7 @@ form {
 }
 
 form.form--lg {
-  
+
   @include sm {
     width: 110%;
     max-width: 800px;
@@ -46,7 +46,7 @@ form.form--lg {
   div:not(.multiple-choice__item) > label {
     font-size: 1em;
   }
-  
+
 }
 
 form {
@@ -183,7 +183,6 @@ form {
 
   &__legend {
     border-bottom: 0;
-    margin-bottom: $space-md;
 
     * {
       margin: 0;
