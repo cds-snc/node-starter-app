@@ -1,4 +1,4 @@
-# Canada Web Forms Starter Repo for Node.JS
+# Canada Web Forms Starter Repo for Node.js
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cds-snc/node-starter-app.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cds-snc/node-starter-app/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/cds-snc/node-starter-app.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cds-snc/node-starter-app/context:javascript)
 
@@ -24,7 +24,7 @@ It provides the following functionality:
 
 It's setup with some sensible defaults and tech choices, such as:
 
-- Node.js 10.x
+- Node.js >= 10.x
 - NVM (Node Version Manager) for install Node.js versions
 - [Express](https://expressjs.com/) web framework
 - [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) view templates
