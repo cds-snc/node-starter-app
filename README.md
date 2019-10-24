@@ -15,8 +15,9 @@ It provides the following functionality:
 - Prevents [forged cross-site requests](#form-csrf-protection)
 - Translation ready, [using name/value pairs configs](#locales)
 - Fast deployment, currently for:
+  - [Amazon Web Services](cdk) via [AWS CDK](https://aws.amazon.com/cdk/)
   - [Azure](terraform/readme.md) via [Terraform](https://terraform.io)
-  - [AWS](cdk) via [AWS CDK](https://aws.amazon.com/cdk/)
+  - [Google Cloud Platform](cloudbuild.yaml) via [Google Cloud Build](https://cloud.google.com/cloud-build/)
 - Continuous integration checks that run automatically via [GitHub Actions](https://github.com/features/actions)
   - [Accessibility](.github/workflows/a11y.yml)
   - [Code Styling / Linting]((.github/workflows/nodejs.yml))
