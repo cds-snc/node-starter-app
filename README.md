@@ -6,7 +6,16 @@
 
 **Changelog:** [changelog.md](https://github.com/cds-snc/node-starter-app/blob/master/changelog.md)
 
-This repository provides a codebase that can be used to quickly build web pages or forms with a Government of Canada look-and-feel. It's setup with some sensible defaults and tech choices, such as:
+This repository provides a codebase that can be used to quickly build web pages or forms with a Government of Canada look-and-feel. 
+
+It provides the following functionality:
+
+- Create web pages that look like GC pages
+- Add endpoints ([routes/URLs](#adding-routes)) for web form workflows, complete with [form validation](#form-validation)
+- Prevents [forged cross-site requests](#form-csrf-protection)
+- Translation ready, [using name/value pairs configs](#locales)
+
+It's setup with some sensible defaults and tech choices, such as:
 
 - Node.js 10.x
 - NVM (Node Version Manager) for install Node.js versions
