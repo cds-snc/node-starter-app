@@ -14,6 +14,7 @@ It provides the following functionality:
 - Add endpoints ([routes/URLs](#adding-routes)) for web form workflows, complete with [form validation](#form-validation)
 - Prevents [forged cross-site requests](#form-csrf-protection)
 - Translation ready, [using name/value pairs configs](#locales)
+- Deployment scripts (currently: [Azure](terraform/readme.md))
 
 It's setup with some sensible defaults and tech choices, such as:
 
