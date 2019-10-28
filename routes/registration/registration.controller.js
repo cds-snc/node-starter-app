@@ -5,8 +5,10 @@ module.exports = (app, route) => {
   const name = route.name
 
   route.draw(app)
+  
     .get((req, res) => {
-      res.render(name, routeUtils.getViewData(req, {}))
+      const jsFiles = ['js/file-input.js']
+      res.render(name, routeUtils.getViewData(req, jsFiles))
     })
     .post(route.applySchema(Schema), route.doRedirect())
 }

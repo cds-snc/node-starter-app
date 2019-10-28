@@ -50,5 +50,7 @@
   "Cannot read property 'match' of undefined": "Cannot read property 'match' of undefined",
   "Government of Canada": "Government of Canada",
   "landing.title": "This is our landing page!",
-  "landing.intro": "Hello... welcome to the Scheduler landing page"
+  "landing.intro": "Hello... welcome to the Scheduler landing page",
+  "registration.title": "Enter your information",
+  "registration.intro": "Step 1 of 4"
 }
