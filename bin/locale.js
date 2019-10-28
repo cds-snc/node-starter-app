@@ -18,8 +18,8 @@ if (program.add) {
   let en = ejf("./locales/en.json")
   let fr = ejf("./locales/fr.json")
   
-  en.set(program.key.toString(),program.key.toString().replace("\\",""))
-  fr.set(program.key.toString(),program.key.toString().replace("\\",""))
+  en.set(program.key.toString(),program.key.toString().replace(/\\/g,""))
+  fr.set(program.key.toString(),program.key.toString().replace(/\\/g,""))
   en.save()
   fr.save()
 }
