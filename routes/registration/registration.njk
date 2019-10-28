@@ -1,0 +1,18 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+    <h1>{{ __('registration.title') }}</h1>
+
+    <div>
+        <p>
+            {{ __('registration.intro') }}
+        </p>
+
+        <form method="post">
+            {{ textInput('form.firstname', null, 'form.firstname.desc', { class: "w-3-4", name: "firstname", id: "firstname", autofocus: '', value: data.firstname }) }}
+            {{ formButtons() }}
+        </form>
+    </div>
+
+{% endblock %}
