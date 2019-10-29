@@ -23,6 +23,7 @@
   "errors.applicationNumber.length": "application number contains 1 letter and 12 numbers",
   "errors.confirmEmail": "Email addresses must match",
   "errors.expiry.date": "Date is required",
+  "errors.application.error": "Incorrect Number",
   "errors.fullname.length": "Full name is required",
   "errors.notify_type": "Please indicate how you would like to receive notifications",
   "errors.send_notifications.valid": "Please indicate if you would like to receive notifications",
@@ -60,5 +61,8 @@
   "registration.title": "Enter your information",
   "registration.intro": "Step 1 of 4",
   "errors.confirmEmail.length": "errors.confirmEmail.length",
-  "form.send_notifications": "form.send_notifications"
+  "form.send_notifications": "form.send_notifications",
+  "Invalid value": "Invalid value",
+  "Cannot read property 'value' of undefined": "Cannot read property 'value' of undefined",
+  "Cannot read property 'fields' of undefined": "Cannot read property 'fields' of undefined"
 }

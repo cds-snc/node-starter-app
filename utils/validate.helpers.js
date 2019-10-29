@@ -35,6 +35,14 @@ const isValidDate = dateString => {
   return d.toISOString().slice(0, 7) === dateString
 }
 
+const isValidRegAppNum = appNum => {
+  const regEx = /^[a-zA-Z]{1}[0-9]{12}$/
+  if (!appNum.match(regEx)) {
+    return false // Invalid format
+  }
+  return true
+}
+
 /**
  * Middleware function that runs our error validation
  *
@@ -183,6 +191,7 @@ module.exports = {
   errorArray2ErrorObject,
   validateRouteData,
   isValidDate,
+  isValidRegAppNum,
   checkErrors,
   checkErrorsJSON,
   hasData,
