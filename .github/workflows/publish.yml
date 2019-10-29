@@ -1,0 +1,17 @@
+name: Publish_Artifact
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Docker Publish
+      uses: manusa/actions-publish-docker@v1.0.1
+
+
