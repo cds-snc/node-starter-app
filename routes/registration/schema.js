@@ -15,6 +15,19 @@ const Schema = {
       options: { min: 3, max: 200 },
     },
   },
+  applicationNumber: {
+    isLength: {
+      errorMessage: 'errors.applicationNumber.length',
+      options: { max: 13 },
+    },
+  },
+  confirmEmail: {
+    equals: {
+      errorMessage: 'errors.confirmEmail',
+      options: { min: 3, max: 200 },
+      
+    },
+  },
   expiry: {
     customSanitizer: {
       options: value => {
