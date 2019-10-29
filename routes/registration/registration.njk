@@ -11,19 +11,15 @@
 
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
+        {{ textInput( 'applicationNumber', 'form.applicationNumber') }}
+
         {{ textInput('fullname', 'form.fullname', { class: "w-3-4" }) }}
         
         {{ textInput('email', 'form.email') }}
 
-        {{ textInput('expiry', 'form.expiry', { hint: 'form.expiry.desc' }) }}
+        {{ textInput('confirmEmail', 'form.confirmEmail') }}
         
-        {{ textArea('address', 'form.address', { hint: 'form.address.desc' }) }}
-        
-        {{ fileInput('form.upload', null, {name: "myfile", id: "myfile"} ) }}
-        
-        {{ radioButtons('send_notifications', { '1':'Yes','2':'No'}, data.send_notifications, 'form.send_notifications', errors) }}
-
-        {{ checkBoxes('notify_type', {'1':'SMS','2':'Email'}, data.notify_type, 'form.notify_by', errors) }}
+        {{ radioButtons('accessible', { '1':'Yes','2':'No'}, data.send_notifications, 'form.accessible', errors) }}
 
         {{ formButtons() }}
     </form>
