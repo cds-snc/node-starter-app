@@ -9,13 +9,11 @@
             {{ __('confirmation.intro') }}
         </p>
         <ul>
+            <li>{{ __('form.applicationNumber') }}:  <strong>{{ data.applicationNumber }}</strong></li>
             <li>{{ __('form.fullname') }}:  <strong>{{ data.fullname }}</strong></li>
             <li>{{ __('form.email') }}: <strong>{{ data.email }}</strong></li>
-            <li>{{ __('form.send_notifications') }}: <strong>{{ data.send_notifications }}</strong></li>
+            <li>{{ __('form.accessible') }}: <strong>{{ data.accessible }}</strong></li>
 
-            {% if data.send_notifications == "Yes" %}
-                <li>{{ __('form.notify_by') }}: <strong>{{ data.notify_type }}</strong></li>
-            {% endif %}
 
         </ul>
     </div>
