@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Docker Publish
-      uses: manusa/actions-publish-docker@v1.0.1
+    - name: Azure WebApp Container
+      uses: Azure/webapps-container-deploy@v1
 
 
