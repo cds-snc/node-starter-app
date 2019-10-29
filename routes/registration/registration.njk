@@ -17,7 +17,7 @@
 
         {{ textInput('confirmEmail', 'form.confirmEmail') }}
         
-        {{ radioButtons('accessible', { '1':'Yes','2':'No'}, data.send_notifications, 'form.accessible', errors) }}
+        {{ radioButtons('accessible', { '1': __('registration.title'),'2':'No'}, data.send_notifications, 'form.accessible', errors) }}
 
         {{ formButtons() }}
     </form>

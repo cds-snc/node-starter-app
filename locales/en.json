@@ -48,10 +48,17 @@
   "personal.intro": "Intro copy goes here",
   "personal.title": "Personal Information",
   "phase.desc": "This site will change as we test ideas.",
-  "start.intro": "What you’ll need to set up notifications:<ul><li>Your information 1</li><li>Your information 2</li></ul>",
   "start.intro.banner": "This is a demo",
   "start.submit": "Let's Go",
-  "start.title": "Node Starter App",
+  "start.title": "Request an appointment for fingerprints and photo (biometrics)",
+  "start.You.will.need": "You will need",
+  "start.app.email": "<ul><li>Your <b>Application number</b> which can be found at the top of the mailed letter we sent you</li><li>A <b>valid email address</b> where we can send a confirmation message</li></ul>",
+  "start.next": "Next, you'll select a location, day and time you 're available within the next 30 days.",
+  "start.Privacy.notice": "Privacy notice",
+  "start.intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc.",
+  "error.policy":"In order to start your request, you must first read and accept the privacy notice statement.",
+  
+  
   "wordmark.alt": "Symbol of the Government of Canada",
   "caught this error": "caught this error",
   "Cannot read property 'match' of undefined": "Cannot read property 'match' of undefined",
@@ -64,5 +71,10 @@
   "form.send_notifications": "form.send_notifications",
   "Invalid value": "Invalid value",
   "Cannot read property 'value' of undefined": "Cannot read property 'value' of undefined",
-  "Cannot read property 'fields' of undefined": "Cannot read property 'fields' of undefined"
+  "Cannot read property 'fields' of undefined": "Cannot read property 'fields' of undefined",
+  "I have read and accept the privacy policy (Required)": "I have read and accept the privacy policy (Required)",
+  "form.policy": "form.policy",
+  "": "",
+  " ": " ",
+  "Start": "Start"
 }

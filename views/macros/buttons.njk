@@ -14,3 +14,12 @@
         <a href="{{ confirmURL }}">{{ __('Confirm') }}</a>
     </div>
 {% endmacro %}
+
+{% macro startButton(submitButtonText = 'Start') %}
+    <div class="startButtons">
+        <div class="buttons--left">
+            <button type="submit">{{ __(submitButtonText) }}</button>
+        </div>
+        
+    </div>
+{% endmacro %}

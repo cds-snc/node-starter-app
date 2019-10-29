@@ -177,6 +177,32 @@ form {
   }
 }
 
+
+
+.startButtons {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 25%;
+
+  .buttons--left,
+  .buttons--right {
+    flex: 1;
+  }
+
+  @include sm {
+    flex-direction: row;
+
+    .buttons--left {
+      margin-right: $space-xs;
+    }
+    .buttons--right {
+      margin-left: $space-xs;
+    }
+  }
+}
+
+
 .fieldset {
   border: 0;
   padding: 0;

@@ -48,5 +48,16 @@
   "wordmark.alt": "Symbol of the Government of Canada",
   "Government of Canada": "Government of Canada",
   "form.applicationNumber": "form.applicationNumber",
-  "form.accessible": "form.accessible"
+  "form.accessible": "form.accessible",
+  "registration.title": "Renseignements personnels",
+  "registration.intro": "registration.intro",
+  "form.confirmEmail": "form.confirmEmail",
+  "start.You.will.need": "start.You.will.need",
+  "start.app.email": "start.app.email",
+  "start.next": "start.next",
+  "start.Privacy.notice": "start.Privacy.notice",
+  "form.policy": "form.policy",
+  "I have read and accept the privacy policy (Required)": "I have read and accept the privacy policy (Required)",
+  "Start": "Start",
+  "start.required": "start.required"
 }

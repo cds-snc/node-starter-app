@@ -18,6 +18,10 @@ const Schema = {
     },
   },
   confirmEmail: {
+    isLength: {
+      errorMessage: 'errors.email.length',
+      options: { min: 3, max: 200 },
+    },
     custom: {
       options: (value, { req }) => {
         if (value === req.body.email) {

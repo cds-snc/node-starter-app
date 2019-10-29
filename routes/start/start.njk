@@ -6,12 +6,22 @@
 
     {{ banner('blue', '<p>' + __('start.intro.banner') + '</p>') }}
 
-    <div>{{ __('start.intro') | safe }}</div>
-    <div>
-        <a class="button-link" href="{{ routePath(route.next) }}" role="button" draggable="false">
-            {{ __('start.submit') }}
-            <span aria-hidden="true">→</span>
-        </a>
-    </div>
+    <h2>{{ __('start.You.will.need') }}</h2>
+    <div>{{ __('start.app.email')| safe }}</div>
+    <div>{{ __('start.next') | safe }}</div>
+    <h2>{{ __('start.Privacy.notice') }}</h2>
+
+    <p>{{ __('start.intro') | safe }}</p>
+
+        <form method="post">
+
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+    {{ checkBoxes('policy', { '1':'I have read and accept the privacy policy (Required)'}, data.send_notifications, 'form.policy', errors) }}
+        {{ startButton() }}
+
+  
+
+    </form>
 
 {% endblock %}
