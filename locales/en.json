@@ -17,8 +17,8 @@
   "Yes": "Yes",
   "app.desc": "Node Starter App",
   "app.title": "Node Starter App",
-  "confirmation.intro": "Confirmation Intro goes here",
-  "confirmation.title": "Confirmation Title",
+  "confirmation.intro": "Step 2 of 2",
+  "confirmation.title": "Confirmation page",
   "errors.email.length": "Email is required",
   "errors.applicationNumber.length": "application number contains 1 letter and 12 numbers",
   "errors.confirmEmail": "Email addresses must match",
@@ -58,7 +58,7 @@
   "landing.title": "This is our landing page!",
   "landing.intro": "Hello... welcome to the Scheduler landing page",
   "registration.title": "Enter your information",
-  "registration.intro": "Step 1 of 4",
+  "registration.intro": "Step 1 of 2",
   "errors.confirmEmail.length": "errors.confirmEmail.length",
   "form.send_notifications": "form.send_notifications"
 }
