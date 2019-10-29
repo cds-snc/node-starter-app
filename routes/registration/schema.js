@@ -1,18 +1,8 @@
 /* istanbul ignore file */
 
-// const isValidDate = require('../../utils/').isValidDate
-<<<<<<< HEAD
 const isValidRegAppNum = require('../../utils/').isValidRegAppNum
-=======
->>>>>>> 81f752181d4384be13321264dc2707542ff62b79
 
 const Schema = {
-  // fullname: {
-  //   isLength: {
-  //     errorMessage: 'errors.fullname.length',
-  //     options: { min: 3, max: 200 },
-  //   },
-  // },
   email: {
     isLength: {
       errorMessage: 'errors.email.length',
@@ -20,11 +10,8 @@ const Schema = {
     },
   },
   applicationNumber: {
-<<<<<<< HEAD
     custom: {
       options: (value, { req }) => {
-        console.log(value)
-        console.log(req.body.email)
         return isValidRegAppNum(value)
       },
       errorMessage: 'errors.application.error',
@@ -38,18 +25,6 @@ const Schema = {
         }
       },
       errorMessage: 'errors.confirmEmail',
-=======
-    isLength: {
-      errorMessage: 'errors.applicationNumber.length',
-      options: { max: 13 },
-    },
-  },
-  confirmEmail: {
-    isLength: {
-      errorMessage: 'errors.confirmEmail',
-      options: { min: 3, max: 200 },
-      
->>>>>>> 81f752181d4384be13321264dc2707542ff62b79
     },
   },
   // expiry: {
