@@ -2,7 +2,7 @@
 name: User Story
 about: For simple User Story Creation
 title: ''
-labels: Epic
+labels: User Story
 assignees: ''
 
 ---
