@@ -30,6 +30,7 @@ jobs:
       uses: appleboy/jenkins-action@master
       with:
         url: "https://jenkins.esdc.online"
+        user: "jenkinsbot"
         token: ${{ secrets.DTS_JENKINS_TOKEN}}
         job: "dts-scheduler"
 
