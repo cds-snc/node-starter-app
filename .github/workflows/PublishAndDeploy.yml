@@ -31,6 +31,6 @@ jobs:
       with:
         url: "https://jenkins.esdc.online"
         token: ${{ secrets.DTS_JENKINS_TOKEN}}
-        job: "dts-Scheduler"
+        job: "dts-scheduler"
 
 
