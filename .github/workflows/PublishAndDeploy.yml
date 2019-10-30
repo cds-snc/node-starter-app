@@ -16,6 +16,7 @@ jobs:
         password: ${{ secrets.DTS_AZURE_PASSWORD }}
 
     - run: |
+        ls
         docker build -t mtscontainers.azurecr.io/dts-scheduler:latest .
         docker push mtscontainers.azurecr.io/dts-scheduler:latest
 
