@@ -36,7 +36,7 @@
   "footer.link4": "https://www.canada.ca/en/transparency/terms.html",
   "footer.link4.desc": "Terms and conditions",
   "footer.link5": "https://www.canada.ca/en/transparency/privacy.html",
-  "footer.link5.desc": "Privacy", 
+  "footer.link5.desc": "Privacy",
   "form.address": "Address",
   "form.policy": " ",
   "form.address.desc": "Enter your current address",
@@ -72,8 +72,7 @@
   "Government of Canada": "Government of Canada",
   "landing.title": "This is our landing page!",
   "landing.intro": "Hello... welcome to the Scheduler landing page",
-  "registration.title": "Enter your information",
-  "registration.intro": "Step 1 of 2",
+  "registration.title": "Step 1 of 4 – Enter your information",
   "errors.confirmEmail.length": "errors.confirmEmail.length",
   "form.send_notifications": "form.send_notifications",
   "Invalid value": "Invalid value",
@@ -83,5 +82,6 @@
   "": "",
   " ": " ",
   "Start": "Start",
-  "Enter your information": "Enter your information"
+  "Enter your information": "Enter your information",
+  "Step 1 of 4 – Enter your information": "Step 1 of 4 – Enter your information"
 }
