@@ -14,8 +14,9 @@ jobs:
         login-server: mtscontainers.azurecr.io
         username: ${{ secrets.DTS_AZURE_USERNAME }}
         password: ${{ secrets.DTS_AZURE_PASSWORD }}
-    - run: |
-        ls
+    - run:
+        ls DTS-Scheduler
+    - run:
         pwd
     - run: |
         docker build -t mtscontainers.azurecr.io/dts-scheduler:latest .
