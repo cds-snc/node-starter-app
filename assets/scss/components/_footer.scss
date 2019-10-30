@@ -4,13 +4,18 @@ footer {
   padding-top: $space-md;
   padding-bottom: $space-md;
   border-top: 4px solid $color-blue-dark;
+  background-color: #f8f8f8;
   height: $height-footer;
   position: absolute;
   bottom: 0;
   width: 100%;
 
   .footer-links {
-    font-size: 0.85em;
+    font-size: 0.70em;
+    font-family: "Noto Sans",sans-serif;
+    line-height: 1.4375;
+    color: #333;
+    height: 30px;
 
     ul {
       list-style: none;
