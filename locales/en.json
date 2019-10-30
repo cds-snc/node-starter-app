@@ -16,7 +16,7 @@
   "Skip to main content": "Skip to main content",
   "Yes": "Yes",
   "app.desc": "Node Starter App",
-  "app.title": "Node Starter App",
+  "app.title": "Request an appointment for biometrics",
   "confirmation.intro": "Step 2 of 2",
   "confirmation.title": "Confirmation page",
   "errors.email.length": "Email is required",
@@ -73,15 +73,13 @@
   "landing.title": "This is our landing page!",
   "landing.intro": "Hello... welcome to the Scheduler landing page",
   "registration.title": "Step 1 of 4 – Enter your information",
+  "registration.radio1": "Yes",
+  "registration.radio2": "No",
   "errors.confirmEmail.length": "errors.confirmEmail.length",
   "form.send_notifications": "form.send_notifications",
   "Invalid value": "Invalid value",
   "Cannot read property 'value' of undefined": "Cannot read property 'value' of undefined",
   "Cannot read property 'fields' of undefined": "Cannot read property 'fields' of undefined",
   "I have read and accept the privacy policy (Required)": "I have read and accept the privacy policy (Required)",
-  "": "",
-  " ": " ",
-  "Start": "Start",
-  "Enter your information": "Enter your information",
-  "Step 1 of 4 – Enter your information": "Step 1 of 4 – Enter your information"
+  "Start": "Start"
 }
