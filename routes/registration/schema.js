@@ -3,18 +3,18 @@
 const isValidRegAppNum = require('../../utils/').isValidRegAppNum
 
 const Schema = {
-  email: {
-    isLength: {
-      errorMessage: 'errors.email.length',
-      options: { min: 3, max: 200 },
-    },
-  },
   applicationNumber: {
     custom: {
       options: (value, { req }) => {
         return isValidRegAppNum(value)
       },
       errorMessage: 'errors.application.error',
+    },
+  },
+  email: {
+    isLength: {
+      errorMessage: 'errors.email.length',
+      options: { min: 3, max: 200 },
     },
   },
   confirmEmail: {
