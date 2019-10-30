@@ -15,7 +15,7 @@ jobs:
         username: ${{ secrets.DTS_AZURE_USERNAME }}
         password: ${{ secrets.DTS_AZURE_PASSWORD }}
     - run:
-        ls DTS-Scheduler
+        ls
     - run:
         pwd
     - run: |
