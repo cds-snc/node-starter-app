@@ -11,13 +11,14 @@ jobs:
     steps:
     - uses: azure/docker-login@v1
       with:
-        login-server: contoso.azurecr.io
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+        login-server: mtscontainers.azurecr.io
+        username: ${{ secrets.DTS_AZURE_USERNAME }}
+        password: ${{ secrets.DTS_AZURE_PASSWORD }}
 
     - run: |
-        docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
-        docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
+        docker build . -t mtscontainers.azurecr.io/dts-scheduler:latest -t mtscontainers.azurecr.io/dts-scheduler:BUILD_ID
+        docker push mtscontainers.azurecr.io/dts-scheduler:latest
+        docker push mtscontainers.azurecr.io/dts-scheduler:BUILD_ID
 
   Deploy:
     name: Deploy
