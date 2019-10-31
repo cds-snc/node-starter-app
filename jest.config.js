@@ -3,6 +3,7 @@ module.exports = {
     '<rootDir>/.next/',
     '<rootDir>/node_modules/',
     '<rootDir>/__tests__/fixtures/',
+    '<rootDir>/cypress/',
   ],
   coverageThreshold: {
     global: {
