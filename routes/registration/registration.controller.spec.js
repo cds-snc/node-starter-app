@@ -9,14 +9,14 @@ function extractCsrfToken(res) {
   return $('[name=_csrf]').val();
 }
 
-test('Can send get request personal route ', async () => {
+test('Can send get request registration route ', async () => {
   const route = app.routes.get('registration')
   const response = await request(app).get(route.path.en)
   expect(response.statusCode).toBe(200)
 })
 
 // @todo test sending a form request
-test('Can send post request personal route ', async () => {
+test('Can send post request registration route ', async () => {
   const route = app.routes.get('registration')
 
   // to test form with csrf token, need a session, and a token from a get request
