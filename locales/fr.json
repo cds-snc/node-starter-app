@@ -65,9 +65,10 @@
   "start.app.email": "start.app.email",
   "start.next": "start.next",
   "start.Privacy.notice": "start.Privacy.notice",
+  "start.policyAgree": "J'ai lu et accepte la politique de confidentialité. ",
   "form.policy": "form.policy",
-  "I have read and accept the privacy policy (Required)": "I have read and accept the privacy policy (Required)",
   "Start": "Start",
-  "start.required": "start.required",
-  "Oui": "Oui"
+  "required": "(requis)",
+  "Oui": "Oui",
+  "J'ai lu et accepte la politique de confidentialité. ": "J'ai lu et accepte la politique de confidentialité. "
 }

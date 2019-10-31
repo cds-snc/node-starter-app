@@ -13,14 +13,13 @@
 
     <p>{{ __('start.intro') | safe }}</p>
 
-        <form method="post">
+    <form method="post">
 
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
-    {{ checkBoxes('policy', { '1':'I have read and accept the privacy policy (Required)'}, data.send_notifications, 'form.policy', errors) }}
-        {{ startButton() }}
+        {{ checkBoxes('policy', { '1':__('start.policyAgree')}, data.send_notifications, 'form.policy', errors, __('required') )}}
 
-  
+        {{ startButton() }}
 
     </form>
 
