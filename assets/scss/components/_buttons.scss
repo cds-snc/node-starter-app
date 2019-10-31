@@ -15,6 +15,11 @@
   text-decoration: none;
   -webkit-appearance: none;
 
+  svg {
+    vertical-align: middle;
+    height: 1.6rem;
+  }
+
   &::before {
     content: '';
     display: block;
@@ -55,17 +60,13 @@ form button {
 .buttons--prev {
   @extend %button-styles;
   border-radius: 5px;
-  background-color: #cfd1d5;
+  background-color: $color-grey-light;
   color: #000000; 
   width: 150px;
 
-  svg {
-    padding-top: 5px;
-  }
-  
   &:hover,
   &:focus {
-    background-color:  #a2a3a5;
+    background-color:  $color-grey-dark;
   }
 }
 
@@ -73,18 +74,7 @@ form button {
   @extend %button-styles;
   border-radius: 5px;
   margin-left: 30px;
-  background-color: #2572B4;
-  color: #FFFFFF; 
   width: 150px;
-
-  svg {
-    padding-top: 5px;
-  }
-  
-  &:hover,
-  &:focus {
-    background-color: #1c5a91;
-  }
 }
 
 a.button-link {
