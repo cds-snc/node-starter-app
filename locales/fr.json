@@ -68,7 +68,6 @@
   "start.policyAgree": "J'ai lu et accepte la politique de confidentialité. ",
   "form.policy": "form.policy",
   "Start": "Start",
-  "required": "(requis)",
-  "Oui": "Oui",
-  "J'ai lu et accepte la politique de confidentialité. ": "J'ai lu et accepte la politique de confidentialité. "
+  "Required": "(requis)",
+  "Oui": "Oui"
 }

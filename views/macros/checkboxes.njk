@@ -1,4 +1,4 @@
-{% macro checkBoxes(key, values, selectedVals, question, errors, required, attributes) %}
+{% macro checkBoxes(key, values, selectedVals, question, errors, attributes) %}
     <div class="{{ 'has-error' if errors and errors[key] }}">
         <fieldset class="fieldset">
             <legend class="fieldset__legend">{{ __(question) }}</legend>
@@ -11,7 +11,7 @@
                         <input id="{{ key }}{{ val }}" name="{{ key }}" type="checkbox" value="{{ val }}" {% if selectedVals and val in selectedVals %} checked="checked" {% endif %} {% if errors and errors[key] %} aria-describedby="{{ key + '-error' }}" aria-invalid="true" {% endif %}>
                         <label for="{{ key }}{{ val }}">
                             {{ __(val) }}
-                            <span class="red">{{ required }}</span>
+                            <span class="red">{{ __(attributes.required) }}</span>
                         </label>
                     </div>
                 {% endfor %}

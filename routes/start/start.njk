@@ -17,7 +17,7 @@
 
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
-        {{ checkBoxes('policy', { '1':__('start.policyAgree')}, data.send_notifications, 'form.policy', errors, __('required') )}}
+        {{ checkBoxes('policy', { '1': 'start.policyAgree' }, data.send_notifications, 'form.policy', errors, {'required': 'Required'}) }}
 
         {{ startButton() }}
 
