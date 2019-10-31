@@ -5,3 +5,6 @@ docs
 test
 coverage
 cdk
+cypress/videos/
+cypress/screenshots/
+cypress/results
