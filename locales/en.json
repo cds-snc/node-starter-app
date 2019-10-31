@@ -65,7 +65,7 @@
   "start.next": "Next, you'll select a location, day and time you 're available within the next 30 days.",
   "start.Privacy.notice": "Privacy notice",
   "start.intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc.",
-  "start.policyAgree": "I have read and accept the privacy policy.",
+  "start.policyAgree": "I have read and accept the privacy policy. ",
   "error.policy": "In order to start your request, you must first read and accept the privacy notice statement.",
   "wordmark.alt": "Symbol of the Government of Canada",
   "caught this error": "caught this error",
@@ -84,7 +84,6 @@
   "Start": "Start",
   "Previous": "Previous",
   "Next": "Next",
-  "required": "(Required)",
   "I have read and accept the privacy policy. ": "I have read and accept the privacy policy. ",
-  "I have read and accept the privacy policy.": "I have read and accept the privacy policy."
+  "Required": "(required)"
 }
