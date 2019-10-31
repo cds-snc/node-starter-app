@@ -8,11 +8,11 @@
 
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
-        {{ textInput( 'applicationNumber', 'form.applicationNumber', __('Required') ) }}
+        {{ textInput('applicationNumber', 'form.applicationNumber', {'hint': 'form.applicationNumber.desc', 'required': 'Required'}) }}
         
-        {{ textInput('email', 'form.email', __('Required')) }}
+        {{ textInput('email', 'form.email', {'hint': 'form.email.desc', 'required': 'Required'}) }}
 
-        {{ textInput('confirmEmail', 'form.confirmEmail', __('Required')) }}
+        {{ textInput('confirmEmail', 'form.confirmEmail', {'hint': 'form.confirmEmail.desc', 'required': 'Required'}) }}
         
         {{ radioButtons('accessible', { '1': __('registration.radio1'),'2': __('registration.radio2')}, data.send_notifications, 'form.accessible', errors) }}
 

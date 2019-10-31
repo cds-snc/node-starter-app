@@ -7,14 +7,14 @@
     {% set firstError = errors[errors.keys()[0]] %}
 {% endif %}
 
-{% macro textInput(name, label, required, attributes) %}
+{% macro textInput(name, label, attributes) %}
     <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
         <label for="{{ name }}" id="{{ name }}__label">
-            {% if required %}
+            {% if attributes.required %}
                 <span class="red">*</span>
             {% endif %}
             {{ __(label) }}
-            <span class="red">{{ required }}</span>
+            <span class="red">{{ __(attributes.required) }}</span>
         </label>
         {% if attributes.hint %}
             <span class="form-message">{{ __(attributes.hint) }}</span>
