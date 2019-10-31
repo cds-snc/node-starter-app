@@ -4,13 +4,11 @@
   line-height: 1.1875;
   display: inline-block;
   position: relative;
-  margin-top: 10px;
   padding: 9px 12px;
   border-radius: 0;
   color: $color-white;
   background-color: $color-blue-light;
   border: 2px solid transparent;
-  box-shadow: 0 2px 0 black;
   text-align: center;
   vertical-align: top;
   cursor: pointer;
@@ -50,8 +48,43 @@
 form button {
   @extend %button-styles;
   font-family: 'Noto Sans', sans-serif;
-  border-radius: 4px;
+  border-radius: 5px;
   width: 100%;
+}
+
+.buttons--prev {
+  @extend %button-styles;
+  border-radius: 5px;
+  background-color: #cfd1d5;
+  color: #000000; 
+  width: 150px;
+
+  svg {
+    padding-top: 5px;
+  }
+  
+  &:hover,
+  &:focus {
+    background-color:  #a2a3a5;
+  }
+}
+
+.buttons--next {
+  @extend %button-styles;
+  border-radius: 5px;
+  margin-left: 30px;
+  background-color: #2572B4;
+  color: #FFFFFF; 
+  width: 150px;
+
+  svg {
+    padding-top: 5px;
+  }
+  
+  &:hover,
+  &:focus {
+    background-color: #1c5a91;
+  }
 }
 
 a.button-link {
