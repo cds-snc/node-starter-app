@@ -4,11 +4,18 @@ on:
     branches:
     - master
 
-jobs:
+jobs:  
+     
   publish:
     name: Publish
     runs-on: ubuntu-latest
     steps:
+    - name: Generate build number
+      uses: einaregilsson/build-number@v1 
+      with:
+        token: ${{secrets.github_token}}        
+    - name: Print new build number
+      run: echo Build number is $BUILD_NUMBER   
     - uses: azure/docker-login@v1
       with:
         login-server: mtscontainers.azurecr.io
@@ -18,12 +25,13 @@ jobs:
     - name: docker build and push
       run: |
         docker build -t mtscontainers.azurecr.io/dts-scheduler:latest .
-        docker tag mtscontainers.azurecr.io/dts-scheduler:latest mtscontainers.azurecr.io/dts-scheduler:BUILD_ID
+        docker tag mtscontainers.azurecr.io/dts-scheduler:latest mtscontainers.azurecr.io/dts-scheduler:$BUILD_NUMBER
         docker push mtscontainers.azurecr.io/dts-scheduler:latest
-        docker push mtscontainers.azurecr.io/dts-scheduler:BUILD_ID
+        docker push mtscontainers.azurecr.io/dts-scheduler:$BUILD_NUMBER
 
   Deploy:
     name: Deploy
+    needs: publish
     runs-on: ubuntu-latest
     steps:
     - name: trigger single Job
