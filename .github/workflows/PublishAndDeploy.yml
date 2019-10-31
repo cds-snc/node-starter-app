@@ -18,9 +18,9 @@ jobs:
     - name: docker build and push
       run: |
         docker build -t mtscontainers.azurecr.io/dts-scheduler:latest .
-        docker tag mtscontainers.azurecr.io/dts-scheduler:latest mtscontainers.azurecr.io/dts-scheduler:BUILD_ID
+        docker tag mtscontainers.azurecr.io/dts-scheduler:latest mtscontainers.azurecr.io/dts-scheduler:${ GITHUB_ACTION }
         docker push mtscontainers.azurecr.io/dts-scheduler:latest
-        docker push mtscontainers.azurecr.io/dts-scheduler:BUILD_ID
+        docker push mtscontainers.azurecr.io/dts-scheduler:${ GITHUB_ACTION }
 
   Deploy:
     name: Deploy
