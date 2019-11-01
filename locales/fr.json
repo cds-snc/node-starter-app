@@ -67,7 +67,7 @@
   "start.Privacy.notice": "start.Privacy.notice",
   "start.policyAgree": "J'ai lu et accepte la politique de confidentialité. ",
   "form.policy": "form.policy",
-  "Start": "Start",
   "Required": "(requis)",
-  "Oui": "Oui"
+  "Oui": "Oui",
+  "Start request": "demande de démarrage"
 }

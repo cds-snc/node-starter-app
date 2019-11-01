@@ -81,8 +81,8 @@
   "Invalid value": "Invalid value",
   "Cannot read property 'value' of undefined": "Cannot read property 'value' of undefined",
   "Cannot read property 'fields' of undefined": "Cannot read property 'fields' of undefined",
-  "Start": "Start",
   "Previous": "Previous",
   "Next": "Next",
-  "Required": "(required)"
+  "Required": "(required)",
+  "Start request": "Start request"
 }

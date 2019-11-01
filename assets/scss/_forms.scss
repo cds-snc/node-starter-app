@@ -91,7 +91,7 @@ form {
   }
 
   .form-message {
-    color: $color-grey-dark;
+    color: $color-grey-darker;
     font-size: smaller;
   }
 
@@ -163,7 +163,6 @@ form {
     .buttons--left,
     .buttons--right {
       flex: 1;
-      max-width: 200px;
     }
 
     @include sm {
@@ -190,6 +189,7 @@ form {
   .buttons--left,
   .buttons--right {
     flex: 1;
+    max-width: 300px;
   }
 
   @include sm {
