@@ -4,7 +4,7 @@ name: dts-testing
 on:
   push:
     branches:
-      -master
+      - master
 
 jobs:  
   testing:
