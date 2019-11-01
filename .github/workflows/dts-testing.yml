@@ -16,4 +16,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: run docker compose
-      run: docker-compose up --exit-code-from cypress
+      run: docker-compose up --exit-code-from e2e
