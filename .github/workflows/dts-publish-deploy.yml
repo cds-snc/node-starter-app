@@ -1,18 +1,4 @@
-name: Publish_and_Deploy
-on:
-  pull_request:
-    branches:
-    - *
-
-jobs:  
-  testing:
-    name: testing
-    runs-on: ubuntu-latest
-    steps:
-    -name: run docker compose
-     uses: actions/checkout@v1
-     run: |
-       docker-compose up
+name: dts-publish-deploy
 
 on: 
   push:
