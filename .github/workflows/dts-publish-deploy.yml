@@ -1,11 +1,11 @@
-name: Publish_and_Deploy
-on:
+name: dts-publish-deploy
+
+on: 
   push:
     branches:
-    - master
+    -master
 
-jobs:  
-     
+jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
