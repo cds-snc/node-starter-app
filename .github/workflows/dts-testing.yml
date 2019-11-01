@@ -1,7 +1,9 @@
+name: dts-testing
+
 on:
-  [push, pull_request]
+  [push, pull_request]:
     branches:
-    - master
+    -master
 
 jobs:  
   testing:
