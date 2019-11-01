@@ -1,13 +1,26 @@
-name: dts-publish-deploy
+name: dts-test-publish-deploy
 
 on: 
   push:
     branches:
       - master
+  pull_request:
+    branches: 
+      - master
 
 jobs:
+  testing:
+    name: testing
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: run docker compose
+      run: docker-compose up --exit-code-from e2e
+
   publish:
     name: Publish
+    needs: testing
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
