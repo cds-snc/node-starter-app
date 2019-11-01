@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: 
+      - master
 
 jobs:  
   testing:
@@ -13,4 +16,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: run docker compose
-      run: docker-compose up
+      run: docker-compose up --exit-code-from testing
