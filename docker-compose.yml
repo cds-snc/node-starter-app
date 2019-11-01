@@ -1,10 +1,10 @@
 version: '3.3'
 services: 
-  sab-gui:
+  dts-scheduler:
     build:
       context: ./
       dockerfile: Dockerfile
-    container_name: sab-gui
+    container_name: dts-scheduler
     restart: always
     ports:
      - "80:3000"
@@ -16,9 +16,9 @@ services:
       dockerfile: cypress.Dockerfile
     container_name: cypress
     depends_on:
-      - sab-gui
+      - dts-scheduler
     # note: inside e2e container, the network allows accessing
-    # "web" host under name "web" (in this project it's 'sab-gui' and not web)
+    # "web" host under name "web" (in this project it's 'dts-scheduler' and not web)
     # so "curl http://web" would return whatever the webserver
     # in the "web" container is cooking
     # see https://docs.docker.com/compose/networking/
