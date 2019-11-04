@@ -1,4 +1,4 @@
-# Canada Web Forms Starter Repo
+# Canada Web Forms Starter Repo for Node.js
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cds-snc/node-starter-app.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cds-snc/node-starter-app/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/cds-snc/node-starter-app.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cds-snc/node-starter-app/context:javascript)
 
@@ -6,9 +6,26 @@
 
 **Changelog:** [changelog.md](https://github.com/cds-snc/node-starter-app/blob/master/changelog.md)
 
-This repository provides a codebase that can be used to quickly build web pages or forms with a Government of Canada look-and-feel. It's setup with some sensible defaults and tech choices, such as:
+This repository provides a codebase that can be used to quickly build web pages or forms with a Government of Canada look-and-feel. 
 
-- Node.js 10.x
+It provides the following functionality:
+
+- Create web pages that look like GC pages
+- Add endpoints ([routes/URLs](#adding-routes)) for web form workflows, complete with [form validation](#form-validation)
+- Prevents [forged cross-site requests](#form-csrf-protection)
+- Translation ready, [using name/value pairs configs](#locales)
+- Fast deployment, currently for:
+  - [Amazon Web Services](cdk) via [AWS CDK](https://aws.amazon.com/cdk/)
+  - [Azure](terraform/readme.md) via [Terraform](https://terraform.io)
+  - [Google Cloud Platform](cloudbuild.yaml) via [Google Cloud Build](https://cloud.google.com/cloud-build/)
+- Continuous integration checks that run automatically via [GitHub Actions](https://github.com/features/actions)
+  - [Accessibility](.github/workflows/a11y.yml)
+  - [Code Styling / Linting]((.github/workflows/nodejs.yml))
+  - Scanning codebase for [accidental secret leaking]((.github/workflows/secret.yml))
+
+It's setup with some sensible defaults and tech choices, such as:
+
+- Node.js >= 10.x
 - NVM (Node Version Manager) for install Node.js versions
 - [Express](https://expressjs.com/) web framework
 - [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) view templates
@@ -156,6 +173,7 @@ block content
 
 - Form validation is built into the form schema files and use [validator.js](https://github.com/validatorjs/validator.js#validators) to validate input
 
+> To mark fields showing as required you can pass required: true as an attribute
 ## Template Engine
 
 [Nunjucks](https://mozilla.github.io/nunjucks/)

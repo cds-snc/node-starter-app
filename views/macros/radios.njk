@@ -2,11 +2,17 @@
     <div class="{{ 'has-error' if errors and errors[key] }}">
         <fieldset class="fieldset">
             <legend class="fieldset__legend">
-              {{ __(question) }}
+            {% if attributes.required %}
+                <span aria-hidden="true" class="required">*</span>
+            {% endif %}
+            {{ __(question) }}
+            {% if attributes.required %}
+                <span class="required">{{ __("required")}}</span>
+            {% endif %}
             </legend>
-              {% if attributes.hint %}
+            {% if attributes.hint %}
                 <span class="form-message">{{ __(attributes.hint) }}</span>
-              {% endif %}
+            {% endif %}
             <div class="multiple-choice multiple-choice--radios" id="{{ key }}">
                 {% if errors and errors[key] %}
                     {{ validationMessage(errors[key].msg, key) }}

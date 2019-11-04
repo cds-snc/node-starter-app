@@ -1,5 +1,10 @@
 # Changelog
 
+## [5.0.3] - 2019-10-17
+
+### Added 
+- Added `{ required: true }` for form inputs which adds * required to the field label fixes [#98](https://github.com/cds-snc/node-starter-app/issues/98)
+
 
 ## [5.0.2] - 2019-10-15
 

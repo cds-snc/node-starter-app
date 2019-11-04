@@ -95,7 +95,7 @@ const renderPageWithErrors = (
   res,
   options = { template: '', errors: [] },
 ) => {
-  return res.status(422).render(options.template, {
+  return res.render(options.template, {
     data: getSessionData(req),
     name: options.template,
     body: req.body,
