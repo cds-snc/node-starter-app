@@ -1,0 +1,27 @@
+{#
+  - `name`: field name
+  - `label`: text for the label
+  - `optValues`: the Options as Object of {[key, text]}
+  - `attributes`: object of optional attributes: id, class, hint, divClasses, autocomplete
+#}
+{% if errors %}
+    {% set firstError = errors[errors.keys()[0]] %}
+{% endif %}
+
+{% macro selectDropDown(name, label, optValues, attributes) %}
+    <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
+        <label for="{{ name }}" id="{{ name }}__label">{{ __(label) }}</label>
+        {% if errors and errors[name] %}
+            {{ validationMessage(errors[name].msg, name) }}
+        {% endif %}
+        <select class="{{ attributes.class if attributes.class else name }}" id="{{ attributes.id }}" name="{{ attributes.name }}" 
+                        {%- if describedBy %} aria-describedby="{{ describedBy }}"{% endif %} 
+                        {%- for attribute, value in attributes.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+          {% for optValue in optValues %}
+            {% if optValue %}
+              <option value="{{ optValue.value }}" {{-" selected" if optValue.selected }}>{{ __(optValue.text) }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+    </div>
+{% endmacro %}
