@@ -10,7 +10,16 @@
 
 {% macro selectDropDown(name, label, optValues, attributes) %}
     <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
-        <label for="{{ name }}" id="{{ name }}__label">{{ __(label) }}</label>
+        
+        <label for="{{ name }}" id="{{ name }}__label">
+          {% if attributes.required %}
+            <span class="red">*</span>
+          {% endif %}
+          {{ __(label) }}
+          {% if attributes.required %}
+            <span class="red">{{ __('Required') }}</span>
+          {% endif %}
+        </label>
         {% if errors and errors[name] %}
             {{ validationMessage(errors[name].msg, name) }}
         {% endif %}
