@@ -62,7 +62,7 @@ form button {
   border-radius: 5px;
   background-color: $color-grey-light;
   color: #000000; 
-  width: 150px;
+  width: 180px;
 
   &:hover,
   &:focus {
@@ -74,7 +74,7 @@ form button {
   @extend %button-styles;
   border-radius: 5px;
   margin-left: 30px;
-  width: 150px;
+  width: 180px;
 }
 
 a.button-link {
