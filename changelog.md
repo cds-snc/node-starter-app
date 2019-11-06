@@ -1,5 +1,10 @@
 # Changelog
 
+## [5.0.4] - 2019-11-06
+
+### Added 
+- Added webpack-cli
+
 ## [5.0.3] - 2019-10-17
 
 ### Added 

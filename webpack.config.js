@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = (env, argv) => {
-  const { getConfig } = require('@cds-snc/webpack-starter')
+  const { getConfig } = require('@cdssnc/webpack-starter')
   const config = getConfig({
     mode: argv.mode,
     entry: {
