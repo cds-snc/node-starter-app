@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 const Schema = {
   firstname: {
     isLength: {
