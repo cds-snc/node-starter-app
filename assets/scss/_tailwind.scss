@@ -1,0 +1,11 @@
+h1 {
+  @apply text-5xl mb-4 mt-4;
+}
+
+ol {
+    @apply list-decimal;
+}
+
+a {
+  @apply underline;
+}
