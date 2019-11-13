@@ -6,7 +6,7 @@ module.exports = (env, argv) => {
   const config = getConfig({
     mode: argv.mode,
     entry: {
-      styles: './styles.js',
+      styles: './assets/scss/styles.scss',
       personal: './routes/personal/js/personal.js',
     },
     output: {
