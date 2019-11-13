@@ -1,5 +1,4 @@
-/* normalize.css for better cross-browser compatibility */
-@import '../../node_modules/normalize.css/normalize';
+@tailwind base;
 
 /* Utilities */
 @import './_variables';
@@ -21,3 +20,7 @@
 @import './components/_phase-banner';
 @import './components/_input-file';
 @import './components/skip-link';
+
+@tailwind components;
+
+@tailwind utilities;
