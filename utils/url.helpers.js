@@ -27,7 +27,7 @@ const getHostProtocol = req => {
   return 'http'
 }
 
-const clientJsDir = '/js/dist/'
+const clientJsDir = '/dist/'
 
 const getClientJsPath = req => {
   const domain = getDomain(req)
