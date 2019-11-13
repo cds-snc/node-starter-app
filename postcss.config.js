@@ -1,4 +1,4 @@
-// postcss.config.js
+const cssnano = require('cssnano')
 const purgecss = require('@fullhuman/postcss-purgecss')({
   // Specify the paths to all of the template files in your project
   content: ['./routes/**/*.njk', './views/**/*.njk'],
@@ -11,7 +11,10 @@ module.exports = {
   plugins: [
     require('@csstools/postcss-sass'),
     require('tailwindcss'),
+    cssnano({
+      preset: 'default',
+    }),
     require('autoprefixer'),
-    ...(process.env.NODE_ENV === 'production' ? [purgecss] : []),
+    ...(process.env.NODE_ENV !== 'production' ? [purgecss] : []),
   ],
 }
