@@ -1,6 +1,6 @@
 <div class="error-list" role="alert">
     <h3 class="error-list__header">{{ __('Please correct the errors on the page') }}</h3>
-    <ol class="error-list__list" id="formErrors">
+    <ol class="error-list__list list-decimal" id="formErrors">
         {% for field, error in errors %}
             <li class="error-list__list-item">
                 <a class="error-list__link" href="#{{ error.param }}">{{ __(error.msg) }}</a>
