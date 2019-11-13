@@ -1,5 +1,3 @@
-@tailwind base;
-
 /* Utilities */
 @import './_variables';
 @import './_mixins';
@@ -20,7 +18,3 @@
 @import './components/_phase-banner';
 @import './components/_input-file';
 @import './components/skip-link';
-
-@tailwind components;
-
-@tailwind utilities;
