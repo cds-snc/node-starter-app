@@ -6,7 +6,6 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
 const helmet = require('helmet')
-const sassMiddleware = require('node-sass-middleware')
 const path = require('path')
 const cookieSession = require('cookie-session')
 const cookieSessionConfig = require('./config/cookieSession.config')
@@ -47,18 +46,6 @@ app.use(function(req, res, next) {
 // in production: use redis for sessions
 // but this works for now
 app.use(cookieSession(cookieSessionConfig))
-
-// in production: precompile CSS
-app.use(
-  sassMiddleware({
-    src: path.join(__dirname, 'assets/scss'),
-    dest: path.join(__dirname, 'public'),
-    debug: false,
-    indentedSyntax: false, // look for .scss files, not .sass files
-    sourceMap: true,
-    outputStyle: 'compressed',
-  }),
-)
 
 // public assets go here (css, js, etc)
 app.use(express.static(path.join(__dirname, 'public')))
