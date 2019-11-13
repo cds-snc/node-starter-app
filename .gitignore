@@ -64,9 +64,8 @@ typings/
 .csr
 .pem
 
-# CSS files are compiled
-public/styles.css
-public/styles.css*
+# Compiled CSS and files
+public/dist
 
 .DS_Store
 credentials
@@ -75,7 +74,3 @@ cdk.out
 
 cdk/local-image
 credentials
-
-
-
-public/js/dist
