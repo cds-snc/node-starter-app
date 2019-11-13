@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "webpack --mode=production",
-    "dev": "cross-env nodemon --ignore public/dist --exec npm run dev:dist",
+    "dev": "cross-env nodemon --exec npm run dev:dist",
     "dev:dist": "webpack --mode=development && cross-env NODE_ENV=development  node ./bin/www",
     "start": "npm run build && cross-env NODE_ENV=production node ./bin/www",
     "lint": "node node_modules/eslint/bin/eslint.js config utils routes bin/www app.js",
@@ -83,6 +83,7 @@
     "webpack-cli": "^3.3.10"
   },
   "nodemonConfig": {
-    "ext": "js,json,njk,scss"
+    "ext": "js,json,njk,scss",
+    "ignore": ["public/dist/**/*.*"]
   }
 }
