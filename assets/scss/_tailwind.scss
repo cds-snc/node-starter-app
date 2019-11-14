@@ -1,3 +1,5 @@
+/* Adjustments for tailwind defaults that conflict with the node-starter-app defaults */
+
 h1 {
   @apply text-5xl mb-4 mt-4;
 }
@@ -15,5 +17,5 @@ a {
 }
 
 .canada-wordmark img {
-  display: inline;
+  @apply inline;
 }
