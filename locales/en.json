@@ -12,8 +12,6 @@
   "Not found": "Not found",
   "Page not found": "Page not found",
   "Please correct the errors on the page": "Please correct the errors on the page",
-  "SMS": "SMS",
-  "Skip to main content": "Skip to main content",
   "Yes": "Yes",
   "app.desc": "Node Starter App",
   "app.title": "Request an appointment for biometrics",
@@ -49,8 +47,6 @@
   "form.notify_by": "Notify by",
   "form.accessible": "Do you require an accessible work station?",
   "next": "Next",
-  "personal.intro": "Intro copy goes here",
-  "personal.title": "Personal Information",
   "phase.desc": "This site will change as we test ideas.",
   "start.intro.banner": "This is a demo",
   "start.submit": "Let's Go",
@@ -93,5 +89,6 @@
   "province.10": "Prince Edward Island",
   "province.11": "Quebec",
   "province.12": "Saskatchewan",
-  "province.13": "Yukon"
+  "province.13": "Yukon",
+  "form.fullname": "form.fullname"
 }
