@@ -11,7 +11,8 @@ module.exports = (env, argv) => {
     output: {
       filename: 'js/[name].[chunkhash].js',
       path: path.resolve(__dirname, 'public/dist'),
-    }
+    },
+    stats: 'errors-only',
   })
 
   return config
