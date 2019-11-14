@@ -1,0 +1,31 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+    <h1>{{ __('province.title') }}</h1>
+
+    <form method="post">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+        {{ selectDropDown('provinces', 'province.province', 
+                         [{'value':'', 'text':'province.0'},
+                          {'value':'1', 'text':'province.1'},
+                          {'value':'2', 'text':'province.2'},
+                          {'value':'3', 'text':'province.3', 'selected':true},
+                          {'value':'4', 'text':'province.4'},
+                          {'value':'5', 'text':'province.5'},
+                          {'value':'6', 'text':'province.6'},
+                          {'value':'7', 'text':'province.7'},
+                          {'value':'8', 'text':'province.8'},
+                          {'value':'9', 'text':'province.9'},
+                          {'value':'10', 'text':'province.10'},
+                          {'value':'11', 'text':'province.11'},
+                          {'value':'12', 'text':'province.12'},
+                          {'value':'13', 'text':'province.13'}
+                          ],
+                         {'required':true}) }}
+
+        {{ prevNextButtons() }}
+    </form>
+
+{% endblock %}

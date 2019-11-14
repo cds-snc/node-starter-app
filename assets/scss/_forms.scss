@@ -91,7 +91,8 @@ form {
   }
 
   .form-message {
-    color: $color-grey-dark;
+    color: $color-grey-darker;
+    font-size: smaller;
   }
 
   .validation-message {
@@ -156,7 +157,7 @@ form {
 
   .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     flex-direction: column;
 
     .buttons--left,
@@ -177,6 +178,33 @@ form {
   }
 }
 
+
+
+.startButtons {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 50%;
+
+  .buttons--left,
+  .buttons--right {
+    flex: 1;
+    max-width: 300px;
+  }
+
+  @include sm {
+    flex-direction: row;
+
+    .buttons--left {
+      margin-right: $space-xs;
+    }
+    .buttons--right {
+      margin-left: $space-xs;
+    }
+  }
+}
+
+
 .fieldset {
   border: 0;
   padding: 0;
@@ -193,4 +221,13 @@ form {
   .has-error &__legend {
     margin-bottom: $space-xxs;
   }
+}
+
+.red {
+  color: red;
+}
+
+select {
+  background-color: #FFFFFF;
+  max-width: 500px;
 }

@@ -9,8 +9,37 @@
     </div>
 {% endmacro %}
 
+{% macro prevNextButtons(nextButtonText = 'Next', prevButtonText = 'Previous', cancelUrl = '/clear') %}
+    <div class="buttons">
+        <div>
+            <button type="button" class="buttons--prev"> 
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 10 16" class="css-1g3no9x" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 3L0 8l6 5v-3h4V6H6V3z"></path></svg> 
+                {{ __(prevButtonText) }}
+            </button>
+        </div>
+        <div>
+            <button type="submit" class="buttons--next"> 
+                {{ __(nextButtonText) }}
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 10 16" class="css-114midb" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3l6-5z"></path></svg>
+            </button>
+        </div>
+    </div>
+{% endmacro %}
+
 {% macro linkButtons(confirmURL) %}
     <div class="buttons-row">
         <a href="{{ confirmURL }}">{{ __('Confirm') }}</a>
+    </div>
+{% endmacro %}
+
+{% macro startButton(submitButtonText = 'Start request') %}
+    <div class="startButtons">
+        <div class="buttons--left">
+            <button type="submit">
+                {{ __(submitButtonText) }}
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 10 16" class="css-114midb" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 8L4 3v3H0v4h4v3l6-5z"></path></svg>
+            </button>
+        </div>
+        
     </div>
 {% endmacro %}

@@ -10,7 +10,7 @@ module.exports = (app, route) => {
       // ⚠️ experimental
       // validate data from previous step
       // see if we should be allowed to reach this step
-      const { Schema } = require('../personal/schema.js')
+      const { Schema } = require('../registration/schema.js')
       const result = await validateRouteData(req, Schema)
       if (!result.status) {
         setFlashMessageContent(req, result.errors)

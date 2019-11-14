@@ -1,0 +1,22 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+    <h1>{{ __('registration.title') }}</h1>
+
+    <form method="post">
+
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+        {{ textInput('applicationNumber', 'form.applicationNumber', {'hint': 'form.applicationNumber.desc', 'required': 'Required'}) }}
+        
+        {{ textInput('email', 'form.email', {'hint': 'form.email.desc', 'required': 'Required'}) }}
+
+        {{ textInput('confirmEmail', 'form.confirmEmail', {'hint': 'form.confirmEmail.desc', 'required': 'Required'}) }}
+        
+        {{ radioButtons('accessible', { '1': __('registration.radio1'),'2': __('registration.radio2')}, data.send_notifications, 'form.accessible', errors) }}
+
+        {{ prevNextButtons() }}
+    </form>
+
+{% endblock %}

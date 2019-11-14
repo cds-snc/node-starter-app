@@ -1,7 +1,9 @@
+/* istanbul ignore file */
+
 const Schema = {
-  fullname: {
+  policy: {
     isLength: {
-      errorMessage: 'errors.fullname.length',
+      errorMessage: 'error.policy',
       options: { min: 3, max: 200 },
     },
   },
