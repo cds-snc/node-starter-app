@@ -30,6 +30,7 @@ It's setup with some sensible defaults and tech choices, such as:
 - [Express](https://expressjs.com/) web framework
 - [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) view templates
 - Sass (Syntactically Awesome Style Sheets) for reusable styles
+- [Tailwindcss](https://tailwindcss.com/) a utility-first css framework for rapidly building custom designs
 
 ## Cloning and pulling upstream changes
 
@@ -55,6 +56,17 @@ npm install
 npm run dev
 ```
 
+## Custom styles, Sass, PostCSS, TailwindCSS, and PurgeCSS
+
+There is a base set of SASS stylesheets included by default that provide a good base visual starting point.
+
+TailwindCSS is included, but completely optional. If you don't like it, you can just remove the @tailwind directives in app.scss, remove the tailwind.scss customizations, and remove the tailwindcss plugin from postcss.config.js.
+
+Webpack loads app.scss and imported sheets, runs them through PostCSS which parses SASS, sets up Tailwindcss, compiles, minimizes with cssnano, and applies autoprefixer. On production builds, everything gets passed through PurgeCSS to remove any unused classes to really reduce file size.
+
+app.scss is where we recommend you place custom SASS or CSS rules.
+
+
 ## Adding Routes
 Generate the route files
 ```
@@ -79,7 +91,6 @@ const routes = [
 ```
 
 Note: Delete unused route(s) directories as needed.
-
 
 ## Form step redirects
 
