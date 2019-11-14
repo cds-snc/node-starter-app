@@ -1,5 +1,26 @@
 # Changelog
 
+## [6.0.0] - 2019-11-14
+
+### Added 
+- [Tailwind CSS](https://tailwindcss.com)
+- [PostCSS](https://github.com/postcss/postcss) to handle SASS processing & CSS Autoprefixing
+
+### Updated 
+- Moved output path for CSS & JS files. 
+  Before `/styles.css` after `/dist/css/styles.css`
+
+- Moved clientJsDir 
+  Before `/js/dist/` after '/dist/'
+
+- Webpack now handles CSS loading, extracting
+
+### Removed
+- sassMiddleware
+
+### Added 
+- Added webpack-cli
+
 ## [5.0.4] - 2019-11-06
 
 ### Added 
