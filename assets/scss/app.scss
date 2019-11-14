@@ -1,15 +1,10 @@
 @tailwind base;
 
 @import './styles';
+@import './tailwind';
 
-/* Place SCSS or Tailwindcss extracts and base styles here */
-h1 {
-  @apply text-4xl;
-}
+/* Place custom SCSS or Tailwindcss extracts and base styles here */
 
-ol {
-    @apply list-decimal;
-}
 
 @tailwind components;
 
