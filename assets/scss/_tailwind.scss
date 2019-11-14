@@ -6,6 +6,14 @@ ol {
     @apply list-decimal;
 }
 
+ul {
+  @apply list-disc;
+}
+
 a {
   @apply underline;
+}
+
+.canada-wordmark img {
+  display: inline;
 }
