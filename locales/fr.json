@@ -35,7 +35,7 @@
   "form.address": "form.address",
   "form.address.desc": "form.address.desc",
   "form.email": "Adresse e-mail",
-  "form.email.desc": "form.email.desc",
+  "form.email.desc": "C'est là que nous vous enverrons un email de confirmation lorsque vous aurez terminé.",
   "form.notify_by": "form.notify_by",
   "form.send_notifications": "form.send_notifications",
   "next": "next",
@@ -78,5 +78,8 @@
   "province.12": "Territoires du Nord-Ouest",
   "province.13": "Yukon",
   "Previous": "Précédent",
-  "Next": "Suivant"
+  "Next": "Suivant",
+  "Skip to main content": "Skip to main content",
+  "form.applicationNumber.desc": "Ce numéro est en haut de la lettre que nous vous avons envoyée.",
+  "form.confirmEmail.desc":"Merci de ressaisir votre adresse email."
 }
