@@ -5,21 +5,27 @@
 ### Added 
 - [Tailwind CSS](https://tailwindcss.com)
 - [PostCSS](https://github.com/postcss/postcss) to handle SASS processing & CSS Autoprefixing
+- [PurgeCSS](https://www.purgecss.com/) to purge unused css at build
+- [cssnano](https://cssnano.co/) for minifying css
 
 ### Updated 
 - Moved output path for CSS & JS files. 
   Before `/styles.css` after `/dist/css/styles.css`
 
 - Moved clientJsDir 
-  Before `/js/dist/` after '/dist/'
+  Before `/js/dist/` after '/dist/js/'
 
 - Webpack now handles CSS loading, extracting
 
+- Changed stylesheet entrypoint to `app.scss` which imports the default node-starter styles and tailwind
+
+- Renamed the node-starter class `container` to `outer-container` due to a conflict with tailwindcss
+
+- Fixed the infinite loop issue #116
+
 ### Removed
 - sassMiddleware
-
-### Added 
-- Added webpack-cli
+- `normalize.css` (tailwindcss already includes it)
 
 ## [5.0.4] - 2019-11-06
 
