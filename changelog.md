@@ -13,7 +13,7 @@
   Before `/styles.css` after `/dist/css/styles.css`
 
 - Moved clientJsDir 
-  Before `/js/dist/` after '/dist/js/'
+  Before `/js/dist/` after `/dist/js/`
 
 - Webpack now handles CSS loading, extracting
 
