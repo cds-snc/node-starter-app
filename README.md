@@ -31,6 +31,8 @@ It's setup with some sensible defaults and tech choices, such as:
 - [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) view templates
 - Sass (Syntactically Awesome Style Sheets) for reusable styles
 - [Tailwindcss](https://tailwindcss.com/) a utility-first css framework for rapidly building custom designs
+- [PostCSS](https://postcss.org/)
+- [PurgeCSS](https://www.purgecss.com/)
 
 ## Cloning and pulling upstream changes
 
