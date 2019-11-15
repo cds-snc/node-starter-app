@@ -1,5 +1,9 @@
 # Changelog
 
+## [6.0.1] - 2019-11-15
+
+- Fixed failing dependencies
+
 ## [6.0.0] - 2019-11-14
 
 ### Added 
