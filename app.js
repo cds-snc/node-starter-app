@@ -88,4 +88,24 @@ nunjucks.installJinjaCompat()
 
 app.set('view engine', 'njk')
 
+// BrowserSync at development host
+if (process.env.NODE_ENV === 'development') {
+  var browserSync = require('browser-sync')
+  var config = {
+    files: [
+      'public/**/*.{js,css}',
+      'assets/scss/**/*.scss',
+      'routes/**/*.{js,njk}',
+      'views/**/*.njk',
+    ],
+    logLevel: 'debug',
+    logSnippet: false,
+    reloadDelay: 5000,
+    reloadOnRestart: true,
+    proxy: 'localhost:3000',
+  }
+  var bs = browserSync(config)
+  app.use(require('connect-browser-sync')(bs))
+}
+
 module.exports = app
