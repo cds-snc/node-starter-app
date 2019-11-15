@@ -46,29 +46,29 @@ const Schema = {
   //     errorMessage: 'errors.expiry.date',
   //   },
   // },
-  // send_notifications: {
-  //   isIn: {
-  //     errorMessage: 'errors.send_notifications.valid',
-  //     options: [['Yes', 'No']],
-  //   },
-  // },
-  // notify_type: {
-  //   custom: {
-  //     options: (value, { req }) => {
-  //       const sendNotifications = req.body.send_notifications
-  //       if (sendNotifications && sendNotifications === 'Yes') {
-  //         if (typeof value === 'undefined') {
-  //           return false
-  //         }
-  //       } else {
-  //         req.body.notify_type = undefined
-  //       }
+  accessible: {
+    isIn: {
+      errorMessage: 'errors.accessible.valid',
+      options: [['Yes', 'No']],
+    },
+  },
+  notify_type: {
+    custom: {
+      options: (value, { req }) => {
+        const sendNotifications = req.body.accessible
+        if (sendNotifications && sendNotifications === 'Yes') {
+          if (typeof value === 'undefined') {
+            return false
+          }
+        } else {
+          req.body.notify_type = undefined
+        }
 
-  //       return true
-  //     },
-  //     errorMessage: 'errors.notify_type',
-  //   },
-  // },
+        return true
+      },
+      errorMessage: 'errors.notify_type',
+    },
+  },
 }
 
 module.exports = {

@@ -24,7 +24,7 @@
   "errors.application.error": "Incorrect Number",
   "errors.province.notempty": "please select a province",
   "errors.notify_type": "Please indicate how you would like to receive notifications",
-  "errors.send_notifications.valid": "Please indicate if you would like to receive notifications",
+  "errors.accessible.valid": "Please indicate if you would like accessible work station",
   "footer.link1": "https://www.canada.ca/en/social.html",
   "footer.link1.desc": "Social media",
   "footer.link2": "https://www.canada.ca/en/mobile.html",
