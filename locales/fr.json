@@ -17,11 +17,9 @@
   "app.title": "Demander un rendez-vous pour la biométrie",
   "confirmation.intro": "confirmation.intro",
   "confirmation.title": "confirmation.title",
-  "errors.email.length": "errors.email.length",
-  "errors.expiry.date": "errors.expiry.date",
+  "errors.email.length": "Email est requis",
   "errors.province.notempty": "veuillez sélectionner une province",
-  "errors.notify_type": "errors.notify_type",
-  "errors.send_notifications.valid": "errors.send_notifications.valid",
+  "errors.accessible.valid": "Veuillez indiquer si vous souhaitez un poste de travail accessible",
   "footer.link1": "https://www.canada.ca/fr/sociaux.html",
   "footer.link1.desc": "Médias sociaux",
   "footer.link2": "https://www.canada.ca/fr/mobile.html",
@@ -81,5 +79,6 @@
   "Next": "Suivant",
   "Skip to main content": "Skip to main content",
   "form.applicationNumber.desc": "Ce numéro est en haut de la lettre que nous vous avons envoyée.",
-  "form.confirmEmail.desc":"Merci de ressaisir votre adresse email."
+  "form.confirmEmail.desc": "Merci de ressaisir votre adresse email.",
+  "errors.application.error": "Numéro incorrect"
 }
