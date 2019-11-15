@@ -1,4 +1,5 @@
 const path = require('path')
+const WebpackNotifierPlugin = require('webpack-notifier')
 
 module.exports = (env, argv) => {
   const { getConfig } = require('@cdssnc/webpack-starter')
@@ -13,6 +14,13 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, 'public/dist'),
     },
     stats: 'errors-only',
+    plugins: [
+      new WebpackNotifierPlugin({
+        title: 'CDS Starter App',
+        contentImage:
+          'https://github.com/cds-snc/common-assets/raw/master/EN/cds-snc.png',
+      }),
+    ],
   })
 
   return config
