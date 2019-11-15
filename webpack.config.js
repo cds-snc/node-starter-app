@@ -1,5 +1,6 @@
 const path = require('path')
 const WebpackNotifierPlugin = require('webpack-notifier')
+const NodemonBrowsersyncPlugin = require('nodemon-browsersync-webpack-plugin')
 
 module.exports = (env, argv) => {
   const { getConfig } = require('@cdssnc/webpack-starter')
@@ -20,6 +21,17 @@ module.exports = (env, argv) => {
         contentImage:
           'https://github.com/cds-snc/common-assets/raw/master/EN/cds-snc.png',
       }),
+      new NodemonBrowsersyncPlugin(
+        {
+          script: './bin/www',
+          ext: 'js,njk,json,scss',
+          ignore: ['public/dist/*'],
+          verbose: true,
+        },
+        {
+          proxy: 'localhost:3000',
+        },
+      ),
     ],
   })
 
