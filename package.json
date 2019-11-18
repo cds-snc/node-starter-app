@@ -20,7 +20,8 @@
     "aws-bootstrap": "node cdk/bootstrap.js",
     "aws-destroy": "node cdk/destroy.js",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "pg:start": "docker run -d -p 5432:5432 --name sab-db -e POSTGRES_PASSWORD=password postgres"
   },
   "husky": {
     "hooks": {
