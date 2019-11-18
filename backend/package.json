@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "node+express server and postgresql database",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "start:postgres": "docker run -d -p 5432:5432 --name sab-postgres -e POSTGRES_PASSWORD=password postgres && docker exec -it sab-postgres bash"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^7.12.1"
+  }
+}
