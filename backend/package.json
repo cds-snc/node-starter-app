@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
-    "start:postgres": "docker run -d -p 5432:5432 --name sab-postgres -e POSTGRES_PASSWORD=password postgres && docker exec -it sab-postgres bash"
+    "start:postgres": "docker run -d -p 5432:5432 --name sab-db -e POSTGRES_PASSWORD=password postgres"
   },
   "author": "",
   "license": "ISC",
