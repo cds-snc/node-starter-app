@@ -5,7 +5,8 @@ import cors from 'cors'
 import morgan from 'morgan'
 import path from 'path'
 import bodyParser from 'body-parser'
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 
