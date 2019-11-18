@@ -1,7 +1,7 @@
 {% macro checkBoxes(key, values, selectedVals, question, errors, attributes) %}
     <div class="{{ 'has-error' if errors and errors[key] }}">
         <fieldset class="fieldset">
-            <legend class="fieldset__legend">{{ __(question) }}</legend>
+            <legend id="check-text" class="fieldset__legend">{{ __(question) }}</legend>
             <div class="multiple-choice multiple-choice--checkboxes" id="{{ key }}">
                 {% if errors and errors[key] %}
                     {{ validationMessage(errors[key].msg, key) }}

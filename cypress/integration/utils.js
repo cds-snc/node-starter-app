@@ -20,3 +20,5 @@ export const sMediaHref = () => cy.get('#footer div a').eq(1);
 export const mobileHref = () => cy.get('#footer div a').eq(2);
 export const tocHref = () => cy.get('#footer div a').eq(3);
 export const privacyHref = () => cy.get('#footer div a').eq(4);
+
+export const nextButton = () => cy.get('.buttons--next')
