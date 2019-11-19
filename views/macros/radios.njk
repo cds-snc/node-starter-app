@@ -1,7 +1,7 @@
 {% macro radioButtons(key, values, value, question, errors, attributes) %}
     <div class="{{ 'has-error' if errors and errors[key] }}">
         <fieldset class="fieldset">
-            <legend class="fieldset__legend">{{ __(question) }}</legend>
+            <legend id="radio-text" class="fieldset__legend">{{ __(question) }}</legend>
             <div class="multiple-choice multiple-choice--radios" id="{{ key }}">
                 {% if errors and errors[key] %}
                     {{ validationMessage(errors[key].msg, key) }}
