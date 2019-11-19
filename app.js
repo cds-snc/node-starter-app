@@ -4,6 +4,7 @@ require('dotenv').config()
 // import node modules.
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 const compression = require('compression')
 const helmet = require('helmet')
 const sassMiddleware = require('node-sass-middleware')
@@ -14,6 +15,11 @@ const { hasData } = require('./utils')
 const { addNunjucksFilters } = require('./filters')
 const csp = require('./config/csp.config')
 const csrf = require('csurf')
+const morgan = require('morgan')
+
+// Database API Routes
+// const appointmentsRoutes = require('./src/api/routes/appointments.routes')
+// const locationsRoutes = require('./src/api/routes/locations.routes')
 
 // check to see if we have a custom configRoutes function
 let { configRoutes, routes, locales } = require('./config/routes.config')
@@ -29,6 +35,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser(process.env.app_session_secret))
 app.use(require('./config/i18n.config').init)
+app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+)
 
 // CSRF setup
 app.use(
@@ -43,6 +55,11 @@ app.use(function(req, res, next) {
   res.locals.csrfToken = req.csrfToken()
   next()
 })
+
+// Logging for request details
+process.env.NODE_ENV === 'development'
+  ? app.use(morgan('dev'))
+  : app.use(morgan('combined'))
 
 // in production: use redis for sessions
 // but this works for now
@@ -84,6 +101,10 @@ app.locals.basedir = path.join(__dirname, './views')
 app.set('views', [path.join(__dirname, './views')])
 
 app.routes = configRoutes(app, routes, locales)
+
+// set app to use database API routes
+// app.use(appointmentsRoutes)
+// app.use(locationsRoutes)
 
 // view engine setup
 const nunjucks = require('nunjucks')

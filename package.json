@@ -20,7 +20,8 @@
     "aws-bootstrap": "node cdk/bootstrap.js",
     "aws-destroy": "node cdk/destroy.js",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "pg:start": "docker run -d -p 5432:5432 --name sab-db -e POSTGRES_PASSWORD=password postgres"
   },
   "husky": {
     "hooks": {
@@ -33,8 +34,9 @@
     "cookie-parser": "~1.4.4",
     "cookie-session": "^1.3.3",
     "copy-template-dir": "^1.4.0",
+    "cross-env": "^6.0.3",
     "csurf": "^1.10.0",
-    "dotenv": "^8.1.0",
+    "dotenv": "^8.2.0",
     "dynamoose": "^1.11.1",
     "express": "~4.17.1",
     "express-session": "^1.17.0",
@@ -45,8 +47,9 @@
     "node-sass-middleware": "^0.11.0",
     "normalize.css": "^8.0.1",
     "nunjucks": "^3.2.0",
-    "request": "^2.88.0",
-    "cross-env": "^6.0.3"
+    "pg": "^7.12.1",
+    "pg-promise": "^10.2.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "@aws-cdk/aws-docdb": "1.13.0",
@@ -71,6 +74,7 @@
     "fse": "^4.0.1",
     "husky": "^3.0.9",
     "jest": "^24.9.0",
+    "morgan": "^1.9.1",
     "nodemon": "^1.19.3",
     "patch-package": "^6.2.0",
     "prettier": "^1.18.2",
