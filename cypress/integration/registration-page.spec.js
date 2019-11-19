@@ -98,7 +98,7 @@ describe('Items shown on the registration page', () => {
         //  cy.get('li > a').should('contain.text', 'Application number')
         
         })})
-    it.skip('should show error message for incorrect email address format', () => {
+    it('should show error message for incorrect email address format', () => {
         cy.fixture('user').then(data => {
             cy.get('#applicationNumber').type(data.applicationNumber, { force: true })
             cy.get('#email').type(data.emailIncorrectFormat, { force: true })
@@ -113,7 +113,7 @@ describe('Items shown on the registration page', () => {
             cy.get('ul > :nth-child(2) > a').should('contain.text', 'Confirm Email address')  
         })})
 
-    it.skip('should show error message for non matching email address', () => {
+    it('should show error message for non matching email address', () => {
         cy.fixture('user').then(data => {
             cy.get('#applicationNumber').type(data.applicationNumber, { force: true })
             cy.get('#email').type(data.email, { force: true })
