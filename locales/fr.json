@@ -18,6 +18,7 @@
   "confirmation.intro": "confirmation.intro",
   "confirmation.title": "confirmation.title",
   "errors.email.length": "Email est requis",
+  "errors.email.format": "Email must be formatted correctly",
   "errors.province.notempty": "veuillez sélectionner une province",
   "errors.accessible.valid": "Veuillez indiquer si vous souhaitez un poste de travail accessible",
   "footer.link1": "https://www.canada.ca/fr/sociaux.html",

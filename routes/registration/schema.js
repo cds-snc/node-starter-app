@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 
 const isValidRegAppNum = require('../../utils/').isValidRegAppNum
+const isValidEmail = require('../../utils/').isValidEmail
 
 const Schema = {
   applicationNumber: {
@@ -15,6 +16,12 @@ const Schema = {
     isLength: {
       errorMessage: 'errors.email.length',
       options: { min: 3, max: 200 },
+    },
+    custom: {
+      options: (value, { req }) => {
+        return isValidEmail(value)
+      },
+      errorMessage: 'errors.email.format',
     },
   },
   confirmEmail: {
@@ -38,8 +45,6 @@ const Schema = {
       options: [['Yes', 'No']],
     },
   },
-  
-
 }
 
 module.exports = {
