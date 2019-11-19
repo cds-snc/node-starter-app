@@ -1,7 +1,6 @@
 /* istanbul ignore file */
 
 const isValidRegAppNum = require('../../utils/').isValidRegAppNum
-const isValidEmail = require('../../utils/').isValidEmail
 
 const Schema = {
   applicationNumber: {
@@ -17,10 +16,7 @@ const Schema = {
       errorMessage: 'errors.email.length',
       options: { min: 3, max: 200 },
     },
-    custom: {
-      options: (value, { req }) => {
-        return isValidEmail(value)
-      },
+    isEmail: {
       errorMessage: 'errors.email.format',
     },
   },

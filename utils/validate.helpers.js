@@ -43,14 +43,6 @@ const isValidRegAppNum = appNum => {
   return true
 }
 
-const isValidEmail = email => {
-  const regEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!email.match(regEx)) {
-    return false
-  }
-  return true
-}
-
 /**
  * Middleware function that runs our error validation
  *
@@ -200,7 +192,6 @@ module.exports = {
   validateRouteData,
   isValidDate,
   isValidRegAppNum,
-  isValidEmail,
   checkErrors,
   checkErrorsJSON,
   hasData,
