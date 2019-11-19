@@ -18,6 +18,7 @@
   "confirmation.intro": "Step 2 of 2",
   "confirmation.title": "Confirmation page",
   "errors.email.length": "Email is required",
+  "errors.email.format": "Email must be formatted correctly",
   "errors.applicationNumber.length": "application number contains 1 letter and 12 numbers",
   "errors.confirmEmail": "Email addresses must match",
   "errors.expiry.date": "Date is required",
