@@ -29,22 +29,21 @@ describe('Items shown on the registration page', () => {
             cy.get(langLink).should('be.visible', 'Français')
 
         })
-        // it('should check footer info for links and canada image', () => {
-        //   cy.url().should('contains', '/')
-        //   cy.get(aboutCA).should('be.visible').and('contain', 'About Canada.ca')
-        //   cy.get(sMedia).should('be.visible').and('contain', 'Social media')
-        //   cy.get(mobileApp).should('be.visible').and('contain', 'Mobile applications')
-        //   cy.get(tocLink).should('contain', 'Terms and Conditions')
-        //   cy.get(privacyLink).should('contain', 'Privacy')
-
-    //   cy.get(aboutCAHref).should('have.attr', 'href', 'https://www.canada.ca/en/government/about.html')
-    //   cy.get(sMediaHref).should('have.attr', 'href', 'https://www.canada.ca/en/social.html')
-    //   cy.get(mobileHref).should('have.attr', 'href', 'https://www.canada.ca/en/mobile.html')
-    //   cy.get(tocHref).should('have.attr', 'href', 'https://digital.canada.ca/legal/terms/')
-    //   cy.get(privacyHref).should('have.attr', 'href', '/privacy')
-
-    //    cy.get(footerImg).should('be.visible')
-    //   })
+    it('should check footer info for links and canada image', () => {
+            cy.get(aboutCA).should('be.visible').and('contain', 'About Canada.ca')
+            cy.get(sMedia).should('be.visible').and('contain', 'Social media')
+            cy.get(mobileApp).should('be.visible').and('contain', 'Mobile applications')
+            cy.get(tocLink).should('contain', 'Terms and conditions')
+            cy.get(privacyLink).should('contain', 'Privacy')
+    
+            cy.get(aboutCAHref).should('have.attr', 'href', 'https://www.canada.ca/en/government/about.html')
+            cy.get(sMediaHref).should('have.attr', 'href', 'https://www.canada.ca/en/social.html')
+            cy.get(mobileHref).should('have.attr', 'href', 'https://www.canada.ca/en/mobile.html')
+            cy.get(tocHref).should('have.attr', 'href', 'https://www.canada.ca/en/transparency/terms.html')
+            cy.get(privacyHref).should('have.attr', 'href', 'https://www.canada.ca/en/transparency/privacy.html')
+    
+            cy.get(footerImg).should('be.visible')
+       })
 
     
     it('should show the header steps ', () => {  
@@ -98,19 +97,17 @@ describe('Items shown on the registration page', () => {
         //  cy.get('li > a').should('contain.text', 'Application number')
         
         })})
-    it.only('should show error message for incorrect email address format', () => {
+    it('should show error message for incorrect email address format', () => {
         cy.fixture('user').then(data => {
             cy.get('#applicationNumber').type(data.applicationNumber, { force: true })
             cy.get('#email').type(data.emailIncorrectFormat, { force: true })
             cy.get('#confirmEmail').type(data.emailIncorrectFormat, { force: true })
             cy.get('#accessibleYes').click()
             cy.get('.buttons--next').click()
+            cy.get('.error-list__link')
+            .should('contain.text', 'Email must be formatted correctly') 
             cy.get('#email-error')
-              .should('contain.text', 'Please make sure you provide a valid email address. For example, ‘yourname@example.com’')
-            cy.get('#email-Confirm-error')
-              .should('contain.text', 'Must be a valid email address.') 
-            cy.get('ul > :nth-child(1) > a').should('contain.text', 'Email address')
-            cy.get('ul > :nth-child(2) > a').should('contain.text', 'Confirm Email address')  
+              .should('contain.text', 'Email must be formatted correctly')
         })})
 
     it('should show error message for non matching email address', () => {
@@ -122,9 +119,62 @@ describe('Items shown on the registration page', () => {
             cy.get('.buttons--next').click()
             cy.get('#email-error')
               .should('not.be.visible')
-            cy.get('#email-Confirm-error')
-              .should('contain.text', 'Your email does not match. Please re-enter your email.')
-            cy.get('li > a').should('contain.text', 'Confirm Email address')   
+            cy.get('.error-list__link')
+              .should('contain.text', 'Email addresses must match')
+            cy.get('#confirmEmail-error').should('contain.text', 'Email addresses must match')   
+        })})
+
+    it('should scroll on error message click', () => {
+        
+        cy.fixture('user').then(data => {
+        cy.get('#applicationNumber').type(data.wrongFileNumber, { force: true })
+        cy.get('#email').type(data.emailIncorrectFormat, { force: true })
+        cy.get('#confirmEmail').type(data.emailIncorrectMatch, { force: true })
+        cy.get('.buttons--next').click()
+        cy.injectAxe()
+                // Application number link click
+        cy.get('#applicationNumber-error').should('be.visible')
+        cy.get(':nth-child(1) > .error-list__link').click()
+        cy.window().then(($window) => {
+            expect($window.scrollY).to.be.closeTo(700, 200);
+            })
+        
+        checkA11y(cy)
+                // Email address error link
+        cy.get('#email-error').should('be.visible')
+        cy.get(':nth-child(2) > .error-list__link').click()
+        cy.window().then(($window) => {
+              expect($window.scrollY).to.be.closeTo(780, 200);
+         })
+
+            // confirm email address error link
+        cy.get('#confirmEmail-error').should('be.visible')
+        cy.get(':nth-child(3) > .error-list__link').click()
+        cy.window().then(($window) => {
+           expect($window.scrollY).to.be.closeTo(920, 200);
+           })
+        checkA11y(cy)
+            // confirm accessible work station error link
+        cy.get('#accessible-error').should('be.visible')
+        cy.get(':nth-child(4) > .error-list__link').click()
+        cy.window().then(($window) => {
+            expect($window.scrollY).to.be.closeTo(920, 200);
+             })
+        checkA11y(cy)
+           
+     })})
+ 
+     it('should move to calendar page with successful entires.', () => {  
+        cy.fixture('user').then(data => {
+        cy.get('#applicationNumber').type(data.applicationNumber, { force: true })
+        cy.get('#email').type(data.email, { force: true })
+        cy.get('#confirmEmail').type(data.email, { force: true })
+        cy.get('#email-error').should('not.be.visible')  
+        cy.get('#radio-text').should('contain.text', 'Do you require an accessible work station?')
+        cy.get('#accessibleYes').should('be.visible').click()
+        cy.get('#accessibleNo').should('be.visible')
+        cy.get('.buttons--next').click()
+            // TODO: no calendar page yet - check that it goes to the page once added
         })})
   
 
