@@ -24,17 +24,4 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add(
-    'shouldHaveTrimmedText',
-    {
-        prevSubject: true,
-    },
-    (subject, equalTo) => {
-        if (isNaN(equalTo)) {
-            expect(subject.text()).to.eq(equalTo);
-        } else {
-            expect(parseInt(subject.text())).to.eq(equalTo);
-        }
-        return subject;
-    },
-);
+

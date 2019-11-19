@@ -22,3 +22,4 @@ export const tocHref = () => cy.get('#footer div a').eq(3);
 export const privacyHref = () => cy.get('#footer div a').eq(4);
 
 export const nextButton = () => cy.get('.buttons--next')
+export const nextButtons = () => cy.get('button[class="buttons--next"]')

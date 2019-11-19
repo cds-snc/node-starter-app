@@ -86,7 +86,7 @@ describe('Items shown on the registration page', () => {
            
        })
 
-    it.only('should show error message for incorrect Application number', () => {
+    it('should show error message for incorrect Application number', () => {
         cy.fixture('user').then(data => {
           cy.get('#applicationNumber').type(data.wrongFileNumber, { force: true })
           cy.get('#email').type(data.email, { force: true })
@@ -98,6 +98,34 @@ describe('Items shown on the registration page', () => {
         //  cy.get('li > a').should('contain.text', 'Application number')
         
         })})
+    it.skip('should show error message for incorrect email address format', () => {
+        cy.fixture('user').then(data => {
+            cy.get('#applicationNumber').type(data.applicationNumber, { force: true })
+            cy.get('#email').type(data.emailIncorrectFormat, { force: true })
+            cy.get('#confirmEmail').type(data.emailIncorrectFormat, { force: true })
+            cy.get('#accessibleYes').click()
+            cy.get('.buttons--next').click()
+            cy.get('#email-error')
+              .should('contain.text', 'Please make sure you provide a valid email address. For example, ‘yourname@example.com’')
+            cy.get('#email-Confirm-error')
+              .should('contain.text', 'Must be a valid email address.') 
+            cy.get('ul > :nth-child(1) > a').should('contain.text', 'Email address')
+            cy.get('ul > :nth-child(2) > a').should('contain.text', 'Confirm Email address')  
+        })})
 
+    it.skip('should show error message for non matching email address', () => {
+        cy.fixture('user').then(data => {
+            cy.get('#applicationNumber').type(data.applicationNumber, { force: true })
+            cy.get('#email').type(data.email, { force: true })
+            cy.get('#confirmEmail').type(data.emailIncorrectMatch, { force: true })
+            cy.get('#accessibleYes').click()
+            cy.get('.buttons--next').click()
+            cy.get('#email-error')
+              .should('not.be.visible')
+            cy.get('#email-Confirm-error')
+              .should('contain.text', 'Your email does not match. Please re-enter your email.')
+            cy.get('li > a').should('contain.text', 'Confirm Email address')   
+        })})
+  
 
 })
