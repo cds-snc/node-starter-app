@@ -16,6 +16,9 @@ const Schema = {
       errorMessage: 'errors.email.length',
       options: { min: 3, max: 200 },
     },
+    isEmail: {
+      errorMessage: 'errors.email.format',
+    },
   },
   confirmEmail: {
     isLength: {
@@ -38,8 +41,6 @@ const Schema = {
       options: [['Yes', 'No']],
     },
   },
-  
-
 }
 
 module.exports = {
