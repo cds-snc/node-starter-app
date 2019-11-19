@@ -23,7 +23,7 @@ describe('Items shown on the province page', () => {
         cy.url().should('contains', '/en/province')
         checkA11y(cy)
     })
-    it('should go to the landing page and show header image and links ', () => {
+    it('should go to the province page and show header image and links ', () => {
             cy.get(headerImg).should('be.visible')
             cy.get(langLink).should('be.visible', 'Français')
 
