@@ -98,7 +98,7 @@ describe('Items shown on the registration page', () => {
         //  cy.get('li > a').should('contain.text', 'Application number')
         
         })})
-    it('should show error message for incorrect email address format', () => {
+    it.only('should show error message for incorrect email address format', () => {
         cy.fixture('user').then(data => {
             cy.get('#applicationNumber').type(data.applicationNumber, { force: true })
             cy.get('#email').type(data.emailIncorrectFormat, { force: true })
