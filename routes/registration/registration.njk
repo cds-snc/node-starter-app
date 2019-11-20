@@ -15,7 +15,7 @@
         {{ textInput('confirmEmail', 'form.confirmEmail', {'hint': 'form.confirmEmail.desc', 'required': 'Required'}) }}
         
         {{ radioButtons('accessible',  { '1': __('registration.radio1'),'2': __('registration.radio2')}, data.accessible, 'form.accessible', errors, { required: true}) }}
-
+       
         {{ prevNextButtons() }}
     </form>
 

@@ -108,14 +108,14 @@ app.routes = configRoutes(app, routes, locales)
 
 // view engine setup
 const nunjucks = require('nunjucks')
-
+const dateFilter = require('nunjucks-date-filter');
 const env = nunjucks
   .configure([...app.get('views'), 'views/macros'], {
     autoescape: true,
     express: app,
   })
   .addGlobal('$env', process.env)
-
+  .addFilter('date', dateFilter)
 addNunjucksFilters(env)
 
 nunjucks.installJinjaCompat()

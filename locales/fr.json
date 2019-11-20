@@ -81,5 +81,6 @@
   "Skip to main content": "Skip to main content",
   "form.applicationNumber.desc": "Ce numéro est en haut de la lettre que nous vous avons envoyée.",
   "form.confirmEmail.desc": "Merci de ressaisir votre adresse email.",
-  "errors.application.error": "Numéro incorrect"
+  "errors.application.error": "Numéro incorrect",
+  "date.modified": "Date modifiée:"
 }
