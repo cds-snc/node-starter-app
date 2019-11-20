@@ -9,17 +9,18 @@ export const homeLinkHref = () => cy.get('.canada-flag > a').eq(0);
 
 
 // Check the footer for links and Canada wordmark
-export const aboutCA = () => cy.get('#footer a').eq(0);
-export const sMedia = () => cy.get('#footer a').eq(1);
-export const mobileApp = () => cy.get('#footer a').eq(2);
-export const tocLink = () => cy.get('#footer a').eq(3);
-export const privacyLink = () => cy.get('#footer a').eq(4);
+export const sMedia = () => cy.get('#link-1 > a')
+export const mobileApp = () => cy.get('#link-2 > a')
+export const aboutCA = () => cy.get('#link-3 > a')
+export const tocLink = () => cy.get('#link-4 > a')
+export const privacyLink = () => cy.get('#link-5 > a')
 
-export const aboutCAHref = () => cy.get('#footer div a').eq(0);
-export const sMediaHref = () => cy.get('#footer div a').eq(1);
-export const mobileHref = () => cy.get('#footer div a').eq(2);
-export const tocHref = () => cy.get('#footer div a').eq(3);
-export const privacyHref = () => cy.get('#footer div a').eq(4);
+export const sMediaHref = () => cy.get('#link-1 > a');
+export const mobileHref = () => cy.get('#link-2 > a')
+export const aboutCAHref = () => cy.get('#link-3 > a')
+export const tocHref = () => cy.get('#link-4 > a')
+export const privacyHref = () => cy.get('#link-5 > a')
+export const footerImg = () => cy.get('.canada-wordmark > img')
 
 export const nextButton = () => cy.get('.buttons--next')
 export const nextButtons = () => cy.get('button[class="buttons--next"]')
