@@ -28,22 +28,22 @@ describe('Items shown on the Landing page', () => {
             cy.get(langLink).should('be.visible', 'Français')
 
         })
-        // it('should check footer info for links and canada image', () => {
-        //   cy.url().should('contains', '/')
-        //   cy.get(aboutCA).should('be.visible').and('contain', 'About Canada.ca')
-        //   cy.get(sMedia).should('be.visible').and('contain', 'Social media')
-        //   cy.get(mobileApp).should('be.visible').and('contain', 'Mobile applications')
-        //   cy.get(tocLink).should('contain', 'Terms and Conditions')
-        //   cy.get(privacyLink).should('contain', 'Privacy')
+    it('should check footer info for links and canada image', () => {
+        cy.url().should('contains', '/')
+        cy.get(aboutCA).should('be.visible').and('contain', 'About Canada.ca')
+        cy.get(sMedia).should('be.visible').and('contain', 'Social media')
+        cy.get(mobileApp).should('be.visible').and('contain', 'Mobile applications')
+        cy.get(tocLink).should('contain', 'Terms and conditions')
+        cy.get(privacyLink).should('contain', 'Privacy')
 
-    //   cy.get(aboutCAHref).should('have.attr', 'href', 'https://www.canada.ca/en/government/about.html')
-    //   cy.get(sMediaHref).should('have.attr', 'href', 'https://www.canada.ca/en/social.html')
-    //   cy.get(mobileHref).should('have.attr', 'href', 'https://www.canada.ca/en/mobile.html')
-    //   cy.get(tocHref).should('have.attr', 'href', 'https://digital.canada.ca/legal/terms/')
-    //   cy.get(privacyHref).should('have.attr', 'href', '/privacy')
+        cy.get(aboutCAHref).should('have.attr', 'href', 'https://www.canada.ca/en/government/about.html')
+        cy.get(sMediaHref).should('have.attr', 'href', 'https://www.canada.ca/en/social.html')
+        cy.get(mobileHref).should('have.attr', 'href', 'https://www.canada.ca/en/mobile.html')
+        cy.get(tocHref).should('have.attr', 'href', 'https://www.canada.ca/en/transparency/terms.html')
+        cy.get(privacyHref).should('have.attr', 'href', 'https://www.canada.ca/en/transparency/privacy.html')
 
-    //    cy.get(footerImg).should('be.visible')
-    //   })
+        cy.get(footerImg).should('be.visible')
+      })
     it('should have text on the start page that informs the user', () => {
         cy.get('h1').should('be.visible')
             .and('contain.text', 'Request an appointment for fingerprints and photo (biometrics)')
