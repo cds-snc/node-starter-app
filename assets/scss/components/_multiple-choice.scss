@@ -105,12 +105,10 @@
     }
 
     &::after {
-      top: calc(50% - 20px + 11px);
-      left: 9px;
-      width: 18px;
-      height: 7px;
-      -webkit-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
+      top: calc(54% - 11px);
+      left: 8px;
+      width: 26px;
+      height: 12px;
       transform: rotate(-45deg);
       border: solid;
       border-width: 0 0 5px 5px;
