@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.2] - 2019-11-20
+
+### Updated 
+- Fixed checkbox styling that broke when we merged Tailwind CSS
+- Nodemon [2.0.0](https://github.com/remy/nodemon/releases) 
+- Minor package bumps 
+
 ## [6.0.1] - 2019-11-15
 
 - Fixed failing dependencies
