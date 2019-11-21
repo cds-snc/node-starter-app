@@ -1,0 +1,19 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+    <h1>{{ __('check_it.title') }}</h1>
+
+    <div>
+        <p>
+            {{ __('check_it.intro') }}
+        </p>
+
+        <form method="post">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            {{ checkBoxes('box_type', {'1':'box 1','2':'box 2', '3':'box 3'}, data.box_type, 'form.box_type', errors, {hint: 'form.box_type.desc'} ) }}
+            {{ formButtons() }}
+        </form>
+    </div>
+
+{% endblock %}

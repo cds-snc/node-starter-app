@@ -1,23 +1,16 @@
 {% extends "base.njk" %}
 
 {% block content %}
-
     <h1>{{ __('confirmation.title') }}</h1>
-
-    <div>
-        <p>
-            {{ __('confirmation.intro') }}
-        </p>
+    <div> 
         <ul>
-            <li>{{ __('form.fullname') }}:  <strong>{{ data.fullname }}</strong></li>
-            <li>{{ __('form.email') }}: <strong>{{ data.email }}</strong></li>
-            <li>{{ __('form.send_notifications') }}: <strong>{{ data.send_notifications }}</strong></li>
-
-            {% if data.send_notifications == "Yes" %}
-                <li>{{ __('form.notify_by') }}: <strong>{{ data.notify_type }}</strong></li>
-            {% endif %}
-
+         {% if data.box_type | length %}
+             <li>Box Type <strong>{{ data.box_type  | dump }}</strong></li>
+            {% else %}
+            <li>No boxes selected</li>
+        {% endif %}   
         </ul>
-    </div>
 
+        <a href="/en/check-it">Edit</a>
+    </div>
 {% endblock %}
