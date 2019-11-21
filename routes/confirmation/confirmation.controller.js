@@ -1,7 +1,5 @@
 const {
-  validateRouteData,
   getViewData,
-  setFlashMessageContent,
 } = require('../../utils/index')
 
 module.exports = (app, route) => {
