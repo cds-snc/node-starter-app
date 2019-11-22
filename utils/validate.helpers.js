@@ -53,25 +53,24 @@ const isValidDate = dateString => {
  *
  * @param string template The template string to render if errors are found (should match the one used for the GET request)
  */
-const checkErrors = template => {
-  return (req, res, next) => {
-    // check to see if the requests should respond with JSON
-    if (req.body.json) {
-      return checkErrorsJSON(req, res, next)
-    }
-
-    const errors = validationResult(req)
-
-    saveSessionData(req)
-
-    // flash error messages and redirect back on error
-    if (!errors.isEmpty()) {
-      req.session.flashmessage = errorArray2ErrorObject(errors)
-      return res.redirect('back')
-    }
-
-    return next()
+const checkErrors = (req, res, next) => {
+  // check to see if the requests should respond with JSON
+  if (req.body.json) {
+    return checkErrorsJSON(req, res, next)
   }
+
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    req.session.errorState = {
+      errors: errorArray2ErrorObject(errors),
+      firstError: errors[0].msg
+    }
+
+    return res.redirect('back')
+  }
+
+  return next()
 }
 
 /**

@@ -81,7 +81,8 @@
   "nodemonConfig": {
     "ext": "js,json,njk,scss",
     "ignore": [
-      "public/dist/**/*.*"
+      "public/dist",
+      "locales"
     ]
   }
 }

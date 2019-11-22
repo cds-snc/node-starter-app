@@ -4,6 +4,7 @@ const url = require('url');
 const { checkSchema } = require('express-validator')
 const { checkErrors } = require('./validate.helpers')
 const { addViewPath } = require('./view.helpers')
+const { saveToSession } = require('./session.helpers')
 
 class RoutingTable {
   /**
@@ -99,6 +100,8 @@ class Route {
     return this
   }
 
+  render() { return (req, res) => res.render(this.name) }
+
   /**
    * The default middleware for this route, intended
    * for the POST method.
@@ -110,8 +113,53 @@ class Route {
     ]
   }
 
+  /**
+   *
+   * @param {object} schema Schema object from the route folder
+   *
+   * This grabs every key that we expect from the schema, it grabs the default value and passes it to Loadkeys to be loaded inside the locals of the views
+   *
+   */
+  loadSchema(schema) {
+    const defaults = {}
+    const keys = Object.keys(schema)
+    keys.forEach(k => { defaults[k] = schema[k].default })
+
+    return this.loadKeys(keys, defaults)
+  }
+
+  /**
+   *
+   * @param {*} keys Are in the format of an array with the name of each key that you want added. This would be keys that are not already being added by loadSchema()
+   * @param {*} defaults object in the format of keyname: 'defaultValue', 'surname': 'Boisvert' (if you wanted a default surname of Boisvert...)
+   */
+  loadKeys(keys, defaults = {}) {
+    return (req, res, next) => {
+      // copy data from these sources in order, falling through
+      // if each is not present.
+      keys.forEach(k => {
+        res.locals[k] =
+          (req.body || {})[k]
+          || (req.session || {})[k]
+          || defaults[k]
+      })
+
+      // make all variables available on a global `data` field, to
+      // enable dynamic lookup in views
+      // res.locals.data = res.locals
+
+      next()
+    }
+  }
+
+  loadFullSession(defaults = {}) {
+    return (req, res, next) => {
+      this.loadKeys(Object.keys(req.session || {}), defaults)(req, res, next)
+    }
+  }
+
   applySchema(schema) {
-    return [checkSchema(schema), checkErrors(this.name)]
+    return [checkSchema(schema), saveToSession, checkErrors]
   }
 
   doRedirect(redirectTo = null) {
@@ -144,6 +192,11 @@ class DrawRoutes {
   post(...args) { return this.request('post', ...args) }
   put(...args) { return this.request('put', ...args) }
   delete(...args) { return this.request('delete', ...args) }
+
+  use(...args) {
+    this.route.eachLocale((path, locale) => { this.app.use(path, ...args) })
+    return this
+  }
 }
 
 const oneHour = 1000 * 60 * 60 * 1
