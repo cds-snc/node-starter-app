@@ -1,10 +1,15 @@
 # Changelog
 
+## [6.0.3] - 2019-11-22
+
+- Nodemon [2.0.1](https://github.com/remy/nodemon/releases/tag/v2.0.1) 
+  `Fixes ubuntu loop waiting for sub processes`
+
 ## [6.0.2] - 2019-11-20
 
 ### Updated 
 - Fixed checkbox styling that broke when we merged Tailwind CSS
-- Nodemon [2.0.0](https://github.com/remy/nodemon/releases) 
+- Nodemon [2.0.0](https://github.com/remy/nodemon/releases/tag/v2.0.0) 
 - Minor package bumps 
 
 ## [6.0.1] - 2019-11-15

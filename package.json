@@ -1,6 +1,6 @@
 {
   "name": "node-starter-app",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "",
   "author": "CDS",
   "license": "MIT",
@@ -70,7 +70,7 @@
     "fse": "^4.0.1",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
-    "nodemon": "^2.0.0",
+    "nodemon": "^2.0.1",
     "patch-package": "^6.2.0",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.0",
