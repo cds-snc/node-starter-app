@@ -24,7 +24,11 @@ class RoutingTable {
   /**
    * Returns a route given a route name
    */
-  get(name) { return this.routes.find(r => r.name === name) }
+  get(name) {
+    const out = this.routes.find(r => r.name === name)
+    if (!out) console.warn(`missing route ${name}`)
+    return out
+  }
 
   /**
    * Attach the route controllers to an app.
