@@ -1,29 +1,52 @@
-{% macro radioButtons(key, values, value, question, errors, attributes) %}
-    <div class="{{ 'has-error' if errors and errors[key] }}">
-        <fieldset class="fieldset">
+{% macro radioBlock(relname, question, values,
+                    useNested=true,
+                    required=false,
+                    hint=false,
+                    class=false) %}
+    {% set val = getData(relname) %}
+    {% set error = getError(relname) %}
+    {% set name = getName(relname) %}
+
+    <div class="{{ 'has-error' if error }} cds-form-control">
+        <fieldset>
             <legend class="fieldset__legend">
-            {% if attributes.required %}
+            {% if required %}
                 <span aria-hidden="true" class="required">*</span>
             {% endif %}
-            {{ __(question) }}
-            {% if attributes.required %}
+            {{ __(question) if question }}
+            {% if required %}
                 <span class="required">{{ __("required")}}</span>
             {% endif %}
             </legend>
             {% if attributes.hint %}
                 <span class="form-message">{{ __(attributes.hint) }}</span>
             {% endif %}
+
             <div class="multiple-choice multiple-choice--radios" id="{{ key }}">
                 {% if errors and errors[key] %}
                     {{ validationMessage(errors[key].msg, key) }}
                 {% endif %}
-                {% for index, val in values %}
+                {% for option, label in values %}
                     <div class="multiple-choice__item">
-                        <input id="{{ key }}{{ val }}" name="{{ key }}" type="radio" value="{{ val }}" {% if value == val %} checked="checked" {% endif %} {% if errors and errors[key] %} aria-describedby="{{ key + '-error' }}" aria-invalid="true" {% endif %}>
-                        <label for="{{ key }}{{ val }}">{{ __(val) }}</label>
+                        <input type=radio
+                            id="{{ name }}__{{ option }}"
+                            name="{{ name }}"
+                            value="{{ option }}"
+                            {% if option == val %} checked {% endif %}
+                            {% if error %}
+                                aria-describedby="{{ name }}-error"
+                                aria-invalid="true"
+                            {% endif %}
+                        />
+                        <label for="{{ name }}__{{ option }}">{{ __(label) }}</label>
                     </div>
                 {% endfor %}
             </div>
         </fieldset>
     </div>
+{% endmacro %}
+
+{% macro radioButtons(relname, question, values) %}
+  {% call radioBlock(relname, question, values, useNested=false) %}
+  {% endcall %}
 {% endmacro %}

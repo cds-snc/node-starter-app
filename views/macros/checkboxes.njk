@@ -1,26 +1,45 @@
-{% macro checkBoxes(key, values, selectedVals, question, errors, attributes) %}
-    <div class="{{ 'has-error' if errors and errors[key] }}">
+{% macro checkBoxes(relkey, question, labels,
+                    required=false,
+                    hint=false,
+                    class=false) %}
+    {% set error = getError(relkey) %}
+    {% set key = getName(relkey) %}
+
+    <div class="{{ 'has-error' if error }} cds-form-control">
         <fieldset class="fieldset">
             <legend class="fieldset__legend">
-            {% if attributes.required %}
+            {% if required %}
                 <span aria-hidden="true" class="required">*</span>
             {% endif %}
             {{ __(question) }}
-            {% if attributes.required %}
+            {% if required %}
                 <span class="required">{{ __("required")}}</span>
             {% endif %}
             </legend>
-            {% if attributes.hint %}
-                <span class="form-message">{{ __(attributes.hint) }}</span>
+
+            {% if hint %}
+                <span class="form-message">{{ __(hint) }}</span>
             {% endif %}
             <div class="multiple-choice multiple-choice--checkboxes" id="{{ key }}">
-                {% if errors and errors[key] %}
-                    {{ validationMessage(errors[key].msg, key) }}
+                {% if error %}
+                    {{ validationMessage(error.msg, key) }}
                 {% endif %}
-                {% for index, val in values %}
+
+                {% for index, label in labels %}
+                    {% set val = getData(relkey, index) %}
+                    {% set name = getName(relkey, index) %}
+
                     <div class="multiple-choice__item">
-                        <input id="{{ key }}{{ val }}" name="{{ key }}" type="checkbox" value="{{ val }}" {% if selectedVals and val in selectedVals %} checked="checked" {% endif %} {% if errors and errors[key] %} aria-describedby="{{ key + '-error' }}" aria-invalid="true" {% endif %}>
-                        <label for="{{ key }}{{ val }}">{{ __(val) }}</label>
+                        <input type=checkbox
+                            id="{{ name }}"
+                            name="{{ name }}"
+                            {% if val %} checked {% endif %}
+                            {% if error %}
+                                aria-describedby="{{ name }}-error"
+                                aria-invalid=true
+                            {% endif %}
+                        />
+                        <label for="{{ name }}">{{ __(label) }}</label>
                     </div>
                 {% endfor %}
             </div>
