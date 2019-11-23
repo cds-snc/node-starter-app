@@ -23,6 +23,18 @@
                 </li>
             {% endif %}
 
+            <li>
+                <strong>Addresses</strong>
+                <ul>
+                    {% for address in addresses %}
+                        <li>{{__('addresses.street')}}: {{ address.street }}</li>
+                        <li>{{__('addresses.type')}}: {{ address.type }}</li>
+                        <li>{{__('addresses.features')}}: {{ address.features | dump}}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+
+
         </ul>
     </div>
 
