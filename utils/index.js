@@ -6,6 +6,7 @@ const viewHelpers = require('./view.helpers.js')
 const flashMessageHelpers = require('./flash.message.helpers')
 const loadHelpers = require('./load.helpers')
 const contextHelpers = require('./context.helpers')
+const schemaHelpers = require('./schema.helpers')
 
 module.exports = {
   ...routeHelpers,
@@ -17,6 +18,7 @@ module.exports = {
   ...flashMessageHelpers,
   ...loadHelpers,
   ...contextHelpers,
+  ...schemaHelpers,
 }
 
 const { getRouteByName } = require('./route.helpers')

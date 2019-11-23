@@ -1,0 +1,31 @@
+{% macro repeater(name, opts) %}
+    <div class="repeater" id="{{ getName(name) }}">
+        {#- see context.helpers.js -#}
+        {{ enterContext(name) }}
+            {% for instance in pad(getData(), opts.atLeast) %}
+                <fieldset name="{{ getName(loop.index0) }}"
+                          data-index="{{ loop.index0 }}"
+                          class="repeater-instance">
+                    {{ enterContext(loop.index0) }}
+                        {{ caller() }}
+                    {{ exitContext() }}
+                </fieldset>
+            {% endfor %}
+        {{ exitContext() }}
+    </div>
+{% endmacro %}
+
+{% macro repeatLink(name, text) %}
+    <a class="repeat-link" href="#" data-target="{{ getName(name) }}">{{__(text)}}</a>
+{% endmacro %}
+
+{% macro removeRepeatLink(text) %}
+    <a class="remove-repeat-link" href="#">{{__(text)}}</a>
+{% endmacro %}
+
+{% macro repeatNumber() -%}
+    <span class="repeat-number">0</span>
+{%- endmacro %}
+
+{# same as above, but a string that can be passed into i18n. #}
+{% set repeatNumberText = '<span class="repeat-number">0</span>' %}
