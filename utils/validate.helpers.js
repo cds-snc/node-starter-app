@@ -1,6 +1,5 @@
 const { validationResult, checkSchema } = require('express-validator')
 const { getSessionData, saveSessionData } = require('./session.helpers')
-const { setFlashMessageContent } = require('./flash.message.helpers')
 
 /*
   original format is an array of error objects: https://express-validator.github.io/docs/validation-result-api.html
