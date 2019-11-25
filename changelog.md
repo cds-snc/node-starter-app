@@ -2,6 +2,7 @@
 
 ## [6.1.0] - 2019-11-25
 
+### Updated
 - Redirect back with errors. This *may* be a breaking change if you have written any customizations to deal with issues surrounding `renderPageWithErrors` in `validate.helpers.js`.  That method has been removed, and now on validation errors, we flash the errors to the session and redirect back to the `get` route.
 
 ### Removed
