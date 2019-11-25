@@ -70,6 +70,7 @@ const checkErrors = (req, res, next) => {
     return res.redirect('back')
   }
 
+  req.session.errorState = null
   return next()
 }
 
