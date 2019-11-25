@@ -25,7 +25,7 @@ test('Can send post request personal route ', async () => {
   const csrfToken = extractCsrfToken(getresp);
 
   const postresp = await testSession.post(route.path.en).send({ _csrf: csrfToken });
-  expect(postresp.statusCode).toBe(200);
+  expect(postresp.statusCode).toBe(302); // should redirect back with errors on an incomplete form
 })
 
 jest.mock('../../utils/flash.message.helpers', () => ({

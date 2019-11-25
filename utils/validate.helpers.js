@@ -64,43 +64,14 @@ const checkErrors = template => {
 
     saveSessionData(req)
 
+    // flash error messages and redirect back on error
     if (!errors.isEmpty()) {
-      return renderPageWithErrors(req, res, {
-        template,
-        errors: errorArray2ErrorObject(errors),
-      })
+      req.session.flashmessage = errorArray2ErrorObject(errors)
+      return res.redirect('back')
     }
 
     return next()
   }
-}
-
-/**
-* @param options template
- {
-        template: "personal",
-        errors: {
-          fullname: {
-            value: "",
-            msg: "errors.fullname.length",
-            param: "fullname",
-            location: "body"
-          }
-        }
-      };
- */
-
-const renderPageWithErrors = (
-  req,
-  res,
-  options = { template: '', errors: [] },
-) => {
-  return res.render(options.template, {
-    data: getSessionData(req),
-    name: options.template,
-    body: req.body,
-    errors: options.errors,
-  })
 }
 
 /**
@@ -127,12 +98,12 @@ const validateRouteData = async (req, schema) => {
   }
 
   // run checkSchema()
-  await middleWare[0][0](validateReq, res, () => {})
+  await middleWare[0][0](validateReq, res, () => { })
 
   // run checkErrors()
-  middleWare[1](validateReq, res, () => {})
+  middleWare[1](validateReq, res, () => { })
 
-  const errors = checkErrorsJSON(validateReq, res, () => {})
+  const errors = checkErrorsJSON(validateReq, res, () => { })
 
   if (!isEmptyObject(errors)) {
     return { status: false, errors: errors }
@@ -187,5 +158,4 @@ module.exports = {
   checkErrorsJSON,
   hasData,
   isEmptyObject,
-  renderPageWithErrors,
 }
