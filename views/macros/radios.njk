@@ -1,4 +1,5 @@
 {% from 'label-text.njk' import labelText with context  %}
+{% from 'hint-text.njk' import hintText with context %}
 
 {% macro radioButtons(key, values, value, question, errors, attributes) %}
     <div class="{{ 'has-error' if errors and errors[key] }}">
@@ -6,9 +7,7 @@
             <legend class="fieldset__legend">
             {{ labelText(question, attributes.required) }}
             </legend>
-            {% if attributes.hint %}
-                <span class="form-message">{{ __(attributes.hint) }}</span>
-            {% endif %}
+            {{ hintText(attributes.hint) }}
             <div class="multiple-choice multiple-choice--radios" id="{{ key }}">
                 {% if errors and errors[key] %}
                     {{ validationMessage(errors[key].msg, key) }}

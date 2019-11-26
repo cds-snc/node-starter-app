@@ -1,4 +1,5 @@
 {% from 'label-text.njk' import labelText with context  %}
+{% from 'hint-text.njk' import hintText with context %}
 
 {#
   - `name`: field name
@@ -14,9 +15,7 @@
         <label for="{{ name }}" id="{{ name }}__label">
             {{ labelText(label, attributes.required) }}
         </label>
-        {% if attributes.hint %}
-            <span class="form-message">{{ __(attributes.hint) }}</span>
-        {% endif %}
+        {{ hintText(attributes.hint) }}
         {% if errors and errors[name] %}
             {{ validationMessage(errors[name].msg, name) }}
         {% endif %}

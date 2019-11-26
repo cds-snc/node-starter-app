@@ -1,0 +1,5 @@
+{% macro hintText(text) %}
+    {% if attributes.hint %}
+        <span class="form-message">{{ __(attributes.hint) }}</span>
+    {% endif %}
+{% endmacro %}
