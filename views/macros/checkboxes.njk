@@ -1,5 +1,6 @@
 {% from 'label-text.njk' import labelText with context  %}
 {% from 'hint-text.njk' import hintText with context %}
+{% from 'validation-message.njk' import validationMessage with context %}
 
 {% macro checkBoxes(key, values, selectedVals, question, errors, attributes) %}
     <div class="{{ 'has-error' if errors and errors[key] }}">
@@ -9,9 +10,7 @@
             </legend>
             {{ hintText(attributes.hint) }}
             <div class="multiple-choice multiple-choice--checkboxes" id="{{ key }}">
-                {% if errors and errors[key] %}
-                    {{ validationMessage(errors[key].msg, key) }}
-                {% endif %}
+                {{ validationMessage(errors, key)}}
                 {% for index, val in values %}
                     <div class="multiple-choice__item">
                         <input id="{{ key }}{{ val }}" name="{{ key }}" type="checkbox" value="{{ val }}" {% if selectedVals and val in selectedVals %} checked="checked" {% endif %} {% if errors and errors[key] %} aria-describedby="{{ key + '-error' }}" aria-invalid="true" {% endif %}>

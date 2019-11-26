@@ -1,5 +1,6 @@
 {% from 'label-text.njk' import labelText with context  %}
 {% from 'hint-text.njk' import hintText with context %}
+{% from 'validation-message.njk' import validationMessage with context %}
 
 {% macro radioButtons(key, values, value, question, errors, attributes) %}
     <div class="{{ 'has-error' if errors and errors[key] }}">
@@ -9,9 +10,7 @@
             </legend>
             {{ hintText(attributes.hint) }}
             <div class="multiple-choice multiple-choice--radios" id="{{ key }}">
-                {% if errors and errors[key] %}
-                    {{ validationMessage(errors[key].msg, key) }}
-                {% endif %}
+                {{ validationMessage(errors, key) }}
                 {% for index, val in values %}
                     <div class="multiple-choice__item">
                         <input id="{{ key }}{{ val }}" name="{{ key }}" type="radio" value="{{ val }}" {% if value == val %} checked="checked" {% endif %} {% if errors and errors[key] %} aria-describedby="{{ key + '-error' }}" aria-invalid="true" {% endif %}>

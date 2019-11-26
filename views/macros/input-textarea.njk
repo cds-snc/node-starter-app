@@ -1,5 +1,6 @@
 {% from 'label-text.njk' import labelText with context  %}
 {% from 'hint-text.njk' import hintText with context %}
+{% from 'validation-message.njk' import validationMessage with context %}
 
 {#
   - `name`: field name
@@ -16,9 +17,7 @@
         {{ labelText(label, attributes.required) }}
         </label>
         {{ hintText(attributes.hint) }}
-        {% if errors and errors[name] %}
-            {{ validationMessage(errors[name].msg, name) }}
-        {% endif %}
+        {{ validationMessage(errors, name) }}
         <textarea class="{{ attributes.class if attributes.class else "w-3-4" }}" id="{{ attributes.id if attributes.id else name }}" {% if errors and errors[name] %} aria-describedby="{{ name + '-error' }}" aria-invalid="true" {% endif %} {% if errors and firstError.param === name %} autofocus="true" {% endif %} name="{{ name }}">{{ data[name] }}</textarea>
     </div>
 {% endmacro %}
