@@ -1,0 +1,9 @@
+{% macro labelText(text, required) %}
+    {% if required %}
+        <span aria-hidden="true" class="required">*</span>
+    {% endif %}
+    {{ __(text) }}
+    {% if required %}
+        <span class="required">{{ __("required")}}</span>
+    {% endif %}
+{% endmacro %}

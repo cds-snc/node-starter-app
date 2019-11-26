@@ -1,14 +1,10 @@
+{% from 'label-text.njk' import labelText with context  %}
+
 {% macro checkBoxes(key, values, selectedVals, question, errors, attributes) %}
     <div class="{{ 'has-error' if errors and errors[key] }}">
         <fieldset class="fieldset">
             <legend class="fieldset__legend">
-            {% if attributes.required %}
-                <span aria-hidden="true" class="required">*</span>
-            {% endif %}
-            {{ __(question) }}
-            {% if attributes.required %}
-                <span class="required">{{ __("required")}}</span>
-            {% endif %}
+            {{ labelText(question, attributes.required) }}
             </legend>
             {% if attributes.hint %}
                 <span class="form-message">{{ __(attributes.hint) }}</span>

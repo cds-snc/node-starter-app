@@ -1,3 +1,5 @@
+{% from 'label-text.njk' import labelText with context  %}
+
 {#
   - `name`: field name
   - `label`: text for the label
@@ -10,13 +12,7 @@
 {% macro textInput(name, label, attributes) %}
     <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
         <label for="{{ name }}" id="{{ name }}__label">
-            {% if attributes.required %}
-                <span aria-hidden="true" class="required">*</span>
-            {% endif %}
-            {{ __(label) }}
-            {% if attributes.required %}
-                <span class="required">{{ __("required")}}</span>
-            {% endif %}
+            {{ labelText(label, attributes.required) }}
         </label>
         {% if attributes.hint %}
             <span class="form-message">{{ __(attributes.hint) }}</span>
