@@ -1,6 +1,6 @@
-{% from 'label-text.njk' import labelText with context  %}
-{% from 'hint-text.njk' import hintText with context %}
-{% from 'validation-message.njk' import validationMessage with context %}
+{% from 'sub-imports/label-text.njk' import labelText with context  %}
+{% from 'sub-imports/hint-text.njk' import hintText with context %}
+{% from 'sub-imports/validation-message.njk' import validationMessage with context %}
 
 {% macro checkBoxes(key, values, selectedVals, question, errors, attributes) %}
     <div class="{{ 'has-error' if errors and errors[key] }}">
