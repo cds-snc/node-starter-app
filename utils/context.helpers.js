@@ -31,7 +31,7 @@ const contextMiddleware = (req, res, next) => {
   res.locals.pad = (arr, len) => {
     if (!len || len < 1) len = 1
     if (!arr) arr = []
-    if (!len || arr.length >= len) return arr
+    if (arr.length >= len) return arr
     return arr.concat(new Array(len - arr.length).fill({}))
   }
 
