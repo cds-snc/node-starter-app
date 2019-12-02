@@ -8,37 +8,27 @@
 */
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
-const cookieSession = require('cookie-session')
+const FileStore = require('session-file-store')(session)
 
 const oneHour = 1000 * 60 * 60
 const sessionName = `ctb-${process.env.SESSION_SECRET ||
   Math.floor(new Date().getTime() / oneHour)}`
-  
-const cookieSessionConfig = {
-  name: sessionName,
-  secret: sessionName,
-  cookie: {
-    httpOnly: true,
-    maxAge: oneHour,
-    sameSite: true,
-  },
+ 
+
+// In production use redis but this works for now
+const store = { 
+  memory: () => new MemoryStore({ checkPeriod: oneHour }),
+  fileStore: () => new FileStore({}),
 }
-const memorySessionConfig = {
+
+const sessionConfig= {
   cookie: { httpOnly: true, maxAge: oneHour, sameSite: 'strict' },
-  store: new MemoryStore({
-    checkPeriod: oneHour, // prune expired entries every hour
-  }),
+  store: store.fileStore(),
   secret: sessionName,
   resave: false,
   saveUninitialized: false,
   unset: 'destroy',
 }
 
-const sessions = { 
-  cookie : cookieSession(cookieSessionConfig),
-  memory: session(memorySessionConfig),
-}
 
-// In production use redis but this works for now
-const appSession = sessions.cookie
-module.exports = appSession
+module.exports =  session(sessionConfig)

@@ -74,3 +74,6 @@ cdk.out
 
 cdk/local-image
 credentials
+
+#Ignore session added from file-session-store
+sessions
