@@ -23,6 +23,22 @@ const res = {
   },
 }
 
+test('can pad an array', async () => {
+  await new Promise(resolve => contextMiddleware(req, res, resolve))
+
+  const pad = res.locals.pad
+
+  expect(pad([], 3)).toEqual([{}, {}, {}])
+  expect(pad([], 0)).toEqual([{}])
+  expect(pad(undefined, 3)).toEqual([{}, {}, {}])
+
+  expect(pad([1, 2, 3], 0)).toEqual([1, 2, 3])
+  expect(pad([1, 2, 3], 3)).toEqual([1, 2, 3])
+  expect(pad([1, 2, 3], 4)).toEqual([1, 2, 3, {}])
+
+  expect(pad(undefined, undefined)).toEqual([{}])
+})
+
 test('can traverse a data structure with no context', async () => {
   await new Promise(resolve => contextMiddleware(req, res, resolve))
 
