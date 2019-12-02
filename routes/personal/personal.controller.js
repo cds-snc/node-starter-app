@@ -1,4 +1,3 @@
-const { routeUtils, getClientJs } = require('./../../utils')
 const { Schema } = require('./schema.js')
 
 module.exports = (app, route) => {

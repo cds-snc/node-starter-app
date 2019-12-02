@@ -5,12 +5,12 @@ const Schema = {
     street: {
       isLength: {
         errorMessage: 'errors.addresses.street.length',
-        options: { min: 10, max: 200 }
+        options: { min: 10, max: 200 },
       },
     },
-  })
+  }),
 }
 
 module.exports = {
-  Schema
+  Schema,
 }

@@ -52,5 +52,5 @@ const contextMiddleware = (req, res, next) => {
 }
 
 module.exports = {
-  contextMiddleware
+  contextMiddleware,
 }

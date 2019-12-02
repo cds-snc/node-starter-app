@@ -1,5 +1,4 @@
-const { validationResult, checkSchema } = require('express-validator')
-const { getSessionData, saveSessionData } = require('./session.helpers')
+const { validationResult } = require('express-validator')
 
 /*
   original format is an array of error objects: https://express-validator.github.io/docs/validation-result-api.html
@@ -64,7 +63,7 @@ const checkErrors = (req, res, next) => {
   if (!errors.isEmpty()) {
     req.session.errorState = {
       errors: errorArray2ErrorObject(errors),
-      firstError: errors.errors[0].msg
+      firstError: errors.errors[0].msg,
     }
 
     return res.redirect('back')
@@ -72,14 +71,6 @@ const checkErrors = (req, res, next) => {
 
   req.session.errorState = null
   return next()
-}
-
-/**
- * @param {Object} req express request obj
- */
-
-const middlewareArr = options => {
-  return [checkSchema(options.schema), checkErrors(options.name)]
 }
 
 const checkErrorsJSON = (req, res, next) => {

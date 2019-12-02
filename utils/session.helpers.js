@@ -8,5 +8,5 @@ const saveToSession = (req, res, next) => {
 }
 
 module.exports = {
-  saveToSession
+  saveToSession,
 }
