@@ -9,8 +9,8 @@ const mockFn = jest
     return {}
   })
 
-jest.mock('../../utils/session.helpers', () => {
-  const original = jest.requireActual('../../utils/session.helpers')
+jest.mock('../../utils', () => {
+  const original = jest.requireActual('../../utils')
   return {
     ...original,
     getSessionData: jest.fn(req => {
