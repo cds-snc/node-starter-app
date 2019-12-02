@@ -82,36 +82,6 @@ const middlewareArr = options => {
   return [checkSchema(options.schema), checkErrors(options.name)]
 }
 
-const validateRouteData = async (req, schema) => {
-  const data = getSessionData(req)
-  const validateReq = {}
-  validateReq.body = data
-  validateReq.body.json = true
-
-  // setup middleWare to call
-  const middleWare = middlewareArr({ schema })
-
-  const res = {
-    json(payload) {
-      return payload
-    },
-  }
-
-  // run checkSchema()
-  await middleWare[0][0](validateReq, res, () => { })
-
-  // run checkErrors()
-  middleWare[1](validateReq, res, () => { })
-
-  const errors = checkErrorsJSON(validateReq, res, () => { })
-
-  if (!isEmptyObject(errors)) {
-    return { status: false, errors: errors }
-  } else {
-    return { status: true }
-  }
-}
-
 const checkErrorsJSON = (req, res, next) => {
   const errors = validationResult(req)
 
@@ -152,7 +122,6 @@ const isEmptyObject = obj => {
 
 module.exports = {
   errorArray2ErrorObject,
-  validateRouteData,
   isValidDate,
   checkErrors,
   checkErrorsJSON,
