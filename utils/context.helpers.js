@@ -24,16 +24,9 @@ const contextMiddleware = (req, res, next) => {
   res.locals.enterContext = (key) => { keyPath.push(key) }
   res.locals.exitContext = () => { keyPath.pop() }
 
-  // errors in the session
-  const errorState = req.session.errorState
-
   // look up a key at the current keypath
   res.locals.getData = (...keys) => lookupKeypath(res.locals, keyPath.concat(keys))
-  res.locals.getError = (...keys) => {
-    if (!errorState) return undefined
-
-    errorState.errors[errorPath(keyPath.concat(keys))]
-  }
+  res.locals.getError = (...keys) => (res.locals.errors || {})[errorPath(keyPath.concat(keys))]
 
   res.locals.pad = (arr, len) => {
     if (!len || len < 1) len = 1
@@ -52,8 +45,8 @@ const contextMiddleware = (req, res, next) => {
   }
 
   res.locals.isFirstError = (...keys) => {
-    if (!errorState) return false
-    return errorPath(keyPath.concat(keys)) === errorState.firstError
+    if (!req.session.errorState) return false
+    return errorPath(keyPath.concat(keys)) === req.session.errorState.firstError
   }
 
   next()

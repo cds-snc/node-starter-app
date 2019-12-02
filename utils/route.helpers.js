@@ -104,7 +104,12 @@ class Route {
     return this
   }
 
-  render() { return (req, res) => res.render(this.name) }
+  render() {
+    return (req, res) => {
+      Object.assign(res.locals, req.session.errorState || {})
+      res.render(this.name)
+    }
+  }
 
   /**
    * The default middleware for this route, intended

@@ -64,7 +64,7 @@ const checkErrors = (req, res, next) => {
   if (!errors.isEmpty()) {
     req.session.errorState = {
       errors: errorArray2ErrorObject(errors),
-      firstError: errors[0].msg
+      firstError: errors.errors[0].msg
     }
 
     return res.redirect('back')
