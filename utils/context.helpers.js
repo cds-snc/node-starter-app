@@ -16,8 +16,6 @@ const errorPath = (keys) => {
 // we define our helper functions inside the middleware because
 // we need them to access `res.local`.
 const contextMiddleware = (req, res, next) => {
-  console.log('contextMiddleware')
-
   // a request-global stack of key paths into res.locals.
   // these should always be called as a pair - similar to do...end.
   // we would ideally use a caller() macro for this, but those are...
