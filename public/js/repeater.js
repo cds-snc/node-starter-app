@@ -16,6 +16,8 @@ window.Repeater = (function() {
     return out
   }
 
+  // a Block is the largest grouping in the repeater. It contains all the repeated
+  // instances.
   function Block() { this.init.apply(this, arguments) }
   (function(_) {
     _.init = function(el) {
