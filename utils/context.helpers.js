@@ -28,9 +28,8 @@ const contextMiddleware = (req, res, next) => {
   res.locals.getData = (...keys) => lookupKeypath(res.locals, keyPath.concat(keys))
   res.locals.getError = (...keys) => (res.locals.errors || {})[errorPath(keyPath.concat(keys))]
 
-  res.locals.pad = (arr, len) => {
-    if (!len || len < 1) len = 1
-    if (!arr) arr = []
+  res.locals.pad = (arr=[], len=1) => {
+    if (len < 1) len = 1
     if (arr.length >= len) return arr
     return arr.concat(new Array(len - arr.length).fill({}))
   }
