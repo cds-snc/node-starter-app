@@ -138,14 +138,15 @@ class Route {
    * @param {*} defaults object in the format of keyname: 'defaultValue', 'surname': 'Boisvert' (if you wanted a default surname of Boisvert...)
    */
   loadKeys(keys, defaults = {}) {
+    const has = (o, k) => o && Object.prototype.hasOwnProperty.call(o, k)
+
     return (req, res, next) => {
       // copy data from these sources in order, falling through
       // if each is not present.
       keys.forEach(k => {
-        res.locals[k] =
-          (req.body || {})[k]
-          || (req.session || {})[k]
-          || defaults[k]
+        res.locals[k] = has(req.body, k) ? req.body[k]
+                      : has(req.session, k) ? req.session[k]
+                      : defaults[k]
       })
 
       // make all variables available on a global `data` field, to
