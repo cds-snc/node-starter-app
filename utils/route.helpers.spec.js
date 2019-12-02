@@ -71,3 +71,27 @@ describe('doRedirect', () => {
     expect(next.mock.calls.length).toBe(1)
   })
 })
+
+describe('render', () => {
+  const render = jest.fn()
+  const errors = {}
+
+  const req = {
+    session: {
+      errorState: { errors },
+    },
+  }
+
+  const res = {
+    render,
+    locals: {},
+  }
+
+  test('renders the route', () => {
+    personal.render()(req, res)
+
+    expect(res.locals.errors).toBe(errors)
+    expect(render.mock.calls.length).toBe(1)
+    expect(render.mock.calls[0]).toEqual(['personal'])
+  })
+})
