@@ -34,7 +34,7 @@
                 aria-describedby="{{ name }}-error"
                 aria-invalid="true"
             {% endif %}
-            {% if isFirstError(name) %}
+            {% if isFirstError(relname) %}
                 autofocus="true"
             {% endif %}
         >

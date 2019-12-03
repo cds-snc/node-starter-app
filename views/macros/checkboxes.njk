@@ -38,6 +38,9 @@
                                 aria-describedby="{{ name }}-error"
                                 aria-invalid=true
                             {% endif %}
+                            {% if loop.first and isFirstError(relname) %}
+                                autofocus=true
+                            {% endif %}
                         />
                         <label for="{{ name }}">{{ __(label) }}</label>
                     </div>

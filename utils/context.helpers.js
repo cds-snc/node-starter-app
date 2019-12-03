@@ -43,8 +43,18 @@ const contextMiddleware = (req, res, next) => {
     return first + rest.map(x => `[${x}]`).join('')
   }
 
+  let isFirstOverall = true
   res.locals.isFirstError = (...keys) => {
-    return errorPath(keyPath.concat(keys)) === res.locals.firstError
+    if (res.locals.firstError) {
+      return errorPath(keyPath.concat(keys)) === res.locals.firstError
+    }
+    else if (isFirstOverall) {
+      isFirstOverall = false
+      return true
+    }
+    else {
+      return false
+    }
   }
 
   next()
