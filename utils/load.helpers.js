@@ -33,7 +33,6 @@ const getJSFile = (fileName, jsPath = '../public') => {
 
     return false
   } catch (e) {
-    console.log(json)
     console.log(`${fileName}.js or filelist.json doesn't exist`)
     return false
   }
