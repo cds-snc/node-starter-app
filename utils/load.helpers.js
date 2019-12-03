@@ -1,14 +1,13 @@
 /* istanbul ignore file */
 // note: there's test to look for a false response
-// but coverage isn't catching 
+// but coverage isn't catching
 
 const path = require('path')
 const { clientJsDir, getClientJsPath } = require('./url.helpers')
 
-const getClientJs = (req, routeName = '', jsPath = '../public') => {
-  const fs = require('fs')
-
+const getJSFile = (fileName, jsPath = '../public') => {
   try {
+    const fs = require('fs')
     const fileList = path.join(
       __dirname,
       `${jsPath}${clientJsDir}_filelist.json`,
@@ -24,22 +23,32 @@ const getClientJs = (req, routeName = '', jsPath = '../public') => {
       ...
     }
     */
-    const file = json[routeName]
+    const file = json[fileName]
     const filePath = path.join(__dirname, `${jsPath}${clientJsDir}${file}`)
     const fileExists = fs.readFileSync(filePath)
 
     if (fileExists) {
-      return `${getClientJsPath(req)}${file}`
+      return file
     }
 
     return false
   } catch (e) {
-    // console.log(e.message)
-    console.log(`${routeName}.js or filelist.json doesn't exist`)
+    console.log(json)
+    console.log(`${fileName}.js or filelist.json doesn't exist`)
     return false
   }
 }
 
+const getClientJs = (req, routeName = '', jsPath = '../public') => {
+  const file = getJSFile(routeName)
+  if (file) {
+    return `${getClientJsPath(req)}${file}`
+  }
+
+  return false
+}
+
 module.exports = {
+  getJSFile,
   getClientJs,
 }
