@@ -3,7 +3,12 @@
     <ol class="error-list__list" id="formErrors">
         {% for field, error in errors %}
             <li class="error-list__list-item">
-                <a class="error-list__link" href="#{{ error.param }}">{{ __(error.msg) }}</a>
+                <a
+                    class="error-list__link"
+                    href="#{{ error.param | errorToName }}-error"
+                >
+                   {{ __(error.msg) }}
+                </a>
             </li>
         {% endfor %}
     </ol>
