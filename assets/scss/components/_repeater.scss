@@ -1,0 +1,12 @@
+.repeater {
+}
+
+.repeater-instance {
+  padding: 10px 20px;
+  border-left: 5px solid gray;
+  border-top: 5px solid gray;
+
+  > legend {
+    padding: 10px 15px;
+  }
+}

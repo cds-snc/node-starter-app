@@ -108,6 +108,10 @@ window.Repeater = (function() {
         reindexProp(error, 'id', newIndex)
       })
 
+      this.el.querySelectorAll('.remove-repeat-link').forEach(function(link) {
+        reindexProp(link, 'id', newIndex)
+      })
+
       // special elements that show the user which number they're looking at
       this.el.querySelectorAll('.repeat-number').forEach(function(el) {
         el.innerText = ''+(newIndex+1)
