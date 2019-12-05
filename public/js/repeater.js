@@ -37,9 +37,8 @@ window.Repeater = (function() {
       // we use one global listener for removal, because the repeat links may
       // get added and removed from the DOM, and this means we don't have to
       // re-register the event listeners when we clone the nodes.
-      this.container.addEventListener('click', function(evt) {
+      handleLinkInteraction(this.container, function(evt) {
         if (!evt.target.classList.contains('remove-repeat-link')) return
-
         evt.preventDefault()
         var instance = instanceFor(evt.target)
         instance && instance.remove()
@@ -77,8 +76,15 @@ window.Repeater = (function() {
     }
 
     function clearField(control) {
-      if (control.tagName === 'textarea') control.innerText = ''
-      else control.value = ''
+      if (control.tagName === 'textarea') {
+        control.innerText = ''
+      }
+      else if (control.type === 'radio' || control.type === 'checkbox') {
+        control.checked = false
+      }
+      else {
+        control.value = ''
+      }
     }
 
     _.init = function(block, el, index) {
@@ -121,8 +127,19 @@ window.Repeater = (function() {
     }
 
     _.clear = function() {
-      this.el.querySelectorAll('input,textarea,select').forEach(clearField)
+      var first
+      this.el.querySelectorAll('input,textarea,select').forEach(function(el) {
+        if (!first) first = el
+        clearField(el)
+      })
+
+      if (first) first.focus()
       return this
+    }
+
+    _.focus = function() {
+      var first = this.el.querySelector('input,textarea,select')
+      if (first) first.focus()
     }
 
     _.remove = function() {
@@ -139,6 +156,10 @@ window.Repeater = (function() {
 
       // remove from the list of instances
       this.block.instances.splice(this.index, 1)
+
+      // focus the next fieldset if it exists, otherwise the last one
+      var adjacent = this.block.instances[this.index] || this.block.instances[this.index-1]
+      if (adjacent) adjacent.focus()
 
       return this
     }
@@ -174,10 +195,19 @@ window.Repeater = (function() {
     // repeat links are expected to be *outside* the repeater, so can manage
     // their own event listeners.
     document.querySelectorAll('.repeat-link').forEach(function(link) {
-      link.addEventListener('click', function(evt) {
+      handleLinkInteraction(link, function(evt) {
         evt.preventDefault()
         repeat(link.dataset.target)
       })
+    })
+  }
+
+  function handleLinkInteraction(el, handler) {
+    el.addEventListener('click', handler)
+    el.addEventListener('keydown', function(evt) {
+      // spacebar
+      if (evt.keyCode !== 32) return
+      handler(evt)
     })
   }
 
