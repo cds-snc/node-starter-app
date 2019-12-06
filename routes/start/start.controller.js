@@ -7,6 +7,6 @@ module.exports = (app, route) => {
   app.get('/', (req, res) => res.redirect(route.path[req.locale]))
 
   route.draw(app).get(async (req, res) => {
-    res.render(name, routeUtils.getViewData(res))
+    res.render(name, routeUtils.getViewData(req))
   })
 }
