@@ -25,13 +25,16 @@
 
             <li>
                 <strong>Addresses</strong>
-                <ul>
-                    {% for address in addresses %}
-                        <li>{{__('addresses.street')}}: {{ address.street }}</li>
-                        <li>{{__('addresses.type')}}: {{ address.type }}</li>
-                        <li>{{__('addresses.features')}}: {{ address.features | dump}}</li>
-                    {% endfor %}
-                </ul>
+                {% for address in addresses %}
+                    <div>
+                        <em>Address #{{ loop.index }}</em>
+                        <ul>
+                            <li>{{__('addresses.street')}}: {{ address.street }}</li>
+                            <li>{{__('addresses.type')}}: {{ address.type }}</li>
+                            <li>{{__('addresses.features')}}: {{ address.features | dump}}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
             </li>
 
 
