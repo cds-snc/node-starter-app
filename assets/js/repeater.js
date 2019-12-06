@@ -1,4 +1,4 @@
-window.Repeater = (function() {
+export const Repeater = (function() {
   "use strict"
 
   var repeatedSets

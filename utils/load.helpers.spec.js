@@ -6,7 +6,7 @@ describe('Can pull JavaScript file', () => {
       body: {},
       headers: { host: 'localhost' },
     }
-    expect(getClientJs(req, 'start', '../__tests__/fixtures')).toEqual(
+    expect(getClientJs(req, 'start', './__tests__/fixtures')).toEqual(
       'http://localhost/dist/js/start.f1ed5571f87447db4451.js',
     )
   })
@@ -16,7 +16,7 @@ describe('Can pull JavaScript file', () => {
       body: {},
       headers: { host: 'localhost' },
     }
-    expect(getClientJs(req, 'start', '../__tests__/fixtures_missing')).toEqual(
+    expect(getClientJs(req, 'start', './__tests__/fixtures_missing')).toEqual(
       false,
     )
   })
@@ -26,6 +26,6 @@ describe('Can pull JavaScript file', () => {
       body: {},
       headers: { host: 'localhost' },
     }
-    expect(getClientJs(req, 'start1', '../__tests__/fixtures')).toEqual(false)
+    expect(getClientJs(req, 'start1', './__tests__/fixtures')).toEqual(false)
   })
 })

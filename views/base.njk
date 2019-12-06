@@ -40,10 +40,8 @@
     </body>
     {% include "_includes/script.njk" %}
     {% block scripts %}
-        {% if jsFiles %}
-            {% for val in jsFiles %}
-                <script type="text/javascript" src={{val}}></script>
-            {% endfor %}
-        {% endif %}
+        {% for val in globalJsPaths().concat(jsPaths()) %}
+            <script type="text/javascript" src={{val}}></script>
+        {% endfor %}
     {% endblock %}
 </html>

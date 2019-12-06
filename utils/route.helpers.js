@@ -5,6 +5,12 @@ const { checkSchema } = require('express-validator')
 const { checkErrors } = require('./validate.helpers')
 const { addViewPath } = require('./view.helpers')
 const { saveToSession } = require('./session.helpers')
+const { getClientJs } = require('./load.helpers')
+
+const wrapArray = (val) => {
+  if (!val) return []
+  return Array.isArray(val) ? val : [val]
+}
 
 class RoutingTable {
   /**
@@ -34,10 +40,19 @@ class RoutingTable {
    * Attach the route controllers to an app.
    */
   config(app) {
+    app.use(this.globalHelpers())
     this.routes.forEach(r => r.config(app))
     require(`${this.directory}/global/global.controller`)(app, this)
     return this
   }
+
+  globalHelpers() { return (req, res, next) => {
+    // overridden inside any route - this is so that jsPaths() still works
+    // in global routes like 404.
+    res.locals.jsPaths = () => []
+    res.locals.globalJsPaths = () => wrapArray(getClientJs(req, 'global'))
+    return next()
+  } }
 }
 
 class Route {
@@ -224,6 +239,9 @@ const routeMiddleware = (route, locale) => (req, res, next) => {
     if (typeof nameOrObj === 'string') nameOrObj = route.get(nameOrObj)
     return nameOrObj.path[locale]
   }
+
+  // override
+  res.locals.jsPaths = () => wrapArray(getClientJs(req, route.name))
 
   return next()
 }
