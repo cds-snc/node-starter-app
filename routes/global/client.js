@@ -1,1 +1,1 @@
-console.log('global script file in routes/global/client.js')
+import './../../assets/js/button-link'

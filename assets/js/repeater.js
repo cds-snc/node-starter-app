@@ -7,15 +7,6 @@ export const Repeater = (() => {
   const map = (arr, fn) => Array.prototype.map.call(arr, fn)
   const query = (q, el=document) => el.querySelectorAll(q)
 
-  const handleLinkInteraction = (el, handler) => {
-    el.addEventListener('click', handler)
-    el.addEventListener('keydown', (evt) => {
-      // spacebar
-      if (evt.keyCode !== 32) return
-      handler(evt)
-    })
-  }
-
   const indexBy = (key, arr) => {
     var out = {}
     arr.forEach(x => { out[x[key]] = x })
@@ -42,7 +33,7 @@ export const Repeater = (() => {
       // we use one global listener for removal, because the repeat links may
       // get added and removed from the DOM, and this means we don't have to
       // re-register the event listeners when we clone the nodes.
-      handleLinkInteraction(this.container, evt => {
+      this.container.addEventListener('click', (evt) => {
         if (!evt.target.classList.contains('remove-repeat-link')) return
         evt.preventDefault()
         var instance = instanceFor(evt.target)
@@ -61,6 +52,7 @@ export const Repeater = (() => {
       newInstance.reindex(newIndex, true)
       this.container.appendChild(newEl)
       this.instances.push(newInstance)
+      newInstance.focus()
       return newInstance
     }
   }
@@ -84,7 +76,7 @@ export const Repeater = (() => {
       control.checked = false
     }
     else {
-      control.value = ''
+      control.value = null
     }
   }
 
@@ -199,7 +191,7 @@ export const Repeater = (() => {
     // repeat links are expected to be *outside* the repeater, so can manage
     // their own event listeners.
     query('.repeat-link').forEach(link => {
-      handleLinkInteraction(link, (evt) => {
+      link.addEventListener('click', (evt) => {
         evt.preventDefault()
         repeat(link.dataset.target)
       })

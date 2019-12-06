@@ -1,16 +1,4 @@
 <script>
-    var elements = document.querySelectorAll('a.button-link')
-    for (var i = 0, len = elements.length; i < len; i++) {
-        elements[i].addEventListener('keydown', function (e) {
-            if (e.keyCode == 32) {
-                e
-                    .target
-                    .click()
-            }
-        })
-    }
-</script>
-<script>
     if (typeof Promise !== "function" && document.querySelector('details') !== null) 
         document.write('<script src="/js/details-element-polyfill.js"><\/script>');
 </script>

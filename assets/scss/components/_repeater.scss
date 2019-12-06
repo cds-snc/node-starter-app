@@ -10,3 +10,16 @@
     padding: 10px 15px;
   }
 }
+
+a.button-link.remove-repeat-link,
+a.button-link.repeat-link {
+  padding: 5px;
+}
+
+a.button-link.remove-repeat-link {
+  background-color: red;
+}
+
+a.button-link.repeat-link {
+  background-color: green;
+}

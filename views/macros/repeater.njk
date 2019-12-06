@@ -18,7 +18,7 @@
 {% macro repeatLink(name, text) %}
     <a href="#"
         id="{{ name }}__repeat"
-        class="repeat-link"
+        class="button-link repeat-link"
         data-target="{{ getName(name) }}"
     >{{__(text)}}</a>
 {% endmacro %}
@@ -26,7 +26,7 @@
 {% macro removeRepeatLink(text) %}
     <a href="#"
         id="{{ getName() }}__remove-repeat"
-        class="remove-repeat-link"
+        class="button-link remove-repeat-link"
     >{{__(text)}}</a>
 {% endmacro %}
 
