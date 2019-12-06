@@ -1,1 +1,1 @@
-require('./../../assets/js/repeater.js')
+import 'repeater'

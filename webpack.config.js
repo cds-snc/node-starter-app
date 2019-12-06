@@ -21,6 +21,9 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, 'public/dist'),
     },
     stats: 'errors-only',
+    resolve: {
+      modules: ['./assets/js'],
+    }
   })
 
   return config

@@ -1,3 +1,3 @@
-import { fileInput } from './../../assets/js/file-input'
+import { fileInput } from 'file-input'
 
 fileInput()

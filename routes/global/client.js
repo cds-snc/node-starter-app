@@ -1,2 +1,2 @@
-import './../../assets/js/button-link'
-import './../../assets/js/details-polyfill-detect'
+import 'button-link'
+import 'details-polyfill-detect'
