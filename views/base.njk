@@ -38,7 +38,11 @@
             {% include "_includes/footer.njk" %}
         </div>
     </body>
-    {% include "_includes/script.njk" %}
+
+    {% if $env.GOOGLE_ANALYTICS %}
+        {% include "_includes/googleAnalytics.njk" %}
+    {% endif %}
+
     {% block scripts %}
         {% for val in globalJsPaths().concat(jsPaths()) %}
             <script type="text/javascript" src={{val}}></script>
