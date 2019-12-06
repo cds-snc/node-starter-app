@@ -1,43 +1,48 @@
-export const Repeater = (function() {
+export const Repeater = (() => {
   "use strict"
 
   var repeatedSets
 
-  // Since we can't depend on Array.prototype.map
-  function map(arr, fn) {
-    var out = new Array(arr.length)
-    arr.forEach(function(x, i) { out[i] = fn(x, i) })
-    return out
+  // mapping things that aren't quite arrays
+  const map = (arr, fn) => Array.prototype.map.call(arr, fn)
+  const query = (q, el=document) => el.querySelectorAll(q)
+
+  const handleLinkInteraction = (el, handler) => {
+    el.addEventListener('click', handler)
+    el.addEventListener('keydown', (evt) => {
+      // spacebar
+      if (evt.keyCode !== 32) return
+      handler(evt)
+    })
   }
 
-  function indexBy(key, arr) {
+  const indexBy = (key, arr) => {
     var out = {}
-    arr.forEach(function(x) { out[x[key]] = x })
+    arr.forEach(x => { out[x[key]] = x })
     return out
   }
 
   // a Block is the largest grouping in the repeater. It contains all the repeated
   // instances.
-  function Block() { this.init.apply(this, arguments) }
-  (function(_) {
-    _.init = function(el) {
+  class Block {
+    constructor(el) {
       var self = this // closure fix
 
       this.name = el.id
       this.container = el
 
-      this.instances = map(el.querySelectorAll('.repeater-instance'), function(fieldset, i) {
+      this.instances = map(query('.repeater-instance', el), (fieldset, i) => {
         var instance = new Instance(self, fieldset, i)
         instance.reindex(i)
         return instance
       })
     }
 
-    _.setupListeners = function() {
+    setupListeners() {
       // we use one global listener for removal, because the repeat links may
       // get added and removed from the DOM, and this means we don't have to
       // re-register the event listeners when we clone the nodes.
-      handleLinkInteraction(this.container, function(evt) {
+      handleLinkInteraction(this.container, evt => {
         if (!evt.target.classList.contains('remove-repeat-link')) return
         evt.preventDefault()
         var instance = instanceFor(evt.target)
@@ -47,7 +52,7 @@ export const Repeater = (function() {
       return this
     }
 
-    _.repeat = function() {
+    repeat() {
       if (!this.instances.length) throw new Error('empty instances, can\'t repeat!')
 
       var newIndex = this.instances.length
@@ -58,77 +63,76 @@ export const Repeater = (function() {
       this.instances.push(newInstance)
       return newInstance
     }
-  })(Block.prototype)
+  }
+
+  const reindex = (str, index) => {
+    // it's always going to be the first [0] or [1] or etc.
+    return str.replace(/\[\d+\]/, '['+index+']')
+  }
+
+  const reindexProp = (el, prop, index) => {
+    var current = el.getAttribute(prop)
+    if (!current) return
+    el.setAttribute(prop, reindex(current, index))
+  }
+
+  const clearField = (control) => {
+    if (control.tagName === 'textarea') {
+      control.innerText = ''
+    }
+    else if (control.type === 'radio' || control.type === 'checkbox') {
+      control.checked = false
+    }
+    else {
+      control.value = ''
+    }
+  }
 
   // one instance of a repeater
-  function Instance() { return this.init.apply(this, arguments) }
-  (function(_) {
+  class Instance {
     // private functions
-    function reindex(str, index) {
-      // it's always going to be the first [0] or [1] or etc.
-      return str.replace(/\[\d+\]/, '['+index+']')
-    }
-
-    function reindexProp(el, prop, index) {
-      var current = el.getAttribute(prop)
-      if (!current) return
-      el.setAttribute(prop, reindex(current, index))
-    }
-
-    function clearField(control) {
-      if (control.tagName === 'textarea') {
-        control.innerText = ''
-      }
-      else if (control.type === 'radio' || control.type === 'checkbox') {
-        control.checked = false
-      }
-      else {
-        control.value = ''
-      }
-    }
-
-    _.init = function(block, el, index) {
+    constructor(block, el, index) {
       this.block = block
       this.el = el
       this.index = index
     }
 
-    _.reindex = function(newIndex, clear) {
+    reindex(newIndex, clear) {
       this.index = newIndex
 
       reindexProp(this.el, 'name', newIndex)
       this.el.dataset.index = newIndex
 
-      this.el.querySelectorAll('input,textarea,select').forEach(function(control) {
+      query('input,textarea,select', this.el).forEach(control => {
         reindexProp(control, 'name', newIndex)
         reindexProp(control, 'id', newIndex)
         reindexProp(control, 'aria-describedby', newIndex)
         if (clear) clearField(control)
       })
 
-      this.el.querySelectorAll('label').forEach(function(label) {
+      query('label', this.el).forEach(label => {
         reindexProp(label, 'for', newIndex)
       })
 
-      this.el.querySelectorAll('.validation-message').forEach(function(error) {
+      query('.validation-message', this.el).forEach(error => {
         reindexProp(error, 'id', newIndex)
       })
 
-      this.el.querySelectorAll('.remove-repeat-link').forEach(function(link) {
+      query('.remove-repeat-link', this.el).forEach(link => {
         reindexProp(link, 'id', newIndex)
       })
 
       // special elements that show the user which number they're looking at
-      this.el.querySelectorAll('.repeat-number').forEach(function(el) {
+      query('.repeat-number', this.el).forEach(el => {
         el.innerText = ''+(newIndex+1)
       })
 
       return this
     }
 
-    _.clear = function() {
+    clear() {
       var first
-      this.el.querySelectorAll('input,textarea,select').forEach(function(el) {
+      query('input,textarea,select', this.el).forEach(el => {
         if (!first) first = el
         clearField(el)
       })
@@ -137,12 +141,12 @@ export const Repeater = (function() {
       return this
     }
 
-    _.focus = function() {
+    focus() {
       var first = this.el.querySelector('input,textarea,select')
       if (first) first.focus()
     }
 
-    _.remove = function() {
+    remove() {
       // if we're the last one, we should just empty the fields
       if (this.block.instances.length === 1) return this.clear()
 
@@ -164,13 +168,13 @@ export const Repeater = (function() {
       return this
     }
 
-  })(Instance.prototype)
+  }
 
-  function repeat(name) {
+  const repeat = (name) => {
     repeatedSets[name] && repeatedSets[name].repeat()
   }
 
-  function instanceFor(el) {
+  const instanceFor = (el) => {
     var fieldset = el.closest('.repeater-instance')
     if (!fieldset) return null
 
@@ -186,28 +190,19 @@ export const Repeater = (function() {
     return block.instances[index]
   }
 
-  function init() {
+  const init = () => {
     repeatedSets = indexBy('name',
-      map(document.querySelectorAll('.repeater'), function(el) {
+      map(query('.repeater'), (el) => {
         return new Block(el).setupListeners()
       }))
 
     // repeat links are expected to be *outside* the repeater, so can manage
     // their own event listeners.
-    document.querySelectorAll('.repeat-link').forEach(function(link) {
-      handleLinkInteraction(link, function(evt) {
+    query('.repeat-link').forEach(link => {
+      handleLinkInteraction(link, (evt) => {
         evt.preventDefault()
         repeat(link.dataset.target)
       })
-    })
-  }
-
-  function handleLinkInteraction(el, handler) {
-    el.addEventListener('click', handler)
-    el.addEventListener('keydown', function(evt) {
-      // spacebar
-      if (evt.keyCode !== 32) return
-      handler(evt)
     })
   }
 
