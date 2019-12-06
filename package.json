@@ -22,11 +22,6 @@
     "aws-bootstrap": "node cdk/bootstrap.js",
     "aws-destroy": "node cdk/destroy.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run lint && npm test"
-    }
-  },
   "dependencies": {
     "@cdssnc/webpack-starter": "^2.0.2",
     "compression": "^1.7.4",
