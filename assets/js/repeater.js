@@ -43,7 +43,7 @@ export const Repeater = (() => {
     }
 
     repeat() {
-      if (!this.instances.length) throw new Error('empty instances, can\'t repeat!')
+      if (!this.instances.length) throw new Error(`empty instances, can't repeat!`)
 
       const newIndex = this.instances.length
       const newEl = this.instances[0].el.cloneNode(true)
@@ -58,7 +58,7 @@ export const Repeater = (() => {
 
   const reindex = (str, index) => {
     // it's always going to be the first [0] or [1] or etc.
-    return str.replace(/\[\d+\]/, '['+index+']')
+    return str.replace(/\[\d+\]/, `[${index}]`)
   }
 
   const reindexProp = (el, prop, index) => {
@@ -115,7 +115,7 @@ export const Repeater = (() => {
 
       // special elements that show the user which number they're looking at
       query('.repeat-number', this.el).forEach(el => {
-        el.innerText = ''+(newIndex+1)
+        el.innerText = `${newIndex+1}`
       })
 
       return this
