@@ -56,7 +56,7 @@ export const Repeater = (() => {
     }
   }
 
-  const reindex = (str, index) => {
+  const reindexValue = (str, index) => {
     // it's always going to be the first [0] or [1] or etc.
     return str.replace(/\[\d+\]/, `[${index}]`)
   }
@@ -64,7 +64,7 @@ export const Repeater = (() => {
   const reindexProp = (el, prop, index) => {
     const current = el.getAttribute(prop)
     if (!current) return
-    el.setAttribute(prop, reindex(current, index))
+    el.setAttribute(prop, reindexValue(current, index))
   }
 
   const clearField = (control) => {
