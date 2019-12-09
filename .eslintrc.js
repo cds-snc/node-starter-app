@@ -3,6 +3,7 @@ module.exports = {
     'standard',
     'prettier',
     'eslint:recommended',
+    'plugin:import/recommended',
     'plugin:security/recommended',
   ],
   plugins: ['jest', 'security'],
@@ -15,4 +16,12 @@ module.exports = {
     'security/detect-non-literal-require': 'off',
     'security/detect-non-literal-fs-filename': 'off',
   },
+  overrides: [
+    {
+      files: ["routes/*/client.js", "assets/js/*.js"],
+      settings: {
+        "import/resolver": "webpack",
+      },
+    }
+  ],
 }
