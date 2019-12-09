@@ -5,5 +5,6 @@ const needsPolyfill = () => {
 }
 
 if (needsPolyfill()) {
-  document.write('<script src="/js/details-element-polyfill.js"><\/script>')
+  const script = '<script src="/js/details-element-polyfill.js"><\/script>'
+  document.write(script) // lgtm[js/eval-like-call]
 }
