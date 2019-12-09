@@ -1,14 +1,15 @@
 export const Repeater = (() => {
   "use strict"
 
-  var repeatedSets
+  // state for the module
+  let repeatedSets
 
   // mapping things that aren't quite arrays
   const map = (arr, fn) => Array.prototype.map.call(arr, fn)
   const query = (q, el=document) => el.querySelectorAll(q)
 
   const indexBy = (key, arr) => {
-    var out = {}
+    const out = {}
     arr.forEach(x => { out[x[key]] = x })
     return out
   }
@@ -17,13 +18,11 @@ export const Repeater = (() => {
   // instances.
   class Block {
     constructor(el) {
-      var self = this // closure fix
-
       this.name = el.id
       this.container = el
 
       this.instances = map(query('.repeater-instance', el), (fieldset, i) => {
-        var instance = new Instance(self, fieldset, i)
+        const instance = new Instance(this, fieldset, i)
         instance.reindex(i)
         return instance
       })
@@ -36,7 +35,7 @@ export const Repeater = (() => {
       this.container.addEventListener('click', (evt) => {
         if (!evt.target.classList.contains('remove-repeat-link')) return
         evt.preventDefault()
-        var instance = instanceFor(evt.target)
+        const instance = instanceFor(evt.target)
         instance && instance.remove()
       })
 
@@ -46,9 +45,9 @@ export const Repeater = (() => {
     repeat() {
       if (!this.instances.length) throw new Error('empty instances, can\'t repeat!')
 
-      var newIndex = this.instances.length
-      var newEl = this.instances[0].el.cloneNode(true)
-      var newInstance = new Instance(this, newEl, newIndex)
+      const newIndex = this.instances.length
+      const newEl = this.instances[0].el.cloneNode(true)
+      const newInstance = new Instance(this, newEl, newIndex)
       newInstance.reindex(newIndex, true)
       this.container.appendChild(newEl)
       this.instances.push(newInstance)
@@ -63,7 +62,7 @@ export const Repeater = (() => {
   }
 
   const reindexProp = (el, prop, index) => {
-    var current = el.getAttribute(prop)
+    const current = el.getAttribute(prop)
     if (!current) return
     el.setAttribute(prop, reindex(current, index))
   }
@@ -123,7 +122,7 @@ export const Repeater = (() => {
     }
 
     clear() {
-      var first
+      let first
       query('input,textarea,select', this.el).forEach(el => {
         if (!first) first = el
         clearField(el)
@@ -134,7 +133,7 @@ export const Repeater = (() => {
     }
 
     focus() {
-      var first = this.el.querySelector('input,textarea,select')
+      const first = this.el.querySelector('input,textarea,select')
       if (first) first.focus()
     }
 
@@ -146,7 +145,7 @@ export const Repeater = (() => {
       this.el.parentElement.removeChild(this.el)
 
       // reindex everything that comes after, updating name and label attributes
-      for (var i = this.index+1; i < this.block.instances.length; i += 1) {
+      for (let i = this.index+1; i < this.block.instances.length; i += 1) {
         this.block.instances[i].reindex(i - 1)
       }
 
@@ -154,7 +153,9 @@ export const Repeater = (() => {
       this.block.instances.splice(this.index, 1)
 
       // focus the next fieldset if it exists, otherwise the last one
-      var adjacent = this.block.instances[this.index] || this.block.instances[this.index-1]
+      const adjacent = this.block.instances[this.index] ||
+                       this.block.instances[this.index-1]
+
       if (adjacent) adjacent.focus()
 
       return this
@@ -167,16 +168,16 @@ export const Repeater = (() => {
   }
 
   const instanceFor = (el) => {
-    var fieldset = el.closest('.repeater-instance')
+    const fieldset = el.closest('.repeater-instance')
     if (!fieldset) return null
 
-    var match = fieldset.name.match(/^\w+/)
+    const match = fieldset.name.match(/^\w+/)
     if (!match) return null
 
-    var blockName = match[0]
-    var index = parseInt(fieldset.dataset.index)
+    const blockName = match[0]
+    const index = parseInt(fieldset.dataset.index)
 
-    var block = repeatedSets[blockName]
+    const block = repeatedSets[blockName]
     if (!block) return null
 
     return block.instances[index]
