@@ -3,7 +3,6 @@ module.exports = {
     'standard',
     'prettier',
     'eslint:recommended',
-    'plugin:import/recommended',
     'plugin:security/recommended',
   ],
   plugins: ['jest', 'security'],
