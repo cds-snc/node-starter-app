@@ -11,15 +11,16 @@
   }
 }
 
-a.button-link.remove-repeat-link,
-a.button-link.repeat-link {
+.remove-repeat-link,
+.repeat-link {
+  width: 25%;
   padding: 5px;
 }
 
-a.button-link.remove-repeat-link {
+.remove-repeat-link {
   background-color: red;
 }
 
-a.button-link.repeat-link {
+.repeat-link {
   background-color: green;
 }
