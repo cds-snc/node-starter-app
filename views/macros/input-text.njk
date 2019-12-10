@@ -1,3 +1,6 @@
+{% from 'sub-imports/label-text.njk' import labelText with context  %}
+{% from 'sub-imports/hint-text.njk' import hintText with context %}
+{% from 'sub-imports/validation-message.njk' import validationMessage with context %}
 {#
   - `name`: field name
   - `label`: text for the label
@@ -10,20 +13,10 @@
 {% macro textInput(name, label, attributes) %}
     <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
         <label for="{{ name }}" id="{{ name }}__label">
-            {% if attributes.required %}
-                <span aria-hidden="true" class="required">*</span>
-            {% endif %}
-            {{ __(label) }}
-            {% if attributes.required %}
-                <span class="required">{{ __("required")}}</span>
-            {% endif %}
+            {{ labelText(label, attributes.required) }}
         </label>
-        {% if attributes.hint %}
-            <span class="form-message">{{ __(attributes.hint) }}</span>
-        {% endif %}
-        {% if errors and errors[name] %}
-            {{ validationMessage(errors[name].msg, name) }}
-        {% endif %}
+        {{ hintText(attributes.hint) }}
+        {{ validationMessage(errors, name) }}
         <input class="{{ attributes.class if attributes.class else "w-3-4" }}" {% if attributes.autocomplete %}autocomplete="{{ attributes.autocomplete }}" {% endif %} type="text" id="{{ attributes.id if attributes.id else name }}" {% if errors and errors[name] %} aria-describedby="{{ name + '-error' }}" aria-invalid="true" {% endif %} {% if errors and firstError.param === name %} autofocus="true" {% endif %} name="{{ name }}" value="{{ data[name] }}"/>
     </div>
 {% endmacro %}

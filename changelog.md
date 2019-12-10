@@ -4,6 +4,7 @@
 
 ### Updated
 - Redirect back with errors. This *may* be a breaking change if you have written any customizations to deal with issues surrounding `renderPageWithErrors` in `validate.helpers.js`.  That method has been removed, and now on validation errors, we flash the errors to the session and redirect back to the `get` route.
+- Moved duplicated nunjucks code from macros into `views/macros/sub-imports`
 
 ### Removed
 - `renderPageWithErrors` has been removed from `validate.helpers.js`
