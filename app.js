@@ -7,8 +7,7 @@ const cookieParser = require('cookie-parser')
 const compression = require('compression')
 const helmet = require('helmet')
 const path = require('path')
-const cookieSession = require('cookie-session')
-const cookieSessionConfig = require('./config/cookieSession.config')
+const sessionConfig = require('./config/session.config')
 const { hasData } = require('./utils')
 const { addNunjucksFilters } = require('./filters')
 const csp = require('./config/csp.config')
@@ -43,9 +42,8 @@ app.use(function(req, res, next) {
   next()
 })
 
-// in production: use redis for sessions
-// but this works for now
-app.use(cookieSession(cookieSessionConfig))
+// add the session selected in session.config.js
+app.use(sessionConfig)
 
 // public assets go here (css, js, etc)
 app.use(express.static(path.join(__dirname, 'public')))
