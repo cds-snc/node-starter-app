@@ -241,3 +241,95 @@ See:
 - https://github.com/cds-snc/2620-passport-renewal/commit/eb41bf83825b9d8c4a56427e0cd199ccc23089eb
 
 > Starter Cloud Build / Cloud Run setup is in place if you prefer to deploy via GCP see `notification-demo-service` which is setup to deploy using a tag.
+
+<hr>
+<hr>
+
+# Dépôt de départ pour la création de formulaires Web du GC pour Node.js 
+
+Démo : https://cds-node-starter.herokuapp.com
+
+Journal des modifications : changelog.md
+
+**Démo:** https://cds-node-starter.herokuapp.com
+
+**Journal des modifications:** [changelog.md](https://github.com/cds-snc/node-starter-app/blob/master/changelog.md)
+
+Ce dépôt fournit un code base pouvant être utilisé pour créer rapidement des pages Web ou des formulaires Web à l’image du Gouvernement du Canada.
+
+- Création de pages Web de même apparence que les pages du GC
+- Ajout de points d’extrémité [routes/URL](#adding-routes) pour les workflows de formulaires Web, avec validation de formulaire 
+- Protection [contre les requêtes intersites falsifiées](#form-csrf-protection)
+- Traduction possible grâce à des configurations de [paires nom/valeur](#locales)
+- Déploiement rapide disponible pour :
+  - Web Amazon Services via [AWS CDK](https://aws.amazon.com/cdk/)
+  - [Azure](terraform/readme.md) via [Terraform](https://terraform.io)
+  - [Google Cloud Platform](cloudbuild.yaml) (GCP) via [Google Cloud Build](https://cloud.google.com/cloud-build/)
+  - Contrôles à partir de l’intégration continue qui s’exécutent de façon automatique via Actions GitHub 
+  - [Accessibilité](.github/workflows/a11y.yml)
+  - [Stylisation et linting du code](.github/workflows/nodejs.yml)
+  - Balayage du code base pour les fuites [accidentelles de clés secrètes](.github/workflows/secret.yml)
+
+
+Le dépôt est configuré avec des valeurs par défaut et des choix technologiques pratiques comme:
+
+- Node.js >= 10.x
+- NVM (Node Version Manager) pour les versions Install de Node.js 
+- L’infrastructure d’applications Web [Express](https://expressjs.com)
+- Les modèles de vues [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) 
+- Sass (Syntactically Awesome Style Sheets) pour des styles réutilisables
+- [Tailwind CSS](https://tailwindcss.com), une infrastructure utilitaire CSS pour la création rapide de designs personnalisés
+- [PostCSS](https://postcss.org)
+- [PurgeCSS](https://www.purgecss.com)
+
+## Cloner et tirer des modifications en amont
+
+1. Créez un dépôt GitHub empty (doit être vide)
+
+```bash
+
+git remote add upstream git@github.com:cds-snc/node-starter-app.git
+git pull upstream master
+git remote -v // ensure the remotes are setup properly
+
+// you should see
+origin  git@github.com:cds-snc/your-repo.git (fetch)
+origin  git@github.com:cds-snc/your-repo.git (push)
+upstream        git@github.com:cds-snc/node-starter-app.git (fetch)
+upstream        git@github.com:cds-snc/node-starter-app.git (push)
+```
+
+## Install + Mode Dev
+
+```bash
+npm install
+npm run dev
+```
+
+## Styles personnalisés, Sass, PostCSS, TailwindCSS et PurgeCSS
+
+Il existe un ensemble de base de feuilles de styles qui est inclus par défaut et qui fournit un bon point de départ pour un visuel de base. 
+
+TailwindCSS est inclus, mais est tout à fait facultatif. Si vous ne l’aimez pas, vous n’avez qu’à supprimer les directives @tailwind dans app.scss, les personnalisations tailwind.scss, et le plugiciel tailwindcss dans postcss.config.js. 
+
+Webpack charge app.scss et les feuilles importées, les exécute par l’intermédiaire de PostCSS qui analyse les fichiers SASS, configure Tailwindcss, compile, minifie avec CSSnano et applique Autoprefixer. Sur les versions de production, tout passe par PurgeCSS pour éliminer les classes inutilisées et réduire véritablement la taille des fichiers.
+
+app.scss est l’endroit où nous recommandons que vous placiez des règles SASS ou CSS personnalisées.
+
+## Ajouter des routes
+
+Générez les fichiers de route
+
+```
+node ./bin/route.js create --route your_route_name
+```
+
+Le répertoire de la route créé contient par défaut les fichiers suivants :
+ - your_route_name.controller.js
+ - your_route_name.pug
+ - schema.js (utilisé pour les vues de formulaires)
+
+Enregistrez la route via [routes.config.js](https://github.com/cds-snc/node-starter-app/blob/master/config/routes.config.js)
+
+
+
