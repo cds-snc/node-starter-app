@@ -316,7 +316,7 @@ app.scss est l’endroit où nous recommandons que vous placiez des règles SASS
 
 Générez les fichiers de route
 
-```
+```bash
 node ./bin/route.js create --route your_route_name
 ```
 
@@ -327,7 +327,7 @@ Le répertoire de la route créé contient par défaut les fichiers suivants :
 
 Enregistrez la route via [routes.config.js](https://github.com/cds-snc/node-starter-app/blob/master/config/routes.config.js)
 
-```
+```javascript
 // config/routes.config.js
 ...
 const routes = [
@@ -344,7 +344,7 @@ Les redirections sont gérées avec route.doRedirect(). La fonction doRedirect r
 
 Pour les situations où la redirection n’est pas simple, vous pouvez introduire une fonction qui retourne un nom de route ou un objet de route :
 
-```
+```javascript
 // routes.config.js
 const routes = [
   ...
@@ -363,7 +363,7 @@ La protection contre la falsification de requête intersites (CSRF)[https://gith
 
 Notez que le jeton CSRF est transmis à tous les modèles par l’intermédiaire de response.locals, c’est-à-dire : 
 
-```
+```javascript
 // append csrfToken to all responses
 app.use(function (req, res, next) {
   res.locals.csrfToken = req.csrfToken()
@@ -373,19 +373,19 @@ app.use(function (req, res, next) {
 
 Pour réussir à soumettre un formulaire, vous devez inclure un jeton CSRF dans un champ caché :
 
-```
+```javascript
 <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 ```
 
 Si vous utilisez JS/Ajax, vous pouvez obtenir le jeton CSRF à partir de la balise d’en-tête meta incluse dans le modèle de base :
 
-```
+```javascript
 <meta name="csrf-token" content="{{ csrfToken }}">
 ```
 
 L’exemple suivant est un exemple d’utilisation de l’API Fetch pour publier sur la route /personal avec le jeton CSRF provenant de la balise <meta>  sur la page :
 
-```
+```javascript
 // Read the CSRF token from the <meta> tag
 var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
@@ -406,7 +406,7 @@ fetch('/process', {
 
 Le texte dans les pages est fourni par des ID. 
 
-```
+```javascript
 block variables
   -var title = __('personal.title')
 
@@ -419,7 +419,7 @@ block content
   form(method='post')
 ```
 
-```
+```javascript
 // locales/en.json
 "personal.title": "Personal Information",
 "personal.intro": "Intro copy goes here",
@@ -446,7 +446,7 @@ Vous n’aimez pas la configuration actuelle -> c’est un serveur Express, donc
 ## Interface de ligne de commande (CLI)
  - Il y a un outil CLI de base qui vous permet d’exécuter certaines fonctions :
 
-```
+```bash
 > node ./bin/cli.js routes
 [ { name: 'sample', path: '/sample' },
   { name: 'start', path: '/start' },
