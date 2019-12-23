@@ -247,9 +247,9 @@ See:
 
 # Dépôt de départ pour la création de formulaires Web du GC pour Node.js 
 
-Démo : https://cds-node-starter.herokuapp.com
+**Démo :** https://cds-node-starter.herokuapp.com
 
-Journal des modifications : changelog.md
+**Journal des modifications : ** changelog.md
 
 **Démo:** https://cds-node-starter.herokuapp.com
 
