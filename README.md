@@ -254,7 +254,7 @@ See:
 Ce dépôt fournit un code base pouvant être utilisé pour créer rapidement des pages Web ou des formulaires Web à l’image du Gouvernement du Canada.
 
 - Création de pages Web de même apparence que les pages du GC
-- Ajout de points d’extrémité [routes/URL](#adding-routes) pour les workflows de formulaires Web, avec validation de formulaire 
+- Ajout de points d’extrémité [routes/URL](#adding-routes) pour les workflows de formulaires Web, avec [validation](#validation-de-formulaire) de formulaire 
 - Protection [contre les requêtes intersites falsifiées](#form-csrf-protection)
 - Traduction possible grâce à des configurations de [paires nom/valeur](#locales)
 - Déploiement rapide disponible pour :
