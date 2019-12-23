@@ -331,5 +331,114 @@ Le répertoire de la route créé contient par défaut les fichiers suivants :
 
 Enregistrez la route via [routes.config.js](https://github.com/cds-snc/node-starter-app/blob/master/config/routes.config.js)
 
+```
+// config/routes.config.js
+...
+const routes = [
+  { name: "your_route_name", path: "/your_route_name" },
+];
+...
+```
+
+Remarque : Supprimez au besoin les répertoires de routes inutilisés.
+
+## Redirections pour étapes de formulaire
+
+Les redirections sont gérées avec route.doRedirect(). La fonction doRedirect recherche la route suivante en fonction de la configuration des routes.
+
+Pour les situations où la redirection n’est pas simple, vous pouvez introduire une fonction qui retourne un nom de route ou un objet de route :
+
+```
+// routes.config.js
+const routes = [
+  ...
+  { name: 'my-route', ..., skipTo: 'other-route' }
+  ...
+]
+
+// my-route.controller.js
+route.draw(app)
+  .post(..., route.doRedirect((req, res) => shouldSkip(req) ? route.skipTo : route.next))
+```
+
+## Protection CSRF pour formulaires
+
+La protection contre la falsification de requête intersites (CSRF)[https://github.com/expressjs/csurf] est fournie par l’intergiciel csurf.
+
+Notez que le jeton CSRF est transmis à tous les modèles par l’intermédiaire de response.locals, c’est-à-dire : 
+
+```
+// append csrfToken to all responses
+app.use(function (req, res, next) {
+  res.locals.csrfToken = req.csrfToken()
+  next()
+})
+```
+
+Pour réussir à soumettre un formulaire, vous devez inclure un jeton CSRF dans un champ caché :
+
+```
+<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+```
+
+Si vous utilisez JS/Ajax, vous pouvez obtenir le jeton CSRF à partir de la balise d’en-tête meta incluse dans le modèle de base :
+
+```
+<meta name="csrf-token" content="{{ csrfToken }}">
+```
+
+L’exemple suivant est un exemple d’utilisation de l’API Fetch pour publier sur la route /personal avec le jeton CSRF provenant de la balise <meta>  sur la page :
+
+```
+// Read the CSRF token from the <meta> tag
+var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
+// Make a request using the Fetch API
+fetch('/process', {
+  credentials: 'same-origin', // <-- includes cookies in the request
+  headers: {
+    'CSRF-Token': token // <-- is the csrf token as a header
+  },
+  method: 'POST',
+  body: {
+    favoriteColor: 'blue'
+  }
+})
+```
+
+## Paramètres régionaux
+
+Le texte dans les pages est fourni par des ID. 
+
+```
+block variables
+  -var title = __('personal.title')
+
+block content
+
+  h1 #{title}
+
+  div
+    p #{__('personal.intro')}
+  form(method='post')
+```
+
+```
+// locales/en.json
+"personal.title": "Personal Information",
+"personal.intro": "Intro copy goes here",
+"form.fullname": "Full name",
+```
+
+## Validation de formulaire
+
+
+
+
+
+
+
+
+
 
 
