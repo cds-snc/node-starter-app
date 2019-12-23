@@ -241,3 +241,244 @@ See:
 - https://github.com/cds-snc/2620-passport-renewal/commit/eb41bf83825b9d8c4a56427e0cd199ccc23089eb
 
 > Starter Cloud Build / Cloud Run setup is in place if you prefer to deploy via GCP see `notification-demo-service` which is setup to deploy using a tag.
+
+<hr>
+<hr>
+
+# Dépôt de départ pour la création de formulaires Web du GC pour Node.js 
+
+**Démo:** https://cds-node-starter.herokuapp.com
+
+**Journal des modifications:** [changelog.md](https://github.com/cds-snc/node-starter-app/blob/master/changelog.md)
+
+Ce dépôt fournit un code base pouvant être utilisé pour créer rapidement des pages Web ou des formulaires Web à l’image du Gouvernement du Canada.
+
+- Création de pages Web de même apparence que les pages du GC
+- Ajout de points d’extrémité [routes/URL](#adding-routes) pour les workflows de formulaires Web, avec [validation](#validation-de-formulaire) de formulaire 
+- Protection [contre les requêtes intersites falsifiées](#form-csrf-protection)
+- Traduction possible grâce à des configurations de [paires nom/valeur](#locales)
+- Déploiement rapide disponible pour :
+  - Web Amazon Services via [AWS CDK](https://aws.amazon.com/cdk/)
+  - [Azure](terraform/readme.md) via [Terraform](https://terraform.io)
+  - [Google Cloud Platform](cloudbuild.yaml) (GCP) via [Google Cloud Build](https://cloud.google.com/cloud-build/)
+  - Contrôles à partir de l’intégration continue qui s’exécutent de façon automatique via Actions GitHub 
+  - [Accessibilité](.github/workflows/a11y.yml)
+  - [Stylisation et linting du code](.github/workflows/nodejs.yml)
+  - Balayage du code base pour les fuites [accidentelles de clés secrètes](.github/workflows/secret.yml)
+
+
+Le dépôt est configuré avec des valeurs par défaut et des choix technologiques pratiques comme:
+
+- Node.js >= 10.x
+- NVM (Node Version Manager) pour les versions Install de Node.js 
+- L’infrastructure d’applications Web [Express](https://expressjs.com)
+- Les modèles de vues [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) 
+- Sass (Syntactically Awesome Style Sheets) pour des styles réutilisables
+- [Tailwind CSS](https://tailwindcss.com), une infrastructure utilitaire CSS pour la création rapide de designs personnalisés
+- [PostCSS](https://postcss.org)
+- [PurgeCSS](https://www.purgecss.com)
+
+## Cloner et tirer des modifications en amont
+
+1. Créez un dépôt GitHub empty (doit être vide)
+
+```bash
+
+git remote add upstream git@github.com:cds-snc/node-starter-app.git
+git pull upstream master
+git remote -v // ensure the remotes are setup properly
+
+// you should see
+origin  git@github.com:cds-snc/your-repo.git (fetch)
+origin  git@github.com:cds-snc/your-repo.git (push)
+upstream        git@github.com:cds-snc/node-starter-app.git (fetch)
+upstream        git@github.com:cds-snc/node-starter-app.git (push)
+```
+
+## Install + Mode Dev
+
+```bash
+npm install
+npm run dev
+```
+
+## Styles personnalisés, Sass, PostCSS, TailwindCSS et PurgeCSS
+
+Il existe un ensemble de base de feuilles de styles qui est inclus par défaut et qui fournit un bon point de départ pour un visuel de base. 
+
+TailwindCSS est inclus, mais est tout à fait facultatif. Si vous ne l’aimez pas, vous n’avez qu’à supprimer les directives @tailwind dans app.scss, les personnalisations tailwind.scss, et le plugiciel tailwindcss dans postcss.config.js. 
+
+Webpack charge app.scss et les feuilles importées, les exécute par l’intermédiaire de PostCSS qui analyse les fichiers SASS, configure Tailwindcss, compile, minifie avec CSSnano et applique Autoprefixer. Sur les versions de production, tout passe par PurgeCSS pour éliminer les classes inutilisées et réduire véritablement la taille des fichiers.
+
+app.scss est l’endroit où nous recommandons que vous placiez des règles SASS ou CSS personnalisées.
+
+## Ajouter des routes
+
+Générez les fichiers de route
+
+```bash
+node ./bin/route.js create --route your_route_name
+```
+
+Le répertoire de la route créé contient par défaut les fichiers suivants :
+ - your_route_name.controller.js
+ - your_route_name.pug
+ - schema.js (utilisé pour les vues de formulaires)
+
+Enregistrez la route via [routes.config.js](https://github.com/cds-snc/node-starter-app/blob/master/config/routes.config.js)
+
+```javascript
+// config/routes.config.js
+...
+const routes = [
+  { name: "your_route_name", path: "/your_route_name" },
+];
+...
+```
+
+Remarque : Supprimez au besoin les répertoires de routes inutilisés.
+
+## Redirections pour étapes de formulaire
+
+Les redirections sont gérées avec route.doRedirect(). La fonction doRedirect recherche la route suivante en fonction de la configuration des routes.
+
+Pour les situations où la redirection n’est pas simple, vous pouvez introduire une fonction qui retourne un nom de route ou un objet de route :
+
+```javascript
+// routes.config.js
+const routes = [
+  ...
+  { name: 'my-route', ..., skipTo: 'other-route' }
+  ...
+]
+
+// my-route.controller.js
+route.draw(app)
+  .post(..., route.doRedirect((req, res) => shouldSkip(req) ? route.skipTo : route.next))
+```
+
+## Protection CSRF pour formulaires
+
+La protection contre la falsification de requête intersites (CSRF)[https://github.com/expressjs/csurf] est fournie par l’intergiciel csurf.
+
+Notez que le jeton CSRF est transmis à tous les modèles par l’intermédiaire de response.locals, c’est-à-dire : 
+
+```javascript
+// append csrfToken to all responses
+app.use(function (req, res, next) {
+  res.locals.csrfToken = req.csrfToken()
+  next()
+})
+```
+
+Pour réussir à soumettre un formulaire, vous devez inclure un jeton CSRF dans un champ caché :
+
+```javascript
+<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+```
+
+Si vous utilisez JS/Ajax, vous pouvez obtenir le jeton CSRF à partir de la balise d’en-tête meta incluse dans le modèle de base :
+
+```javascript
+<meta name="csrf-token" content="{{ csrfToken }}">
+```
+
+L’exemple suivant est un exemple d’utilisation de l’API Fetch pour publier sur la route /personal avec le jeton CSRF provenant de la balise <meta>  sur la page :
+
+```javascript
+// Read the CSRF token from the <meta> tag
+var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
+// Make a request using the Fetch API
+fetch('/process', {
+  credentials: 'same-origin', // <-- includes cookies in the request
+  headers: {
+    'CSRF-Token': token // <-- is the csrf token as a header
+  },
+  method: 'POST',
+  body: {
+    favoriteColor: 'blue'
+  }
+})
+```
+
+## Paramètres régionaux
+
+Le texte dans les pages est fourni par des ID. 
+
+```javascript
+block variables
+  -var title = __('personal.title')
+
+block content
+
+  h1 #{title}
+
+  div
+    p #{__('personal.intro')}
+  form(method='post')
+```
+
+```javascript
+// locales/en.json
+"personal.title": "Personal Information",
+"personal.intro": "Intro copy goes here",
+"form.fullname": "Full name",
+```
+
+## Validation de formulaire
+- La validation des formulaires est intégrée dans les fichiers de schéma des formulaires et elle utilise [validator.js](https://github.com/validatorjs/validator.js#validators) pour valider les entrées.
+
+> Pour indiquer que des champs sont requis, vous pouvez faire passer required: true comme attribut.
+
+## Template Engine
+
+[Nunjucks](https://mozilla.github.io/nunjucks)
+
+## Aides de vue communes
+
+Consultez views/_includes
+
+## Changer la configuration
+
+Vous n’aimez pas la configuration actuelle -> c’est un serveur Express, donc faites ce que vous souhaitez app.js
+
+## Interface de ligne de commande (CLI)
+ - Il y a un outil CLI de base qui vous permet d’exécuter certaines fonctions :
+
+```bash
+> node ./bin/cli.js routes
+[ { name: 'sample', path: '/sample' },
+  { name: 'start', path: '/start' },
+  { name: 'personal', path: '/personal' },
+  { name: 'confirmation', path: '/confirmation' } ]
+```
+
+## Déploiement
+
+La version et le déploiement par défaut actuels se font via GCP Cloud Build et Cloud Run. Le cloudbuild.yaml n’est pas une solution toute faite, donc il devra être ajusté, tout comme les permissions correctement définies dans GCP. [Ce lien](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build#continuous) explique les étapes requises pour bien configurer Cloud Run.
+
+## Objectifs
+
+- Fonctions d’accessibilité prêtes à l’emploi
+- Maintien des routes de code, des vue(s) et des schémas dans un état aussi portable (complet) que possible.
+- Si le code, c’est-à-dire les validateurs personnalisés des routes, peut être réutilisé, il doit être remonté au niveau app
+- Avoir à toucher le moins possible le code au niveau de l’app (app.js) lors de la création d’une nouvelle application basée sur le créateur de formulaire
+- Mise en oeuvre des meilleures pratiques issues de [Conception de formulaire : de zéro à héros en un article de blogue](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post/) (en anglais)
+
+> Les routes devraient agir comme un plugiciel. Ex. : Soit le Projet B, qui a une page dont vous avez besoin. Copiez le répertoire de la route et ajoutez cette route à votre configuration.
+
+## Ce que le projet n’est pas
+- Le projet a pour objectif de vous permettre de démarrer sur les chapeaux de roue. Il n’offre pas une solution de facto universelle.
+
+## Notes
+
+Le projet est basé sur le code original de https://github.com/cds-snc/cra-claim-tax-benefits et est né de la volonté d’utiliser ce code comme base, sans avoir à éliminer les parties inutilisées chaque fois qu’un nouveau projet débute.
+
+Consultez :
+
+ - https://github.com/cds-snc/notification-demo-service/commit/ab24e79268626e1431b301fb91614b40f9615086
+ - https://github.com/cds-snc/2620-passport-renewal/commit/eb41bf83825b9d8c4a56427e0cd199ccc23089eb
+ 
+ 
+La configuration pour Starter Cloud Build / Cloud Run est établie; si vous préférez déployer via GCP consultez notification-demo-service, qui est configuré pour faire des déploiements en utilisant une balise.
