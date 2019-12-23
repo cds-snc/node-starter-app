@@ -247,10 +247,6 @@ See:
 
 # Dépôt de départ pour la création de formulaires Web du GC pour Node.js 
 
-**Démo :** https://cds-node-starter.herokuapp.com
-
-**Journal des modifications : ** changelog.md
-
 **Démo:** https://cds-node-starter.herokuapp.com
 
 **Journal des modifications:** [changelog.md](https://github.com/cds-snc/node-starter-app/blob/master/changelog.md)
