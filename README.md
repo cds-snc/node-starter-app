@@ -431,14 +431,58 @@ block content
 ```
 
 ## Validation de formulaire
+- La validation des formulaires est intégrée dans les fichiers de schéma des formulaires et elle utilise [validator.js](https://github.com/validatorjs/validator.js#validators) pour valider les entrées.
 
+> Pour indiquer que des champs sont requis, vous pouvez faire passer required: true comme attribut.
 
+## Template Engine
 
+[Nunjucks](https://mozilla.github.io/nunjucks)
 
+## Aides de vue communes
 
+Consultez views/_includes
 
+## Changer la configuration
 
+Vous n’aimez pas la configuration actuelle -> c’est un serveur Express, donc faites ce que vous souhaitez app.js
 
+## Interface de ligne de commande (CLI)
+ - Il y a un outil CLI de base qui vous permet d’exécuter certaines fonctions :
 
+```
+> node ./bin/cli.js routes
+[ { name: 'sample', path: '/sample' },
+  { name: 'start', path: '/start' },
+  { name: 'personal', path: '/personal' },
+  { name: 'confirmation', path: '/confirmation' } ]
+```
 
+## Déploiement
 
+La version et le déploiement par défaut actuels se font via GCP Cloud Build et Cloud Run. Le cloudbuild.yaml n’est pas une solution toute faite, donc il devra être ajusté, tout comme les permissions correctement définies dans GCP. [Ce lien](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build#continuous) explique les étapes requises pour bien configurer Cloud Run.
+
+## Objectifs
+
+- Fonctions d’accessibilité prêtes à l’emploi
+- Maintien des routes de code, des vue(s) et des schémas dans un état aussi portable (complet) que possible.
+- Si le code, c’est-à-dire les validateurs personnalisés des routes, peut être réutilisé, il doit être remonté au niveau app
+- Avoir à toucher le moins possible le code au niveau de l’app (app.js) lors de la création d’une nouvelle application basée sur le créateur de formulaire
+- Mise en oeuvre des meilleures pratiques issues de [Conception de formulaire : de zéro à héros en un article de blogue](https://adamsilver.io/articles/form-design-from-zero-to-hero-all-in-one-blog-post/) (en anglais)
+
+> Les routes devraient agir comme un plugiciel. Ex. : Soit le Projet B, qui a une page dont vous avez besoin. Copiez le répertoire de la route et ajoutez cette route à votre configuration.
+
+## Ce que le projet n’est pas
+- Le projet a pour objectif de vous permettre de démarrer sur les chapeaux de roue. Il n’offre pas une solution de facto universelle.
+
+## Notes
+
+Le projet est basé sur le code original de https://github.com/cds-snc/cra-claim-tax-benefits et est né de la volonté d’utiliser ce code comme base, sans avoir à éliminer les parties inutilisées chaque fois qu’un nouveau projet débute.
+
+Consultez :
+
+ - https://github.com/cds-snc/notification-demo-service/commit/ab24e79268626e1431b301fb91614b40f9615086
+ - https://github.com/cds-snc/2620-passport-renewal/commit/eb41bf83825b9d8c4a56427e0cd199ccc23089eb
+ 
+ 
+La configuration pour Starter Cloud Build / Cloud Run est établie; si vous préférez déployer via GCP consultez notification-demo-service, qui est configuré pour faire des déploiements en utilisant une balise.
