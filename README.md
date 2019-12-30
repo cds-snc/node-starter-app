@@ -79,6 +79,7 @@ The created route directory by default contains the following files:
 - your_route_name.controller.js
 - your_route_name.pug
 - schema.js (used for form views)
+- client.js (optional - page-specific js for the browser)
 
 
 Register the route via [routes.config.js](https://github.com/cds-snc/node-starter-app/blob/master/config/routes.config.js)
@@ -113,6 +114,8 @@ route.draw(app)
   .post(..., route.doRedirect((req, res) => shouldSkip(req) ? route.skipTo : route.next))
 ```
 
+Note that there is nothing specific about the name `skipTo`: any key that is set in the routes configuration will be visible from the `route` object the controller receives.
+
 ## Form CSRF Protection
 
 CSRF protection for forms is provided by [csurf](https://github.com/expressjs/csurf) middleware.
@@ -139,11 +142,13 @@ If using JS/Ajax, you can get the csrf token from the header meta tag included i
 <meta name="csrf-token" content="{{ csrfToken }}">
 ```
 
-The following is an example of using the Fetch API to post to the `/personal` route with the CSRF token from the `<meta>` tag on the page:
+The following is an example of using the Fetch API in the browser to post to the `/personal` route with the CSRF token from the `<meta>` tag on the page:
 
 ```javascript
+// - client.js - //
+
 // Read the CSRF token from the <meta> tag
-var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
 // Make a request using the Fetch API
 fetch('/process', {
@@ -160,26 +165,31 @@ fetch('/process', {
 
 ## Locales
 
-Text on pages is supplied via ids
+Text on pages is supplied via content IDs, and the localization framework provides the correct text depending on the locale. All form macros (such as `textInput`) receive these IDs for labels or other content.
 
-```pug
-block variables
-  -var title = __('personal.title')
+``` jinja2
+{% block content %}
+  <h1>{{ __('personal.title') }}</h1>
 
-block content
+  <div>
+    <p>{{ __('personal.intro') }}</p>
+  </div>
 
-  h1 #{title}
-
-  div
-    p #{__('personal.intro')}
-  form(method='post')
+  <form method="post">
+    {{ textInput('fullname', 'form.fullname') }}
+  </form>
+{% endblock %}
 ```
 
-```json
+```js
 // locales/en.json
-"personal.title": "Personal Information",
-"personal.intro": "Intro copy goes here",
-"form.fullname": "Full name",
+{
+// ...
+  "personal.title": "Personal Information",
+  "personal.intro": "Intro copy goes here",
+  "form.fullname": "Full name",
+// ...
+}
 ```
 
 ## Form Validation
