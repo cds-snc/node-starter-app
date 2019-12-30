@@ -14,6 +14,7 @@ It provides the following functionality:
 - Add endpoints ([routes/URLs](#adding-routes)) for web form workflows, complete with [form validation](#form-validation)
 - Prevents [forged cross-site requests](#form-csrf-protection)
 - Translation ready, [using name/value pairs configs](#locales)
+- A complete localization solution, including `/en/` and `/fr/` URL namespaces
 - Fast deployment, currently for:
   - [Amazon Web Services](cdk) via [AWS CDK](https://aws.amazon.com/cdk/)
   - [Azure](terraform/readme.md) via [Terraform](https://terraform.io)
