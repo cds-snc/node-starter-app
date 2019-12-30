@@ -4,6 +4,13 @@ const url = require('url');
 const { checkSchema } = require('express-validator')
 const { checkErrors } = require('./validate.helpers')
 const { addViewPath } = require('./view.helpers')
+const { saveToSession } = require('./session.helpers')
+const { getClientJs } = require('./load.helpers')
+
+const wrapArray = (val) => {
+  if (!val) return []
+  return Array.isArray(val) ? val : [val]
+}
 
 class RoutingTable {
   /**
@@ -23,16 +30,29 @@ class RoutingTable {
   /**
    * Returns a route given a route name
    */
-  get(name) { return this.routes.find(r => r.name === name) }
+  get(name) {
+    const out = this.routes.find(r => r.name === name)
+    if (!out) console.warn(`missing route ${name}`)
+    return out
+  }
 
   /**
    * Attach the route controllers to an app.
    */
   config(app) {
+    app.use(this.globalHelpers())
     this.routes.forEach(r => r.config(app))
     require(`${this.directory}/global/global.controller`)(app, this)
     return this
   }
+
+  globalHelpers() { return (req, res, next) => {
+    // overridden inside any route - this is so that jsPaths() still works
+    // in global routes like 404.
+    res.locals.jsPaths = () => []
+    res.locals.globalJsPaths = () => wrapArray(getClientJs(req, 'global'))
+    return next()
+  } }
 }
 
 class Route {
@@ -99,6 +119,13 @@ class Route {
     return this
   }
 
+  render() {
+    return (req, res) => {
+      Object.assign(res.locals, req.session.errorState || {})
+      res.render(this.name)
+    }
+  }
+
   /**
    * The default middleware for this route, intended
    * for the POST method.
@@ -110,8 +137,54 @@ class Route {
     ]
   }
 
+  /**
+   *
+   * @param {object} schema Schema object from the route folder
+   *
+   * This grabs every key that we expect from the schema, it grabs the default value and passes it to Loadkeys to be loaded inside the locals of the views
+   *
+   */
+  loadSchema(schema) {
+    const defaults = {}
+    const keys = Object.keys(schema)
+    keys.forEach(k => { defaults[k] = schema[k].default })
+
+    return this.loadKeys(keys, defaults)
+  }
+
+  /**
+   *
+   * @param {*} keys Are in the format of an array with the name of each key that you want added. This would be keys that are not already being added by loadSchema()
+   * @param {*} defaults object in the format of keyname: 'defaultValue', 'surname': 'Boisvert' (if you wanted a default surname of Boisvert...)
+   */
+  loadKeys(keys, defaults = {}) {
+    const has = (o, k) => o && Object.prototype.hasOwnProperty.call(o, k)
+
+    return (req, res, next) => {
+      // copy data from these sources in order, falling through
+      // if each is not present.
+      keys.forEach(k => {
+        res.locals[k] = has(req.body, k) ? req.body[k]
+                      : has(req.session, k) ? req.session[k]
+                      : defaults[k]
+      })
+
+      // make all variables available on a global `data` field, to
+      // enable dynamic lookup in views
+      // res.locals.data = res.locals
+
+      next()
+    }
+  }
+
+  loadFullSession(defaults = {}) {
+    return (req, res, next) => {
+      this.loadKeys(Object.keys(req.session || {}), defaults)(req, res, next)
+    }
+  }
+
   applySchema(schema) {
-    return [checkSchema(schema), checkErrors(this.name)]
+    return [checkSchema(schema), saveToSession, checkErrors]
   }
 
   doRedirect(redirectTo = null) {
@@ -144,6 +217,11 @@ class DrawRoutes {
   post(...args) { return this.request('post', ...args) }
   put(...args) { return this.request('put', ...args) }
   delete(...args) { return this.request('delete', ...args) }
+
+  use(...args) {
+    this.route.eachLocale((path, locale) => { this.app.use(path, ...args) })
+    return this
+  }
 }
 
 const oneHour = 1000 * 60 * 60 * 1
@@ -161,6 +239,9 @@ const routeMiddleware = (route, locale) => (req, res, next) => {
     if (typeof nameOrObj === 'string') nameOrObj = route.get(nameOrObj)
     return nameOrObj.path[locale]
   }
+
+  // override
+  res.locals.jsPaths = () => wrapArray(getClientJs(req, route.name))
 
   return next()
 }

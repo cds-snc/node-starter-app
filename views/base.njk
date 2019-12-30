@@ -5,6 +5,7 @@
 {%- from 'checkboxes.njk' import checkBoxes as checkBoxes with context -%}
 {%- from 'buttons.njk' import formButtons as formButtons with context -%}
 {%- from 'input-file.njk' import fileInput as fileInput with context -%}
+{%- from 'repeater.njk' import repeater, repeatLink, repeatNumber, repeatNumberText, removeRepeatLink with context -%}
 
 <!DOCTYPE html>
 <html lang="{{ getLocale() }}">
@@ -37,12 +38,14 @@
             {% include "_includes/footer.njk" %}
         </div>
     </body>
-    {% include "_includes/script.njk" %}
+
+    {% if $env.GOOGLE_ANALYTICS %}
+        {% include "_includes/googleAnalytics.njk" %}
+    {% endif %}
+
     {% block scripts %}
-        {% if jsFiles %}
-            {% for val in jsFiles %}
-                <script type="text/javascript" src={{val}}></script>
-            {% endfor %}
-        {% endif %}
+        {% for val in globalJsPaths().concat(jsPaths()) %}
+            <script type="text/javascript" src={{val}}></script>
+        {% endfor %}
     {% endblock %}
 </html>

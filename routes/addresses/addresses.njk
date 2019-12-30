@@ -1,0 +1,35 @@
+{% extends "base.njk" %}
+
+{% block content %}
+    <h1>{{ __('addresses.title') }}</h1>
+
+    <div>
+        <p>{{ __('addresses.intro') }}</p>
+    </div>
+    <form method="post">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+        <div class="cds-form-group">
+            {% call repeater('addresses') %}
+                <legend>{{ __('addresses.number', repeatNumberText) | safe }}</legend>
+
+                {{ textInput('street', 'addresses.street') }}
+
+                {{ radioButtons('type', 'addresses.type', { 'house' : 'addresses.type.house',
+                                                            'apartment' : 'addresses.type.apartment',
+                                                            'other' : 'addresses.type.other' }) }}
+
+                {{ checkBoxes('features', 'addresses.features', { 'laundry' : 'addresses.features.laundry',
+                                                                  'kitchen' : 'addresses.features.kitchen',
+                                                                  'yard' : 'addresses.features.yard' }) }}
+
+                {{ removeRepeatLink('addresses.remove') }}
+            {% endcall %}
+
+            {{ repeatLink('addresses', 'addresses.add-another') }}
+        </div>
+
+        {{ formButtons() }}
+    </form>
+
+{% endblock %}

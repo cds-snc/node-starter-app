@@ -3,27 +3,48 @@
   - `label`: text for the label
   - `attributes`: object of optional attributes: class, hint, divClasses, autocomplete
 #}
-{% if errors %}
-    {% set firstError = errors[errors.keys()[0]] %}
-{% endif %}
+{% macro textInput(relname, label,
+                   hint=false,
+                   class=false,
+                   autocomplete=false) %}
+    {% set val = getData(relname) %}
+    {% set error = getError(relname) %}
+    {% set name = getName(relname) %}
 
-{% macro textInput(name, label, attributes) %}
-    <div class="{{ 'has-error' if errors and errors[name] }} {{ attributes.divClasses }}">
+    <div class="{{ 'has-error' if error }} cds-form-group">
         <label for="{{ name }}" id="{{ name }}__label">
             {% if attributes.required %}
                 <span aria-hidden="true" class="required">*</span>
             {% endif %}
             {{ __(label) }}
             {% if attributes.required %}
-                <span class="required">{{ __("required")}}</span>
+                <span class="required">{{ __("required") }}</span>
             {% endif %}
         </label>
-        {% if attributes.hint %}
+
+        {% if hint %}
             <span class="form-message">{{ __(attributes.hint) }}</span>
         {% endif %}
-        {% if errors and errors[name] %}
-            {{ validationMessage(errors[name].msg, name) }}
+
+        {% if error %}
+            {{ validationMessage(error.msg, name) }}
         {% endif %}
-        <input class="{{ attributes.class if attributes.class else "w-3-4" }}" {% if attributes.autocomplete %}autocomplete="{{ attributes.autocomplete }}" {% endif %} type="text" id="{{ attributes.id if attributes.id else name }}" {% if errors and errors[name] %} aria-describedby="{{ name + '-error' }}" aria-invalid="true" {% endif %} {% if errors and firstError.param === name %} autofocus="true" {% endif %} name="{{ name }}" value="{{ data[name] }}"/>
+
+        <input type="text"
+            id="{{ name }}"
+            name="{{ name }}"
+            value="{{ val }}"
+            {% if autocomplete %}
+                autocomplete="{{ autocomplete }}"
+            {% endif %}
+            class="cds-input {{ class if class }}"
+            {% if error %}
+                aria-describedby="{{ name }}-error"
+                aria-invalid=true
+            {% endif %}
+            {% if isFirstError(relname) %}
+                autofocus=true
+            {% endif %}
+        />
     </div>
 {% endmacro %}

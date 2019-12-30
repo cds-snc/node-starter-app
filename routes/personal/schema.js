@@ -53,6 +53,13 @@ const Schema = {
       errorMessage: 'errors.notify_type',
     },
   },
+
+  address: {
+    isLength: {
+      errorMessage: 'errors.address.length',
+      options: { min: 5, max: 500 },
+    },
+  },
 }
 
 module.exports = {

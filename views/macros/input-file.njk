@@ -1,8 +1,18 @@
-{% macro fileInput(label, divClasses, attributes) %}
-    <div class="file-box">
-        <input type="file" name="{{attributes.name}}[]" id="{{attributes.name}}" class="inputfile{{divClasses}}" data-multiple-caption="{count} files selected" multiple />
-        <label for="{{attributes.name}}">
-            <span class="filename"></span> 
+{% macro fileInput(relname, label,
+                   class=false) %}
+    {% set name = getName(relname) %}
+    <div class="cds-form-control file-box">
+        <input type=file
+            id={{ name }}
+            name={{ name }}
+            class="inputfile {{ class if class }}"
+            {#- TODO: localize this??? -#}
+            data-multiple-caption="{count} files selected"
+            multiple
+        />
+
+        <label for="{{ name }}">
+            <span class="filename"></span>&nbsp;
             <span class="pick">{{__(label)}}</span>
         </label>
     </div>
