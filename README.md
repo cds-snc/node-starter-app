@@ -78,7 +78,7 @@ node ./bin/route.js create --route your_route_name
 
 The created route directory by default contains the following files:
 - your_route_name.controller.js
-- your_route_name.pug
+- your_route_name.njk
 - schema.js (used for form views)
 - client.js (optional - page-specific js for the browser)
 
@@ -333,7 +333,7 @@ node ./bin/route.js create --route your_route_name
 
 Le répertoire de la route créé contient par défaut les fichiers suivants :
  - your_route_name.controller.js
- - your_route_name.pug
+ - your_route_name.njk
  - schema.js (utilisé pour les vues de formulaires)
 
 Enregistrez la route via [routes.config.js](https://github.com/cds-snc/node-starter-app/blob/master/config/routes.config.js)
