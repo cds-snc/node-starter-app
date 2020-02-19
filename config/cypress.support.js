@@ -5,7 +5,7 @@ const nodeEnv = Cypress.env('NODE_ENV') || 'development'
 if (nodeEnv === 'development') {
   A11yReporter.setupCypress({
     baseURI: undefined, // no reporting in development!
-    runId: '<local>'
+    runId: '<local>',
   })
 }
 else if (nodeEnv === 'staging') {

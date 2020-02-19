@@ -6,7 +6,7 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:security/recommended',
   ],
-  plugins: ['jest', 'security'],
+  plugins: ['jest', 'cypress', 'security'],
   env: {
     'jest/globals': true,
   },
@@ -22,6 +22,11 @@ module.exports = {
       settings: {
         "import/resolver": "webpack",
       },
+    },
+
+    {
+      files: ["config/cypress.support.js", "routes/*/integration.js"],
+      env: { "cypress/globals": true },
     }
   ],
 }
