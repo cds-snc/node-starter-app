@@ -1,0 +1,6 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "integrationFolder": "routes/",
+  "testFiles": ["*/integration.spec.js"],
+  "supportFile": "config/cypress.support.js"
+}
