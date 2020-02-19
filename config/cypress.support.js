@@ -17,3 +17,7 @@ else if (nodeEnv === 'staging') {
 else {
   throw new Error(`cannot test in environment: ${nodeEnv}`)
 }
+
+afterEach(() => {
+  cy.reportA11y()
+})
