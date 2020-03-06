@@ -65,7 +65,7 @@ typings/
 .pem
 
 # Compiled CSS and files
-public/dist
+/public
 
 .DS_Store
 credentials
