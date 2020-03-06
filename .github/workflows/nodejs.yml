@@ -24,6 +24,8 @@ jobs:
         npm test
       env:
         CI: true
+        A11Y_TRACKER_KEY: ${{ secrets.A11Y_TRACKER_KEY }}
+        A11Y_TRACKER_URL: http://
     - name: npm lint
       run: |
         npm run lint
