@@ -51,7 +51,7 @@
     "@aws-cdk/aws-ecs": "1.17.1",
     "@aws-cdk/aws-ecs-patterns": "1.17.1",
     "@aws-cdk/core": "1.17.1",
-    "acorn": "^7.1.0",
+    "acorn": "^7.1.1",
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.7.0",
